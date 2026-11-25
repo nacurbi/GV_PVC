@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 14 · Resumen</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha{text-decoration:none;display:inline-block}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta h4{margin:14px 0 6px;font-size:15px;font-style:italic;color:var(--fondo)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 14. Pantallas de visualización</p>
+  <div class="barra">
+    <nav class="fichas">
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="s0" title="Cómo usar este esquema">Guía</button>
+      <button type="button" class="ficha" data-ap="s1" title="1. Presentación">1</button>
+      <button type="button" class="ficha" data-ap="s2" title="2. Definiciones">2</button>
+      <button type="button" class="ficha" data-ap="s3" title="3. Responsabilidades del empresariado: la evaluación de riesgos">3</button>
+      <button type="button" class="ficha" data-ap="s4" title="4. Medidas correctoras técnicas u organizativas">4</button>
+      <button type="button" class="ficha" data-ap="s5" title="5. Vigilancia de la salud">5</button>
+      <button type="button" class="ficha" data-ap="s6" title="6. Efectos sobre la salud">6</button>
+      <button type="button" class="ficha" data-ap="s7" title="7. Etiopatogenia">7</button>
+      <button type="button" class="ficha" data-ap="s8" title="8. Ergonomía del puesto de trabajo —PVD— y su entorno">8</button>
+      <button type="button" class="ficha" data-ap="s9" title="9. Postura de trabajo">9</button>
+      <button type="button" class="ficha" data-ap="s10" title="10. Trabajo a distancia y nuevos dispositivos">10</button>
+      <button type="button" class="ficha" data-ap="s11" title="11. Real Decreto 488/1997, de 14 de abril (texto)">11</button>
+      <button type="button" class="ficha" data-ap="s12" title="Mapa de preguntas por apartado">Preguntas</button>
+      <a class="ficha" href="Tema14_Bateria.html">Batería</a>
+    </nav>
+  </div>
+  <p class="nombre-tema" id="nombre"></p>
+</div></header>
+<main>
+<p class="leyenda"><span class="etiqueta">P22-nº</span> Batería Administrativos 2022 · <span class="etiqueta">P26-nº</span> Batería Temario General 2026 · <span class="estrella">★</span> preguntado en las dos</p>
+<section class="tarjeta" data-ap="s0">
+<h2>Cómo usar este esquema</h2>
+<p>El texto de cada apartado es literal del Tema 14 (opebide.com); solo se ha ordenado en esquema. El PDF indica que es el <strong>Tema 12 del nuevo temario</strong>.</p>
+<ul>
+<li><strong>P22-nº</strong> = Batería <em>Administrativos 2022</em>, Tema 12 (preguntas 223–237).</li>
+<li><strong>P26-nº</strong> = Batería <em>Temario General 2026</em>, Tema 12 (preguntas 287–312).</li>
+<li><span class="estrella" title="Preguntado en las dos baterías">★</span> = punto preguntado en las dos baterías.</li>
+<li>Las baterías no traen plantilla de respuestas: la etiqueta indica qué frase del tema responde a cada pregunta.</li>
+<li>El Tema 40 de la batería 2022 (ergonomía, preguntas 692–706) trata otro tema del temario y no se incluye.</li>
+<li><strong>Cambio importante:</strong> la Guía Técnica de 2021 eliminó el criterio de horas (4 h diarias o 20 semanales para ser usuario; menos de 2 h diarias o 10 semanales para quedar excluido). P22-225 y P26-289 preguntan por ese criterio antiguo: se marca la respuesta según la versión anterior, que el tema recoge entre paréntesis.</li>
+<li>P26-307: el tema incluye «El estrés» entre los factores de la propia persona en la fatiga física (7.2), así que la pregunta está mal planteada.</li>
+<li>Erratas del original: «PVCheck», «Tema 12 nuevo».</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s1">
+<h2>1. Presentación</h2>
+<ul>
+<li>Desde hace varios años se ha ido introduciendo progresivamente en el mundo de las oficinas equipos de trabajo dotados con pantallas de visualización (PVD), de tal forma que hoy en día se puede afirmar que no hay en el mundo una persona trabajadora del sector de oficinas y despachos que no utilice en su quehacer diario una pantalla de visualización.</li>
+<li>Sin embargo no todos son ventajas y el uso de esta herramienta en condiciones ergonómicas deficientes puede ser responsable de una serie de riesgos laborales que de no corregirse, previa evaluación de los mismos, causarán diferentes alteraciones en la salud de las personas trabajadoras expuestas a PVD.</li>
+<li>La Ley 31/1995, de 8 de noviembre, de Prevención de Riesgos Laborales que determina el cuerpo básico de garantías para establecer un nivel de protección de la salud de los trabajadores y trabajadoras frente a los riesgos laborales, en su artículo 6 fija que serán las normas reglamentarias las que irán concretando los aspectos técnicos de las medidas preventivas en cada situación.</li>
+<li><strong>En el caso que nos ocupa, la prevención de riesgos laborales de los trabajadores y trabajadoras expuestas a pantallas de visualización, se materializa en el Real Decreto 488/1997, de 14 de abril, sobre Disposiciones mínimas de seguridad y salud relativas al trabajo con equipos que incluyen pantallas de visualización</strong>, que transpone al Derecho español la Directiva 90/270/CEE, de 29 de mayo. <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-224</span> <span class="etiqueta">P26-287</span></li>
+<li>Al mismo tiempo en la Disposición Final primera del citado Real Decreto se establece que el Instituto Nacional de Seguridad e Higiene en el Trabajo (INSHT), actualmente denominado Instituto Nacional de Seguridad y Salud en el Trabajo (INSST), de acuerdo a lo dispuesto por el Real Decreto 39/1997, de 17 de enero, por el que se aprueba el Reglamento de los Servicios de Prevención, elaborará y mantendrá actualizada una «Guía Técnica para la evaluación y prevención de los riesgos relativos a la utilización de equipos que incluyan pantallas de visualización».</li>
+<li>La primera versión de esta Guía se editó en 1998. <strong>La edición vigente es la de 2021</strong>, que el INSST actualizó para adaptarla a la evolución tecnológica de los equipos y a las nuevas normas técnicas. <strong>La Guía no es vinculante</strong>, pero ofrece los criterios de referencia para interpretar y aplicar el Real Decreto.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s2">
+<h2>2. Definiciones</h2>
+<ul>
+<li><strong>Pantalla de visualización:</strong> Una pantalla alfanumérica o gráfica, independiente del método de representación visual utilizado.</li>
+<li><strong>Persona trabajadora:</strong> Cualquier trabajador o trabajadora que habitualmente y durante una parte relevante de su trabajo normal, utilice un equipo con pantalla de visualización.</li>
+</ul>
+<p>¿Quién debe considerarse «trabajador» (usuario de PVD)? Todo el marco legal referido está destinado a proteger la salud de los empleados considerados «trabajadores» usuarios de equipos con pantallas de visualización. <strong>Esta protección se relaciona con los riesgos asociados a la utilización efectiva de dichos equipos y especialmente:</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-223</span> <span class="etiqueta">P26-288</span></p>
+<ul>
+<li><strong>Trastornos músculo-esqueléticos.</strong></li>
+<li><strong>Problemas visuales.</strong></li>
+<li><strong>Fatiga mental.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>La probabilidad de sufrir los citados trastornos está directamente relacionada con la frecuencia y duración de los períodos de trabajo ante la pantalla, así como la intensidad y grado de atención requeridos por la tarea. Junto a estos factores existen otros como es la posibilidad de que la persona trabajadora pueda establecer su propio ritmo de trabajo y establecer pausas.</li>
+<li><strong>La edición de 2021 de la Guía Técnica ha eliminado los criterios basados en el número de horas que recogía la versión anterior (según los cuales era usuaria la persona que superaba las 4 horas diarias o 20 semanales de trabajo efectivo con pantalla, quedaba excluida la que no llegaba a 2 horas diarias o 10 semanales</strong>, y quien se situaba entre ambos umbrales podía serlo si cumplía al menos cinco de siete requisitos). El INSST justifica este cambio en que no existen evidencias de un umbral a partir del cual se produzcan efectos nocivos para la salud y en que el criterio exclusivamente temporal no resulta suficiente. <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-225</span> <span class="etiqueta">P26-289</span></li>
+<li>Por ello, el número de horas de uso ya no es el único factor para delimitar quién es «trabajador» a efectos del Real Decreto. Esta condición se determina atendiendo al conjunto de las condiciones de trabajo y de las características de la persona que ocupa el puesto, junto con los riesgos presentes.</li>
+</ul>
+<p>Cuando el uso del equipo es menos continuo o frecuente, deben valorarse factores adicionales como:</p>
+<ul>
+<li>El requerimiento de altos niveles de atención y concentración para realizar la tarea.</li>
+<li>La necesidad de obtener información de forma rápida o de atender a su aparición de forma continuada.</li>
+<li>Que el ritmo de trabajo venga impuesto por el propio sistema.</li>
+<li>La imposibilidad de realizar pausas voluntarias durante el uso del equipo.</li>
+<li>La repetitividad de la tarea.</li>
+<li>La gravedad de las consecuencias de los posibles errores.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Una vez que el Real Decreto resulta de aplicación a un puesto, debe cumplirse íntegramente, incluido su anexo de disposiciones mínimas.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s3">
+<h2>3. Responsabilidades del empresariado: la evaluación de riesgos</h2>
+<ul>
+<li>El Real Decreto 488/1997 en su artículo 3, cuando hace referencia a las obligaciones generales del empresario, dice que «el empresario adoptará las medidas necesarias para que la utilización por los trabajadores de equipos con pantallas de visualización no suponga riesgos para su seguridad o salud o, si ello no fuera posible, para que tales riesgos se reduzcan al mínimo».</li>
+<li>Más adelante puntualiza: «… el empresario deberá evaluar los riesgos para la seguridad y salud de los trabajadores, teniendo en cuenta en particular los posibles riesgos para la vista y los problemas físicos y de carga mental, así como el posible efecto añadido o combinado de los mismos».</li>
+</ul>
+<p>En resumen: <span class="etiqueta">P26-290</span></p>
+<ul>
+<li><strong>La responsabilidad recae en el empresariado.</strong></li>
+<li>Necesidad de evaluar los riesgos.</li>
+<li>Principales riesgos: Trastornos músculo-esqueléticos · Problemas visuales · Fatiga mental.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Los problemas de salud asociados al trabajo con pantallas de visualización pueden evitarse mediante:</strong> <span class="etiqueta">P22-236</span></p>
+<ul>
+<li><strong>Un buen diseño del puesto de trabajo.</strong></li>
+<li><strong>Una correcta organización del trabajo.</strong></li>
+<li><strong>Una información y formación adecuada al trabajador o trabajadora.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Los riesgos citados se pueden incrementar en la medida en que el diseño del puesto, el medio ambiente físico y la organización del trabajo no tengan en cuenta las necesidades y limitaciones de la persona usuaria.</li>
+</ul>
+<p>El análisis deberá tener en cuenta entre otros los siguientes factores: <span class="etiqueta">P26-291</span></p>
+<ul>
+<li><strong>a) Los derivados de la exigencia de la tarea:</strong> El tiempo promedio de utilización diaria del equipo · El tiempo máximo de atención continua a la pantalla · El grado de atención que exige la tarea · La minuciosidad de la tarea · El tamaño de los elementos a visualizar · La visualización alternativa de pantalla e impresos · Las diferencias de luz entre dichos elementos y las distancias entre ellos y los ojos de la persona usuaria.</li>
+<li><strong>b) Los derivados de las características propias del puesto de trabajo:</strong> La calidad de la pantalla · La iluminación y el entorno visual · El diseño ergonómico del puesto.</li>
+<li><strong>c) Los relativos a las propias características visuales de la persona usuaria.</strong></li>
+</ul>
+<!-- fin -->
+
+<p>En la práctica se nos ofrecen tres posibilidades complementarias para evaluar los puestos de trabajo expuestos a pantallas de visualización: <span class="etiqueta">P26-292</span></p>
+<ol>
+<li>Verificar el diseño ergonómico de los distintos elementos que integran el puesto. Esto es controlar el riesgo en su origen.</li>
+<li>La estimación de las cargas mental, visual y muscular, a través de la evaluación de las exigencias de la tarea, las características personales del trabajador o trabajadora, el tiempo de trabajo, los síntomas de fatiga, etc.</li>
+<li><strong>La detección de las situaciones de riesgo mediante una vigilancia periódica de la salud.</strong></li>
+</ol>
+<!-- fin -->
+
+<ul>
+<li><strong>Las dos primeras posibilidades tienen un marcado acento preventivo, mientras con la tercera buscamos una detección precoz de las alteraciones de salud.</strong></li>
+</ul>
+<h3>3.1. Metodología de la evaluación</h3>
+<ul>
+<li>El tipo de evaluación debe ser apropiado a la clase de trabajo realizado y a la complejidad de las tareas propias del puesto.</li>
+<li>La Guía Técnica del INSST (edición 2021) propone el empleo conjunto de medidas encaminadas al cumplimiento de los requisitos legales, el diseño correcto del puesto, la adecuada organización del trabajo y la información y formación. En los casos en que los riesgos no hayan podido eliminarse se procederá a su evaluación, teniendo en cuenta los métodos o criterios del apartado 3 del artículo 5 del Reglamento de los Servicios de Prevención: los de la propia Guía, los recogidos en normas técnicas o los de guías de otras entidades de reconocido prestigio.</li>
+<li>La edición de 2021 ha suprimido el test de evaluación que incluía la versión anterior (el denominado «PVCheck»), ya que podía interpretarse erróneamente como un método de evaluación, y lo ha sustituido por una lista de verificación de los aspectos legalmente exigibles conforme al anexo del Real Decreto.</li>
+</ul>
+<p>Como apoyo para la evaluación de aspectos concretos, la Guía propone, sin carácter cerrado, métodos como:</p>
+<ul>
+<li><strong>Confort lumínico:</strong> cuestionario de evaluación subjetiva de la iluminación en el puesto de trabajo, desarrollado por el INSST.</li>
+<li><strong>Riesgos del trabajo en oficinas: método ROSA</strong> (Rapid Office Strain Assessment), explicado en la NTP 1173, que cuantifica en una escala de 1 a 10 la exposición a factores de riesgo de la silla, la pantalla y otros elementos del puesto.</li>
+<li><strong>Carga mental: escala ESCAM</strong> (Escala Subjetiva de Carga Mental), cuestionario de 20 ítems agrupados en 5 bloques.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>La información proporcionada por las propias personas trabajadoras usuarias constituye una parte esencial de la evaluación.</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-227</span> <span class="etiqueta">P26-293</span></li>
+<li>No obstante, en actividades donde puedan aparecer riesgos particularmente significativos o pérdidas materiales importantes o daños para la seguridad de terceras personas será necesario realizar una evaluación más detallada que la proporcionada por los procedimientos citados. Ejemplo de estos casos específicos serían el control del tráfico aéreo, grandes plantas de energía, salas de control de sectores estratégicos.</li>
+</ul>
+<h3>3.2. Revisión de las evaluaciones</h3>
+<ul>
+<li><strong>De acuerdo a lo establecido en el artículo 6 del Reglamento de los Servicios de Prevención, la evaluación de riesgos debe ser revisada en el caso de que se hayan introducido cambios significativos en el puesto de trabajo</strong>, cuando se hayan detectado daños a la salud de los trabajadores y trabajadoras y en otros supuestos contemplados en el citado artículo. <span class="etiqueta">P26-294</span></li>
+<li>En el caso del trabajo con pantallas de visualización, esto puede ser debido a los cambios efectuados en el equipo informático, en la iluminación, en el entorno ambiental o bien como consecuencia de un incremento en el tiempo de trabajo o en el tipo de diálogo con el equipo informático.</li>
+</ul>
+<h3>3.3. Reducción del riesgo al mínimo posible</h3>
+<ul>
+<li>Una vez conocidas las deficiencias más importantes a través de la evaluación de riesgos, se deberían llevar a cabo las correspondientes medidas correctoras con la celeridad que la importancia de las mismas indicará, de manera que se elimine el riesgo o se reduzca al nivel razonablemente más bajo posible.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s4">
+<h2>4. Medidas correctoras técnicas u organizativas</h2>
+<p>La mayoría de las medidas correctoras pueden ser clasificadas:</p>
+<ul>
+<li>a) Las dirigidas a garantizar que todos los elementos materiales del puesto satisfagan los requisitos de un diseño ergonómico adecuado. Por ejemplo: empleo de monitores con pantalla de buena calidad, sistema de iluminación que proporcione un nivel de luz satisfactorio sin producir deslumbramientos, programas informáticos amigables…</li>
+<li>b) Las dirigidas a garantizar la formación e información de las personas trabajadoras usuarias de pantallas de visualización de manera que sepan utilizar el equipo de trabajo de manera eficiente y segura.</li>
+<li>c) Las dirigidas a garantizar formas correctas de organización del trabajo.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Desde el punto de vista preventivo, y siempre que la naturaleza de las tareas lo permita, podrían organizarse las actividades, de manera que los trabajadores tengan un margen de autonomía suficiente para poder seguir su propio ritmo de trabajo y hacer pequeñas pausas discrecionales para prevenir la fatiga mental, visual y muscular.</li>
+<li>Esta modalidad de trabajo, que es practicable en muy distintos ámbitos laborales, es la forma más eficaz de prevenir el riesgo de fatiga y suele hacer innecesario el establecimiento de pautas regladas sometidas a los rigores de los acuerdos de negociación.</li>
+</ul>
+<h3>4.1. Naturaleza de las pausas y cambios de actividad</h3>
+<p>En lo que concierne a las pausas planificadas, su duración y frecuencia dependerán de las exigencias concretas de cada caso. No obstante se pueden dar las siguientes recomendaciones de carácter general: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-228</span> <span class="etiqueta">P22-229</span> <span class="etiqueta">P26-295</span></p>
+<ul>
+<li>Las pausas deberán ser introducidas antes de que sobrevenga la fatiga.</li>
+<li>El tiempo de las pausas no debe ser compensado aumentando el ritmo del trabajo durante los períodos de actividad.</li>
+<li>Resultan más eficaces las pausas cortas y frecuentes que las largas y escasas.</li>
+<li>Siempre que sea posible las pausas se harán lejos de la pantalla y deben permitir al trabajador o trabajadora el descanso visual, muscular y mental.</li>
+<li><strong>A título orientativo lo más recomendable es establecer pausas de 10-15 minutos cada 90 minutos de trabajo con la pantalla. No obstante en tareas que requieran una gran atención conviene al menos una pausa de 10 minutos por cada hora de actividad laboral.</strong></li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s5">
+<h2>5. Vigilancia de la salud</h2>
+<ul>
+<li>El artículo 4 del Real Decreto 488/1997, de 14 de abril, sobre las disposiciones mínimas de seguridad y salud relativas al trabajo con equipos que incluyen pantallas PVD, recoge que el empresario garantizará el derecho de los trabajadores y trabajadoras a una vigilancia adecuada a su salud teniendo en cuenta en particular los riesgos para la vista, los problemas físicos y la carga mental, así como el posible efecto añadido o combinado de los mismos y la eventual patología acompañante.</li>
+<li>La vigilancia de la salud se efectúa por medio de exámenes médicos, realizados por personal sanitario competente, conforme al «Protocolo de vigilancia sanitaria específica: pantallas de visualización» del Ministerio de Sanidad.</li>
+</ul>
+<p><strong>Los exámenes médicos que se regirán por las condiciones fijadas por el artículo 22 de la Ley de Prevención de Riesgos Laborales serán de tres tipos:</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-231</span> <span class="etiqueta">P26-296</span></p>
+<ul>
+<li><strong>Examen previo al inicio del trabajo con PVD.</strong></li>
+<li><strong>Examen específico periódico.</strong></li>
+<li><strong>Examen a demanda del trabajador o trabajadora.</strong></li>
+</ul>
+<h3>5.1. Examen</h3>
+<p><span class="etiqueta">P22-230</span></p>
+<p><strong>a) Datos generales.</strong> <strong>El examen incluirá una historia clínico-laboral en la que además de los datos de exploración clínica y control biológico (análisis de sangre y orina) y otros estudios complementarios</strong>, se hará constar una descripción detallada del puesto de trabajo, el tiempo de permanencia en el mismo, los riesgos detectados en la evaluación de riesgos y las medidas de prevención adoptadas.</p>
+<p><strong>b) Reconocimiento oftalmológico</strong></p>
+<ul>
+<li>El examen general no difiere de los reconocimientos médicos habituales, pero centra su atención en la exploración del aparato de la visión.</li>
+<li>El objetivo del examen oftalmológico es el detectar aquellas alteraciones de la función visual que precisen corrección para poder trabajar con pantallas o que contraindiquen este trabajo.</li>
+<li><strong>No es necesario que estos exámenes sean realizados por oftalmólogos/as, pudiendo ser realizado por el médico/a del trabajo en los propios locales del servicio de prevención.</strong> <span class="etiqueta">P26-297</span></li>
+</ul>
+<p>Entre las funciones que se deberán medir están:</p>
+<ul>
+<li>Inspección ocular y reflejos de las pupilas.</li>
+<li>Control de la agudeza visual. Se medirá la agudeza mono y binocular con y sin corrección.</li>
+<li>Sentido cromático para diagnosticar posibles anomalías en la visión de los colores por parte del trabajador o trabajadora.</li>
+<li>Examen de la musculatura del globo ocular.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>A las personas mayores de 40 años, se aconseja, aunque no es de obligado cumplimiento, remitirlas al oftalmólogo u oftalmóloga</strong> para realizar pruebas específicas destinadas a medir la tensión ocular y vigilancia de la presbicia (vista cansada). <span class="etiqueta">P26-298</span></li>
+<li>Si el interrogatorio no ha revelado fatiga visual anormal, si no hay duda de la capacidad visual y si la persona trabajadora estudiada no presenta ninguna enfermedad oftalmológica se le declarará apta.</li>
+<li><strong>Contraindicaciones.</strong> En contra de lo que habitualmente se piensa el trabajo con pantallas de visualización presenta pocas contraindicaciones estrictas pero puede necesitar una vigilancia periódica. La mayor parte de las afecciones oculares, excepto las muy graves como el glaucoma de ángulo estrecho, no se agravan por este trabajo.</li>
+<li><strong>Reconocimiento oftalmológico periódico.</strong> Se realizará un examen periódico ajustado al nivel de riesgo a juicio del personal médico responsable y cuando aparezcan trastornos que pudieran deberse a este tipo de trabajo. También habrá que hacer una vigilancia periódica a solicitud del trabajador o trabajadora. En la valoración de la función visual se tendrán en cuenta: Se pasará un cuestionario de función visual · Se realizará un reconocimiento oftalmológico para trabajos con Pantallas de Visualización (PVD).</li>
+<li>En este reconocimiento además de volver a prestar atención a los parámetros examinados en el reconocimiento oftalmológico inicial se valorará la aparición de defectos como: miopía corregida, hipermetropía y astigmatismo, presbicia, también si presenta defectos en la convergencia ocular y/o visión doble (diplopía) glaucoma o tensión ocular alta…</li>
+</ul>
+<p><strong>c) Examen osteomuscular</strong></p>
+<ul>
+<li><strong>La patología del aparato locomotor es el segundo grupo de enfermedades a las que debe prestar especial atención la vigilancia de la salud de las personas trabajadoras usuarias de pantallas de visualización.</strong> <span class="etiqueta">P26-299</span></li>
+<li>Lo primero que se debe determinar es la existencia o no de desviaciones en el eje de la columna vertebral. Para estudiar al personal trabajador, se le coloca de pie y por inspección se mide: La simetría o asimetría de los hombros · La simetría o asimetría de las caderas (crestas ilíacas) · Trazando una línea imaginaria por las vértebras desde las cervicales a las lumbares podemos vislumbrar una desviación de la columna.</li>
+<li>En caso de precisar el diagnóstico de las desviaciones del eje habrá que realizar un estudio radiológico.</li>
+<li>También se buscará por palpación la existencia de puntos dolorosos y ciertos movimientos: separación y aproximación/flexión y extensión/rotación interna y externa.</li>
+</ul>
+<p><strong>d) Examen osteomuscular periódico</strong></p>
+<ul>
+<li><strong>Se realizará con una periodicidad ajustada al nivel de riesgo a juicio del personal médico responsable del examen</strong> y cuando aparezcan trastornos en el aparato locomotor que pudieran ser debidos a este tipo de trabajo. <span class="etiqueta">P26-300</span></li>
+<li>Habrá que hacer también un examen de salud periódico si así lo solicita el trabajador o trabajadora.</li>
+</ul>
+<p><strong>e) Valoración de la carga mental</strong></p>
+<ul>
+<li>Como se ha ido comentando a lo largo de la exposición, los puestos de trabajo que incluyen pantallas de visualización exigen vigilar tres tipos de patologías: Fatiga visual · Fatiga muscular · Fatiga mental.</li>
+<li><strong>La valoración de la fatiga mental tal como marca el protocolo de vigilancia sanitaria específica se realizará mediante una encuesta específica que se encuentra en el Anexo VIII del citado protocolo.</strong> <span class="etiqueta">P26-301</span></li>
+</ul>
+<p>La encuesta consta de siete apartados:</p>
+<ul>
+<li>Información personal.</li>
+<li>Factores ambientales.</li>
+<li>Exigencias del puesto.</li>
+<li>Organización del trabajo.</li>
+<li>Síntomas.</li>
+<li>Antecedentes de incapacidad laboral.</li>
+<li>Satisfacción personal.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Los resultados de este cuestionario deberán ser analizados conjuntamente con un cuestionario de características de la tarea en trabajos con PVD (Anexo VI del protocolo).</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s6">
+<h2>6. Efectos sobre la salud</h2>
+<h3>6.1. Alteraciones visuales</h3>
+<ul>
+<li><strong>Fatiga visual:</strong> Es una afección funcional de carácter reversible, debido a un exceso de trabajo de los reflejos de las pupilas y de los movimientos oculares para lograr la acomodación.</li>
+<li>La existencia de fatiga visual entre los usuarios y usuarias de PVD es claramente mayor que entre las personas que trabajan en puestos no informatizados.</li>
+<li><strong>Se estima que entre un 10% y un 40% del personal que trabaja con PVD sufre alteraciones de manera cotidiana.</strong> <span class="etiqueta">P26-302</span></li>
+</ul>
+<p>Los síntomas de la fatiga visual se dan a tres niveles:</p>
+<ol>
+<li><strong>Molestias oculares:</strong> Sensación de «sentir los ojos» · Pesadez de los párpados · Pesadez de ojos · Quemazón · Picores · Somnolencia · Lagrimeo · Ojos secos · Enrojecimiento · Aumento del parpadeo.</li>
+<li><strong>Trastornos visuales:</strong> Borrosidad de los caracteres que se tienen que percibir en la pantalla · Dificultad para enfocar · Imágenes dobles o desenfocadas · Fotofobia = rechazo a la luz · Necesidad de adaptar el enfoque continuamente.</li>
+<li><strong>Trastornos extra-oculares:</strong> Cefaleas de baja intensidad · Vértigos o mareos · Sensación de desasosiego y ansiedad · Molestias en la región occipital y cervical por distancia excesiva del ojo al texto · Epilepsia foto-sensitiva (muy rara).</li>
+</ol>
+<h3>6.2. Alteraciones físicas o musculares</h3>
+<ul>
+<li><strong>Fatiga física o muscular:</strong> Hay una disminución de la capacidad física de la persona. Los síntomas de la fatiga física o muscular son fundamentalmente a nivel de la columna vertebral: Dolores de cuello y nuca. Dolores de la columna cervical · Dolores de la columna dorsal · Dolores de la columna lumbar.</li>
+<li><strong>Estos dolores se manifiestan más frecuentemente al finalizar la jornada laboral, sobre todo en mujeres.</strong> Tras un período de reposo suelen desaparecer ya que son de carácter funcional. <span class="etiqueta">P26-303</span></li>
+<li>Se pueden observar otros síntomas como: Contracturas · Hormigueos · Astenia (cansancio inespecífico) · Epicondilitis (codo de tenis) · Lesiones a nivel de la mano y el pulgar (S. del túnel carpiano…).</li>
+</ul>
+<h3>6.3. Alteraciones cutáneas</h3>
+<ul>
+<li><strong>Se han descrito algunos casos de irritación en la piel o incluso reacciones alérgicas.</strong> Especialmente en cuello, cara y a veces en las manos. <span class="etiqueta">P26-304</span></li>
+<li>Estas molestias se deberían al ambiente seco, a la electricidad estática que se produce en los ambientes de trabajo con numerosos equipos de trabajo eléctricos y al polvo que está en suspensión en el aire.</li>
+</ul>
+<h3>6.4. Fatiga mental o psicológica</h3>
+<p>Los síntomas de fatiga mental son:</p>
+<ul>
+<li><strong>Trastornos psicosomáticos:</strong> Cefaleas · Palpitaciones · Mareos · Temblores · Hipersudoración · Trastornos digestivos.</li>
+<li><strong>Perturbaciones psíquicas:</strong> Ansiedad · Irritabilidad · Dificultad de concentración.</li>
+<li><strong>Alteraciones del sueño:</strong> Insomnio · Sueño agitado · Pesadillas.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>En ocasiones se describen trastornos en la memoria y dificultad de concentración mental que pueden deberse a la monotonía y simplicidad del trabajo.</strong> <span class="etiqueta">P26-305</span></li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s7">
+<h2>7. Etiopatogenia</h2>
+<h3>7.1. Factores que intervienen en la aparición de las alteraciones visuales</h3>
+<p><strong>La disposición del puesto de trabajo y la necesidad de adoptar tres distancias no iguales:</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-233</span> <span class="etiqueta">P26-306</span></p>
+<ul>
+<li><strong>Ojo-pantalla.</strong></li>
+<li><strong>Ojo-teclado.</strong></li>
+<li><strong>Ojo-texto.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Son la causa fundamental en la aparición de los trastornos visuales mencionados que aparecen en los usuarios y usuarias de PVD.</li>
+<li>Además de tres distancias hay tres superficies sobre las cuales el ojo debe percibir lo que hay en ellas, que a su vez pueden estar iluminadas por diferentes cantidades de luz.</li>
+<li>Entre las circunstancias que van a condicionar la mejor adaptación del órgano de la visión a estas distancias y superficies con distinta iluminación podemos nombrar: La luminancia de las pantallas · La existencia de centelleo · La necesidad de acomodación sostenida · Los deslumbramientos · Las condiciones de trabajo desfavorables: ruido, corrientes de aire, cambios de temperatura · Existencia previa de defectos visuales · Hábitos tóxicos · Trastornos del sueño.</li>
+</ul>
+<h3>7.2. Factores que intervienen en la aparición de fatiga física o muscular</h3>
+<p><span class="etiqueta">P26-307</span></p>
+<p><strong>Posturas incorrectas ante la pantalla</strong></p>
+<ul>
+<li>La inclinación excesiva de la cabeza incrementa considerablemente la fatiga muscular en la nuca.</li>
+<li>La inclinación del tronco hacia delante origina tensión a nivel lumbar.</li>
+<li>La rotación lateral de la cabeza provoca la aparición de dolores en nuca y hombros</li>
+<li>La flexión exagerada de la mano provocará trastornos en antebrazos y en las articulaciones de la muñeca.</li>
+<li>El estatismo postural por tiempos prolongados ante la pantalla producirá contracturas en diferentes paquetes musculares.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Factores dependientes de una incorrecta organización del trabajo</strong> <span class="etiqueta">P22-234</span></p>
+<ul>
+<li><strong>El exceso de tarea y ausencia de pausas recomendadas</strong></li>
+<li><strong>El tipo de tarea.</strong> Las alteraciones osteomusculares se dan con más frecuencia en los operadores y operadoras que se dedican a la introducción de datos.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Factores dependientes de las condiciones ergonómicas del puesto de trabajo</strong></p>
+<ul>
+<li>Las características y situación de los elementos del puesto, incluido el mobiliario, van a condicionar las posturas adoptadas y en consecuencia la aparición de trastornos musculares.</li>
+<li>La calidad de la iluminación, la nitidez de los caracteres en la pantalla, la calidad de la presentación de la información en los textos etc. guardan una estrecha relación con las posturas de trabajo adoptadas.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Factores dependientes de la propia persona:</strong> La existencia de defectos visuales previos · Lesiones osteo-musculares preexistentes · <strong>El estrés</strong>.</p>
+<h3>7.3. Factores que intervienen en la aparición de alteraciones psicosomáticas</h3>
+<ul>
+<li>La rutina, repetición y monotonía.</li>
+<li>La ansiedad ante el cambio de tareas y funciones.</li>
+<li>La postura estática.</li>
+<li>Los defectos de comunicación persona-programa.</li>
+<li>La predisposición individual.</li>
+<li>Los hábitos nocivos.</li>
+<li>La carga mental excesiva - El estrés.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s8">
+<h2>8. Ergonomía del puesto de trabajo —PVD— y su entorno</h2>
+<ul>
+<li>Se hará referencia a aquellos factores y elementos del equipo y entorno físico que ayudarán a evitar el disconfort y a mejorar las condiciones de trabajo de los puestos con PVD. Los requisitos legalmente exigibles son los del anexo del Real Decreto 488/1997, que se reproduce al final del tema; las cifras que se indican a continuación tienen el carácter de recomendaciones técnicas.</li>
+<li>Estudiaremos tres niveles de actuación: 1. Ergonomía del equipo · 2. Ergonomía del medio ambiente físico · 3. Ergonomía del software.</li>
+</ul>
+<h3>8.1. Ergonomía del equipo</h3>
+<ul>
+<li>El equipo con el que mantendremos el máximo contacto visual y que será el más frecuentemente utilizado se deberá situar en la zona de confort. <strong>Por zona de confort se entiende aquella que, sin cambiar de postura, se alcanza con ambos brazos extendidos hacia delante.</strong></li>
+</ul>
+<p><strong>Pantalla</strong> <span class="etiqueta">P26-308</span></p>
+<ul>
+<li><strong>Para las tareas habituales se mantendrá a una distancia no inferior a 450 mm.</strong> La pantalla estará diseñada de tal forma que permitirá su orientación para lograr un ángulo de visión óptimo = 0º y que en ningún caso exceda de 40º.</li>
+<li>La imagen de la pantalla será estable sin fenómenos de destellos. Los caracteres estarán bien definidos y serán claros. La persona usuaria podrá ajustar el contraste de luminancia.</li>
+<li>Movilidad de la Pantalla: Móvil en tres direcciones y se preferirán aquellos equipos en que la pantalla y el teclado estén separados.</li>
+<li>La utilización de filtros solo es aconsejable como última medida ya que en general disminuyen la luminancia y requieren un mantenimiento de desempolvado y limpieza frecuentes.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Mesa o plano de trabajo</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-235</span> <span class="etiqueta">P26-309</span></p>
+<ul>
+<li>La mesa de trabajo deberá permitir disponer correctamente todo el equipo de trabajo.</li>
+<li><strong>La superficie será de 90 cm por 120 cm. Soportará adecuadamente todo el peso del equipo y para el trabajo sentado deberá permitir un espacio para los miembros inferiores de 60 cm de ancho por 65/70 cm de profundidad.</strong></li>
+</ul>
+<!-- fin -->
+
+<p><strong>Asiento</strong> <span class="etiqueta">P22-237</span></p>
+<ul>
+<li>Deberá permitir al operador u operadora una postura estable y confortable durante el período de tiempo necesario para la realización de toda su actividad laboral.</li>
+<li><strong>La silla será de cinco pies y ruedas que faciliten su desplazamiento y estará situada a 45-55 cm del suelo. El respaldo será ligeramente convexo para un buen apoyo de la zona lumbar.</strong> Podrá regularse hacia atrás y medirá entre 20 a 30 cm.</li>
+<li>El apoyabrazos es un elemento aconsejable y deberá permitir acercarse al área de trabajo lo más posible. El reposapiés es opcional y se utilizará cuando la altura de la silla no permita al personal descansar los pies en el suelo.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Superficies de los equipos</strong></p>
+<ul>
+<li>Las superficies de trabajo y el mobiliario deben carecer de esquinas y aristas agudas. Serán mates al objeto de evitar reflejos y no serán buenas conductoras del calor.</li>
+</ul>
+<h3>8.2. Ergonomía del medio ambiente físico</h3>
+<p><strong>Iluminación</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-226</span> <span class="etiqueta">P22-232</span></p>
+<ul>
+<li>En el lugar donde se ubiquen los puestos con PVD, existirá una iluminación general. Si se utiliza iluminación individual complementaria, esta no se colocará cerca de la pantalla para evitar deslumbramiento directo, reflexiones o desequilibrios.</li>
+<li><strong>Se recomiendan niveles de iluminación (iluminancia) de 300 a 1.000 lux en función del puesto.</strong></li>
+<li>Conviene no confundir ambos conceptos: <strong>la iluminancia es la cantidad de luz que recibe una superficie y se mide en lux, mientras que la luminancia es el brillo con que se percibe una superficie y se mide en candelas por metro cuadrado (cd/m²).</strong></li>
+<li><strong>Las pantallas se colocarán alejadas de las ventanas y de manera que la línea de visión del operador u operadora esté en paralelo al frente de la ventana.</strong> Las luminarias se colocarán en hileras paralelas al frente de la ventana pero no encima de las pantallas.</li>
+<li>Se complementarán con cortinas o persianas que amortiguarán la luz.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Clima</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-232</span> <span class="etiqueta">P26-310</span> <span class="etiqueta">P26-311</span></p>
+<p>Como recomendación de confort, la temperatura operativa se mantendrá dentro del rango:</p>
+<ul>
+<li><strong>Invierno: 20 a 24 ºC.</strong></li>
+<li><strong>Verano: 23 a 26 ºC.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>La humedad relativa se mantendrá entre el 45% y el 65% para cualquiera de las temperaturas referidas.</strong></li>
+<li><strong>La velocidad del aire será menor a 0,15 m/s.</strong></li>
+<li>Estos valores son recomendaciones. <strong>Los límites legalmente exigibles son los del Real Decreto 486/1997</strong>, de 14 de abril, sobre lugares de trabajo: en locales donde se realicen trabajos sedentarios propios de oficinas, temperatura entre 17 y 27 ºC; humedad relativa entre el 30% y el 70% (el límite inferior será del 50% en locales con riesgo por electricidad estática), y velocidad del aire que no supere 0,25 m/s en trabajos en ambientes no calurosos.</li>
+</ul>
+<h3>8.3. Ergonomía del software</h3>
+<p>Nos referimos a los diferentes estilos de diálogo. Cada uno tiene sus ventajas e inconvenientes pero todos ellos deben responder a unos principios generales de diseño y evaluación. Entre estos principios destacamos:</p>
+<ul>
+<li>Capacidad de adecuación a la tarea.</li>
+<li>Control.</li>
+<li>Conformidad con las expectativas de la persona usuaria.</li>
+<li>Tolerancia de errores.</li>
+<li>Adaptabilidad individual.</li>
+<li>Facilidad de aprendizaje.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s9">
+<h2>9. Postura de trabajo</h2>
+<ul>
+<li><strong>En los puestos de trabajo con PVD, la causa de disconfort está ligada con la posición sedentaria mantenida y con los elementos del puesto.</strong> <span class="etiqueta">P26-312</span></li>
+</ul>
+<p>En toda concepción del puesto las recomendaciones a seguir son:</p>
+<ul>
+<li>La postura se debe poder modificar a voluntad.</li>
+<li>La duración del mantenimiento de la postura debe ser la más breve posible.</li>
+<li>Se debe tener en cuenta el alcance manual de los objetos = zona de confort.</li>
+<li>Los esfuerzos estáticos deben ser reducidos.</li>
+<li>Deben evitarse giros e inclinaciones frontales y laterales y que el tronco esté ligeramente hacia atrás para disminuir la presión intervertebral.</li>
+</ul>
+<h3>9.1. Postura de referencia</h3>
+<p>Aun teniendo en cuenta que lo más favorable es la flexibilidad y el cambio postural, en general se tenderá a que la postura principal respete los siguientes términos:</p>
+<ul>
+<li>Los muslos horizontales y piernas verticales.</li>
+<li>Los brazos verticales y antebrazos horizontales.</li>
+<li>Las manos relajadas, sin extensión ni desviación lateral.</li>
+<li>La columna vertebral recta.</li>
+<li>La planta del pie recta con respecto a la pierna.</li>
+<li>La línea de los hombros sin torsión con respecto al tronco.</li>
+<li>La línea de visión paralela al plano horizontal.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s10">
+<h2>10. Trabajo a distancia y nuevos dispositivos</h2>
+<ul>
+<li><strong>El Real Decreto 488/1997 se aplica con independencia del lugar en que se desarrolle la tarea.</strong> En el teletrabajo, por tanto, deben garantizarse igualmente las disposiciones mínimas del Real Decreto, tal como recoge el artículo 15 de la Ley 10/2021, de 9 de julio, de trabajo a distancia, que reconoce a las personas que trabajan a distancia el derecho a una adecuada protección en materia de seguridad y salud en el trabajo. En el ámbito del empleo público, el teletrabajo se regula en el artículo 47 bis del texto refundido de la Ley del Estatuto Básico del Empleado Público.</li>
+<li>Recuérdese además que la exclusión de los sistemas portátiles del artículo 1.3.d) del Real Decreto solo opera cuando no se utilizan de modo continuado en un puesto de trabajo. El uso de dispositivos móviles (portátiles, tabletas o teléfonos inteligentes) puede generar trastornos musculoesqueléticos específicos, asociados a posturas forzadas de cuello, hombros y muñecas y a movimientos repetitivos de los dedos, así como riesgos psicosociales como el tecnoestrés o las dificultades de desconexión digital.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s11">
+<h2>11. Real Decreto 488/1997, de 14 de abril (texto)</h2>
+<h3>Artículo 1. Objeto</h3>
+<ul>
+<li>1. El presente Real Decreto establece las disposiciones mínimas de seguridad y de salud para la utilización por los trabajadores de equipos que incluyan pantallas de visualización.</li>
+<li>2. Las disposiciones de la Ley 31/1995, de 8 de noviembre, de Prevención de Riesgos Laborales, se aplicarán plenamente al conjunto del ámbito contemplado en el apartado anterior.</li>
+</ul>
+<p>3. Quedan excluidos del ámbito de aplicación de este Real Decreto:</p>
+<ul>
+<li>a) Los puestos de conducción de vehículos o máquinas.</li>
+<li>b) Los sistemas informáticos embarcados en un medio de transporte.</li>
+<li>c) Los sistemas informáticos destinados prioritariamente a ser utilizados por el público.</li>
+<li>d) Los sistemas llamados portátiles, siempre y cuando no se utilicen de modo continuado en un puesto de trabajo.</li>
+<li>e) Las calculadoras, cajas registradoras y todos aquellos equipos que tengan un pequeño dispositivo de visualización de datos o medidas necesario para la utilización directa de dichos equipos.</li>
+<li>f) Las máquinas de escribir de diseño clásico, conocidas como máquinas de ventanilla.</li>
+</ul>
+<h3>Artículo 2. Definiciones</h3>
+<ul>
+<li>a) Pantalla de visualización: una pantalla alfanumérica o gráfica, independientemente del método de representación visual utilizado.</li>
+<li>b) Puesto de trabajo: el constituido por un equipo con pantalla de visualización provisto, en su caso, de un teclado o dispositivo de adquisición de datos, de un programa para la interconexión persona/máquina, de accesorios ofimáticos y de un asiento y mesa o superficie de trabajo, así como el entorno laboral inmediato.</li>
+<li>c) Trabajador: cualquier trabajador que habitualmente y durante una parte relevante de su trabajo normal utilice un equipo con pantalla de visualización.</li>
+</ul>
+<h3>Artículo 3. Obligaciones generales del empresario</h3>
+<ul>
+<li>1. El empresario adoptará las medidas necesarias para que la utilización por los trabajadores de equipos con pantallas de visualización no suponga riesgos para su seguridad o salud o, si ello no fuera posible, para que tales riesgos se reduzcan al mínimo. En cualquier caso, los puestos de trabajo a que se refiere el presente Real Decreto deberán cumplir las disposiciones mínimas establecidas en el anexo del mismo.</li>
+<li>2. A efectos de lo dispuesto en el primer párrafo del apartado anterior, el empresario deberá evaluar los riesgos para la seguridad y salud de los trabajadores, teniendo en cuenta en particular los posibles riesgos para la vista y los problemas físicos y de carga mental, así como el posible efecto añadido o combinado de los mismos. La evaluación se realizará tomando en consideración las características propias del puesto de trabajo y las exigencias de la tarea y entre éstas, especialmente, las siguientes: a) El tiempo promedio de utilización diaria del equipo. b) El tiempo máximo de atención continua a la pantalla requerido por la tarea habitual. c) El grado de atención que exija dicha tarea.</li>
+<li>3. Si la evaluación pone de manifiesto que la utilización por los trabajadores de equipos con pantallas de visualización supone o puede suponer un riesgo para su seguridad o salud, el empresario adoptará las medidas técnicas u organizativas necesarias para eliminar o reducir el riesgo al mínimo posible. En particular, deberá reducir la duración máxima del trabajo continuado en pantalla, organizando la actividad diaria de forma que esta tarea se alterne con otras o estableciendo las pausas necesarias cuando la alternancia de tareas no sea posible o no baste para disminuir el riesgo suficientemente.</li>
+<li>4. En los convenios colectivos podrá acordarse la periodicidad, duración y condiciones de organización de los cambios de actividad y pausas a que se refiere el apartado anterior.</li>
+</ul>
+<h3>Artículo 4. Vigilancia de la salud</h3>
+<p>1. El empresario garantizará el derecho de los trabajadores a una vigilancia adecuada de su salud, teniendo en cuenta en particular los riesgos para la vista y los problemas físicos y de carga mental, el posible efecto añadido o combinado de los mismos, y la eventual patología acompañante. Tal vigilancia será realizada por personal sanitario competente y según determinen las autoridades sanitarias en las pautas y protocolos que se elaboren. Dicha vigilancia deberá ofrecerse a los trabajadores en las siguientes ocasiones:</p>
+<ul>
+<li>a) Antes de comenzar a trabajar con una pantalla de visualización.</li>
+<li>b) Posteriormente, con una periodicidad ajustada al nivel de riesgo a juicio del médico responsable.</li>
+<li>c) Cuando aparezcan trastornos que pudieran deberse a este tipo de trabajo.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>2. Cuando los resultados de la vigilancia de la salud a que se refiere el apartado 1 lo hiciese necesario, los trabajadores tendrán derecho a un reconocimiento oftalmológico.</li>
+<li>3. El empresario proporcionará gratuitamente a los trabajadores dispositivos correctores especiales para la protección de la vista adecuados al trabajo con el equipo de que se trate, si los resultados de la vigilancia de la salud a que se refieren los apartados anteriores demuestran su necesidad y no pueden utilizarse dispositivos correctores normales.</li>
+</ul>
+<h3>Artículo 5. Obligaciones en materia de información y formación</h3>
+<ul>
+<li>1. De conformidad con los artículos 18 y 19 de la Ley de Prevención de Riesgos Laborales, el empresario deberá garantizar que los trabajadores y los representantes de los trabajadores reciban una formación e información adecuadas sobre los riesgos derivados de la utilización de los equipos que incluyan pantallas de visualización, así como sobre las medidas de prevención y protección que hayan de adoptarse en aplicación del presente Real Decreto.</li>
+<li>2. El empresario deberá informar a los trabajadores sobre todos los aspectos relacionados con la seguridad y la salud en su puesto de trabajo y sobre las medidas llevadas a cabo de conformidad con lo dispuesto en los artículos 3 y 4 de este Real Decreto.</li>
+<li>3. El empresario deberá garantizar que cada trabajador reciba una formación adecuada sobre las modalidades de uso de los equipos con pantallas de visualización, antes de comenzar este tipo de trabajo y cada vez que la organización del puesto de trabajo se modifique de manera apreciable.</li>
+</ul>
+<h3>Artículo 6 y disposiciones</h3>
+<ul>
+<li><strong>Artículo 6. Consulta y participación de los trabajadores.</strong> La consulta y participación de los trabajadores o sus representantes sobre las cuestiones a que se refiere este Real Decreto se realizarán de conformidad con lo dispuesto en el apartado 2 del artículo 18 de la Ley de Prevención de Riesgos Laborales.</li>
+<li><strong>Disposición transitoria única.</strong> Los equipos que incluyan pantallas de visualización puestos a disposición de los trabajadores en la empresa o centro de trabajo con anterioridad a la fecha de entrada en vigor del presente Real Decreto deberán ajustarse a los requisitos establecidos en el anexo en un plazo de doce meses desde la citada entrada en vigor.</li>
+<li><strong>Disposición final primera.</strong> El Instituto Nacional de Seguridad e Higiene en el Trabajo… elaborará y mantendrá actualizada una Guía Técnica para la evaluación y prevención de los riesgos relativos a la utilización de equipos que incluyan pantallas de visualización.</li>
+<li><strong>Disposición final segunda.</strong> Se autoriza al Ministro de Trabajo y Asuntos Sociales para dictar, previo informe de la Comisión Nacional de Seguridad y Salud en el Trabajo, las disposiciones necesarias en desarrollo de este Real Decreto.</li>
+</ul>
+<h3>Anexo. Disposiciones mínimas</h3>
+<ul>
+<li>Observación preliminar: las obligaciones que se establecen en el presente anexo se aplicarán para alcanzar los objetivos del presente Real Decreto en la medida en que, por una parte, los elementos considerados existan en el puesto de trabajo y, por otra, las exigencias o características intrínsecas de la tarea no se opongan a ello.</li>
+</ul>
+<p><strong>1. Equipo</strong></p>
+<ul>
+<li>a) Observación general. La utilización en sí misma del equipo no debe ser una fuente de riesgo para los trabajadores.</li>
+<li>b) Pantalla. Los caracteres de la pantalla deberán estar bien definidos y configurados de forma clara, y tener una dimensión suficiente, disponiendo de un espacio adecuado entre los caracteres y los renglones. La imagen de la pantalla deberá ser estable, sin fenómenos de destellos, centelleos u otras formas de inestabilidad. El usuario de terminales con pantalla deberá poder ajustar fácilmente la luminosidad y el contraste entre los caracteres y el fondo de la pantalla, y adaptarlos fácilmente a las condiciones del entorno. La pantalla deberá ser orientable e inclinable a voluntad, con facilidad para adaptarse a las necesidades del usuario. Podrá utilizarse un pedestal independiente o una mesa regulable para la pantalla. La pantalla no deberá tener reflejos ni reverberaciones que puedan molestar al usuario.</li>
+<li>c) Teclado. El teclado deberá ser inclinable e independiente de la pantalla para permitir que el trabajador adopte una postura cómoda que no provoque cansancio en los brazos o las manos. Tendrá que haber espacio suficiente delante del teclado para que el usuario pueda apoyar los brazos y las manos. La superficie del teclado deberá ser mate para evitar los reflejos. La disposición del teclado y las características de las teclas deberán tender a facilitar su utilización. Los símbolos de las teclas deberán resaltar suficientemente y ser legibles desde la posición normal de trabajo.</li>
+<li>d) Mesa o superficie de trabajo. La mesa o superficie de trabajo deberán ser poco reflectantes, tener dimensiones suficientes y permitir una colocación flexible de la pantalla, del teclado, de los documentos y del material accesorio. El soporte de los documentos deberá ser estable y regulable y estará colocado de tal modo que se reduzcan al mínimo los movimientos incómodos de la cabeza y los ojos. El espacio deberá ser suficiente para permitir a los trabajadores una posición cómoda.</li>
+<li>e) Asiento de trabajo. El asiento de trabajo deberá ser estable, proporcionando al usuario libertad de movimiento y procurándole una postura confortable. La altura del mismo deberá ser regulable. El respaldo deberá ser reclinable y su altura ajustable. Se pondrá un reposapiés a disposición de quienes lo deseen.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>2. Entorno</strong></p>
+<ul>
+<li>a) Espacio. El puesto de trabajo deberá tener una dimensión suficiente y estar acondicionado de tal manera que haya espacio suficiente para permitir los cambios de postura y movimientos de trabajo.</li>
+<li>b) Iluminación. La iluminación general y la iluminación especial (lámparas de trabajo), cuando sea necesaria, deberán garantizar unos niveles adecuados de iluminación y unas relaciones adecuadas de luminancias entre la pantalla y su entorno, habida cuenta del carácter del trabajo, de las necesidades visuales del usuario y del tipo de pantalla utilizado. El acondicionamiento del lugar de trabajo y del puesto de trabajo, así como la situación y las características técnicas de las fuentes de luz artificial, deberán coordinarse de tal manera que se eviten los deslumbramientos y los reflejos molestos en la pantalla u otras partes del equipo.</li>
+<li>c) Reflejos y deslumbramientos. Los puestos de trabajo deberán instalarse de tal forma que las fuentes de luz, tales como ventanas y otras aberturas, los tabiques transparentes o translúcidos y los equipos o tabiques de color claro no provoquen deslumbramiento directo ni produzcan reflejos molestos en la pantalla. Las ventanas deberán ir equipadas con un dispositivo de cobertura adecuado y regulable para atenuar la luz del día que ilumine el puesto de trabajo.</li>
+<li>d) Ruido. El ruido producido por los equipos instalados en el puesto de trabajo deberá tenerse en cuenta al diseñar el mismo, en especial para que no se perturbe la atención ni la palabra.</li>
+<li>e) Calor. Los equipos instalados en el puesto de trabajo no deberán producir un calor adicional que pueda ocasionar molestias a los trabajadores.</li>
+<li>f) Emisiones. Toda radiación, excepción hecha de la parte visible del espectro electromagnético, deberá reducirse a niveles insignificantes desde el punto de vista de la protección de la seguridad y de la salud de los trabajadores.</li>
+<li>g) Humedad. Deberá crearse y mantenerse una humedad aceptable.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>3. Interconexión ordenador/persona.</strong> Para la elaboración, la elección, la compra y la modificación de programas, así como para la definición de las tareas que requieran pantallas de visualización, el empresario tendrá en cuenta los siguientes factores:</p>
+<ul>
+<li>a) El programa habrá de estar adaptado a la tarea que deba realizarse.</li>
+<li>b) El programa habrá de ser fácil de utilizar y deberá, en su caso, poder adaptarse al nivel de conocimientos y de experiencia del usuario; no deberá utilizarse ningún dispositivo cuantitativo o cualitativo de control sin que los trabajadores hayan sido informados y previa consulta con sus representantes.</li>
+<li>c) Los sistemas deberán proporcionar a los trabajadores indicaciones sobre su desarrollo.</li>
+<li>d) Los sistemas deberán mostrar la información en un formato y a un ritmo adaptados a los operadores.</li>
+<li>e) Los principios de ergonomía deberán aplicarse en particular al tratamiento de la información por parte de la persona.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s12">
+<h2>Mapa de preguntas por apartado</h2>
+<table>
+<thead>
+<tr>
+<th>Apartado del tema</th>
+<th>Batería 2022 (Tema 12)</th>
+<th>Batería 2026 (Tema 12)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Presentación</td>
+<td>224</td>
+<td>287</td>
+</tr>
+<tr>
+<td>2. Definiciones</td>
+<td>223, 225</td>
+<td>288, 289</td>
+</tr>
+<tr>
+<td>3. Responsabilidades: la evaluación de riesgos</td>
+<td>227, 236</td>
+<td>290, 291, 292, 293, 294</td>
+</tr>
+<tr>
+<td>4. Medidas correctoras (pausas)</td>
+<td>228, 229</td>
+<td>295</td>
+</tr>
+<tr>
+<td>5. Vigilancia de la salud</td>
+<td>230, 231</td>
+<td>296, 297, 298, 299, 300, 301</td>
+</tr>
+<tr>
+<td>6. Efectos sobre la salud</td>
+<td>—</td>
+<td>302, 303, 304, 305</td>
+</tr>
+<tr>
+<td>7. Etiopatogenia</td>
+<td>233, 234</td>
+<td>306, 307</td>
+</tr>
+<tr>
+<td>8. Ergonomía del puesto y su entorno</td>
+<td>226, 232, 235, 237</td>
+<td>308, 309, 310, 311</td>
+</tr>
+<tr>
+<td>9. Postura de trabajo</td>
+<td>—</td>
+<td>312</td>
+</tr>
+<tr>
+<td>10. Trabajo a distancia y nuevos dispositivos</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>11. Real Decreto 488/1997 (texto)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Los apartados más preguntados son <strong>5. Vigilancia de la salud</strong> (8 preguntas), <strong>8. Ergonomía del puesto</strong> (8) y <strong>3. Evaluación de riesgos</strong> (7). Muchas preguntas piden <strong>cifras</strong>: 4 h/20 h y 2 h/10 h, pausas 10-15 min cada 90 min (10 min cada hora si hay gran atención), 10-40 %, 450 mm, 90 × 120 cm, 45-55 cm, 300-1.000 lux, 20-24 ºC / 23-26 ºC, 45-65 %, 0,15 m/s.</p>
+</section>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+<script>
+var fichas = document.querySelectorAll('.ficha'), tarjetas = document.querySelectorAll('.tarjeta'), nombre = document.getElementById('nombre');
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function ver(ap){
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap === ap); if(f.dataset.ap && f.dataset.ap === ap) nombre.textContent = ap === 'todo' ? 'Todos los apartados' : f.title; });
+  tarjetas.forEach(function(t){ t.classList.toggle('hidden', ap !== 'todo' && t.dataset.ap !== ap); });
+  window.scrollTo(0,0); avisarAltura();
+}
+fichas.forEach(function(f){ if(f.dataset.ap) f.addEventListener('click', function(){ ver(f.dataset.ap); }); });
+ver('todo');
+window.addEventListener('load', avisarAltura); window.addEventListener('resize', avisarAltura);
+</script>
+</body>
+</html>

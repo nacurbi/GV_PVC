@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 27 · Batería de preguntas</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+.ficha{text-decoration:none;display:inline-block}
+.filtro{display:flex;gap:6px;justify-content:flex-end;margin:0 0 8px;flex-wrap:wrap}
+.filtro button{background:#5F7791;border:1px solid #7A90A8;color:#F9FAFC;border-radius:3px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+.filtro button.activo{background:var(--caja);color:var(--texto);border-color:#F9FAFC}
+.cab2{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bateria h3{background:#EEF2F6;border-left:3px solid var(--acento);padding:5px 10px;margin:16px 0 8px;color:var(--fondo)}
+.preg{border-bottom:1px dashed var(--borde);padding:8px 0 10px}
+.preg:last-child{border-bottom:none}
+.enunciado{font-weight:bold;margin:4px 0 6px}
+.num{display:inline-block;background:var(--acento);color:#fff;border-radius:3px;padding:0 6px;font-size:12px;margin-right:4px;vertical-align:1px}
+.ops{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:2px}
+.ops li{padding:5px 10px;border-radius:3px;font-size:14px;line-height:1.35}
+.ops li.ok{background:var(--ok)}
+.ocultar .ops li.ok{background:transparent}
+.ocultar .referencia{display:none}
+.referencia{text-align:left;font-size:13px;line-height:1.4;background:#EEF2F6;border-left:3px solid var(--acento);padding:6px 10px;margin:4px 0 0;color:var(--texto)}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+
+/* Modo test */
+.etq{width:800px;max-width:100%;font-size:12px;color:#c9d4df;margin:0 0 -12px;text-align:left}
+section.contenedor-test{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 18px;box-sizing:border-box}
+.pregunta{font-size:16px;font-weight:bold;color:var(--texto);margin-bottom:16px;text-align:left;line-height:1.4}
+.opciones-contenedor{display:grid;gap:2px;margin-bottom:20px}
+.opcion{background:var(--caja);border:none;color:var(--texto);padding:11px 12px;line-height:1.3;border-radius:3px;cursor:pointer;font-size:16px;text-align:left;transition:background .2s;font-family:inherit}
+.opcion:hover{background:#D3DCE7}
+.opcion:disabled{cursor:default}
+.opcion:disabled:not(.correcta):not(.incorrecta):not(.seleccionada):hover{background:var(--caja)}
+.opcion.seleccionada{background:#B9C9DA}
+.opcion.correcta,.opcion.correcta:hover{background:var(--ok)}
+.opcion.incorrecta,.opcion.incorrecta:hover{background:var(--ko)}
+.referencia{margin:-8px 0 12px}
+.navegacion{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.navegacion button{background:var(--acento);color:#fff;padding:5px 10px;border:none;border-radius:3px;font-size:12px;width:100px;cursor:pointer;font-family:inherit}
+.navegacion button:hover{background:#51687f}
+#siguiente{margin-left:auto}
+.navegacion button:disabled{opacity:.45;cursor:not-allowed}
+.vacio{text-align:center;color:var(--texto);margin:20px 0}
+.indices{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:800px;max-width:100%}
+.indice{width:30px;height:30px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:#5F7791;border:1px solid #7A90A8;color:#F9FAFC;cursor:pointer;font-weight:bold;font-size:12px}
+.indice:hover{background:#6D86A1}
+.indice.activa{background:var(--caja);border-color:var(--caja);color:var(--texto)}
+.indice.correcta{background:var(--ok);border-color:var(--ok);color:var(--texto)}
+.indice.incorrecta{background:var(--ko);border-color:var(--ko);color:var(--texto)}
+.indice.sinresp{background:#ffe08a;border-color:#ffe08a;color:var(--texto)}
+.filtro button:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 27. Bibliotecas</p>
+  <div class="barra">
+    <nav class="fichas">
+      <a class="ficha" href="Tema27_Resumen.html">Resumen</a>
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="1" title="1. Bibliotecas y centros de documentación">1</button>
+      <button type="button" class="ficha" data-ap="2" title="2. Los centros de documentación">2</button>
+      <button type="button" class="ficha" data-ap="3" title="3. Diferencias entre bibliotecas y centros de documentación">3</button>
+      <button type="button" class="ficha" data-ap="4" title="4. Procesos técnicos y de gestión">4</button>
+      <button type="button" class="ficha" data-ap="5" title="5. Servicios de las bibliotecas y centros de documentación">5</button>
+      <button type="button" class="ficha" data-ap="6" title="6. Procesos transversales">6</button>
+      <button type="button" class="ficha" data-ap="7" title="7. Sistemas y redes bibliotecarias">7</button>
+    </nav>
+  </div>
+  <div class="cab2"><p class="nombre-tema" id="nombre"></p>
+  <div class="filtro">
+    <button type="button" data-bat="2022">2022</button><button type="button" data-bat="2026">2026</button>
+  </div></div>
+</div></header>
+<main>
+<p class="leyenda">15 preguntas: 15 de la batería Administrativos 2022 y 0 de la batería Temario General 2026. Elige la batería (2022 o 2026) y el apartado; pulsa una opción y «Comprobar». En amarillo, las preguntas que el tema actual no responde.</p>
+<p class="etq" id="etq"></p>
+<section class="contenedor-test" id="test">
+  <div class="pregunta" id="pregunta"></div>
+  <div class="opciones-contenedor" id="opciones"></div>
+  <div class="referencia hidden" id="ref"></div>
+  <p class="referencia hidden" id="aviso">Selecciona una respuesta antes de comprobar.</p>
+  <div class="navegacion"><button type="button" id="comprobar">Comprobar</button><button type="button" id="siguiente">Siguiente</button></div>
+</section>
+<section class="contenedor-test hidden" id="vacio"><p class="vacio">No hay preguntas de esta batería en este apartado.</p></section>
+<div class="indices" id="indices"></div>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo(0,0)">↑ Arriba</button>
+<script>
+var DATOS = [{"ap": "1", "t": "1. Bibliotecas y centros de documentación", "bat": "2022", "num": "489", "q": "Las llamadas bibliotecas enciclopédicas se caracterizan por:", "o": ["a) El carácter general de sus fondos y usuarios.", "b) Estar frecuentemente orientadas a la investigación.", "c) Ser privadas o sostenidas por un organismo público o asociación.", "d) El carácter especializado de sus fondos y de sus usuarios."], "ok": [0], "ref": "<b>Respuesta: a)</b> · Pueden ser enciclopédicas (también llamadas generalistas) o especializadas sobre un tema. (El tema no habla de los usuarios; se deduce por oposición a las especializadas.)"}, {"ap": "3", "t": "3. Diferencias entre bibliotecas y centros de documentación", "bat": "2022", "num": "490", "q": "La denominada «literatura gris» se puede encontrar más frecuentemente en:", "o": ["a) Bibliotecas para grupos especiales.", "b) Bibliotecas nacionales.", "c) Centros de documentación.", "d) Bibliotecas públicas."], "ok": [2], "ref": "<b>Respuesta: c)</b> · el centro de documentación a veces elabora los propios documentos, como son los resúmenes (abstracts), literatura gris (1), informes técnicos, etc."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "488", "q": "La herramienta que nos permite identificar documentos e informar de su contenido así como de su localización es:", "o": ["a) El índice.", "b) El catálogo.", "c) Los tesauros.", "d) La signatura."], "ok": [1], "ref": "<b>Respuesta: b)</b> · El catálogo se diferencia de otras fuentes de información bibliográfica porque, además de ofrecer la descripción bibliográfica, indica dónde está ubicado el documento en la biblioteca, por medio de la signatura."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "491", "q": "Dentro de las operaciones básicas del análisis de contenido o análisis interno de un documento NO se encuentra la labor de:", "o": ["a) Clasificación.", "b) Catalogación.", "c) Elaboración de resúmenes.", "d) Indización."], "ok": [1], "ref": "<b>Respuesta: b)</b> · El análisis de la forma es la catalogación o descripción bibliográfica y el del contenido es la llamada indización… También se procede a hacer el resumen o abstract."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "492", "q": "Uno los lenguajes de clasificación documental más difundido es:", "o": ["a) ISBD.", "b) MARC21.", "c) Tesaurus.", "d) CDU."], "ok": [3], "ref": "<b>Respuesta: d)</b> · La clasificación más utilizada es la CDU (Clasificación Decimal Universal)."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "493", "q": "La ISBD recoge una serie de normas internacionales sobre la forma y el contenido de los datos a consignar en:", "o": ["a) La descripción bibliográfica de un documento.", "b) La indización de un documento o determinación de puntos de acceso.", "c) La signatura topográfica de un documento.", "d) El registro de un documento."], "ok": [0], "ref": "<b>Respuesta: a)</b> · ISBD: International Standard Bibliographic Description en su traducción al castellano: Descripción Bibliográfica Internacional Normalizada."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "494", "q": "A la hora de realizar el análisis interno o análisis del contenido de un documento se encuentra muy extendido el uso de la Clasificación Decimal Universal (CDU) que constituye un:", "o": ["a) Lenguaje de clasificación documental a base de descriptores o términos de materias.", "b) Conjunto de estándares de catalogación.", "c) Lenguaje de indización documental a base de listas de palabras clave.", "d) Lenguaje de clasificación documental basado en códigos numéricos."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Clasificaciones basadas en códigos numéricos o alfanuméricos… una clasificación numérica, como puede ser la CDU."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "495", "q": "En el almacenamiento y la recuperación de la información, así como el intercambio y la comunicación de información bibliográfica entre distintos sistemas automatizados de bibliotecas, el MARC ha jugado un papel importante en cuanto constituye:", "o": ["a) Un sistema integrado de gestión bibliotecaria.", "b) Un formato que permite la codificación de la información.", "c) Un software.", "d) Un estándar de catalogación."], "ok": [1], "ref": "<b>Respuesta: b)</b> · Es un formato que permite la codificación de la información para que el ordenador pueda trabajar con esos datos, y finalmente se puedan recuperar e intercambiar."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "497", "q": "Entre los criterios a los que atiende la adquisición o expurgo de los documentos en las bibliotecas especializadas y centros de documentación destaca:", "o": ["a) El grado de deterioro del documento.", "b) El presupuesto disponible.", "c) Las sugerencias de los usuarios.", "d) La obsolescencia del documento."], "ok": [3], "ref": "<b>Respuesta: d)</b> · En las bibliotecas especializadas y centros de documentación… la obsolescencia del documento es una de las principales razones o, al menos, una de las más frecuentes razones para expurgar."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "498", "q": "La mayoría de las bibliotecas y centros de documentación utilizan los SIGB como herramienta informática que permite:", "o": ["a) Automatizar la gestión de las distintas funciones bibliotecarias.", "b) La lectura de contenidos digitales.", "c) Automatizar datos y poder recuperarlos o intercambiarlos.", "d) La normalización de la identificación bibliográfica."], "ok": [0], "ref": "<b>Respuesta: a)</b> · La mayoría de las bibliotecas y centros de documentación tienen sistemas informáticos para gestionar gran parte de los procesos. Son los llamados Sistemas Integrados de Gestión Bibliotecaria o SIGB."}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "500", "q": "Cuando un documento llega a una biblioteca se procede a su recepción o receptación, que incluye una serie de trabajos, como son (indíquese la respuesta INCORRECTA):", "o": ["a) Expurgo.", "b) Sellado.", "c) Registro.", "d) Magnetizado antirrobo."], "ok": [0], "ref": "<b>Respuesta: a)</b> · se revisa si está en perfecto estado, se cotejan albaranes y facturas… se sellan, se pueden colocar antirrobos y se procede al registro de entrada. (El expurgo es otro proceso: 4.1.4.)"}, {"ap": "4", "t": "4. Procesos técnicos y de gestión", "bat": "2022", "num": "501", "q": "La signatura que presenta cada documento de una biblioteca (indíquese la respuesta INCORRECTA):", "o": ["a) Permite su localización en las estanterías.", "b) Se recoge en el tejuelo o etiqueta del lomo.", "c) En los fondos de libre acceso suele coincidir con la CDU.", "d) Utiliza un lenguaje documental a base de descriptores o «palabras clave»."], "ok": [3], "ref": "<b>Respuesta: d)</b> · el mismo número de CDU en la signatura, en el tejuelo (la etiqueta del lomo)… La CDU se utiliza como signatura principalmente en los fondos de libre acceso. (La CDU es una clasificación numérica, no de descriptores.)"}, {"ap": "7", "t": "7. Sistemas y redes bibliotecarias", "bat": "2022", "num": "496", "q": "De acuerdo con la Ley 11/2007, de 26 de octubre, de Bibliotecas de Euskadi, podrán formar parte de la Red de Lectura Pública de Eukadi, además de las bibliotecas públicas municipales (indíquese la respuesta INCORRECTA):", "o": ["a) Bibliotecas privadas que pongan a disposición de todos los ciudadanos sus servicios bibliotecarios mediante los correspondientes convenios de integración en la red de lectura pública.", "b) Las bibliotecas de los centros públicos de enseñanza.", "c) Bibliotecas de uso público general de ámbito únicamente de la Comunidad Autónoma de Euskadi.", "d) Bibliotecas forales que se integren voluntariamente en la red de lectura pública mediante los correspondientes convenios."], "ok": [1], "ref": "<b>Respuesta: b)</b> · La Red de Lectura Pública se configura también como la unificación de las redes bibliotecarias dependientes de las distintas administraciones locales, que se abre a la integración voluntaria de aquellas otras bibliotecas forales, estatales y privadas… (Las de centros docentes públicos figuran en el Sistema, no en la Red. Pregunta dudosa: el tema tampoco menciona la opción c.)"}, {"ap": "7", "t": "7. Sistemas y redes bibliotecarias", "bat": "2022", "num": "499", "q": "De acuerdo con la Ley 11/2007, de 26 de octubre, de Bibliotecas de Euskadi, forman parte del Sistema Bibliotecario de Euskadi (indíquese la respuesta INCORRECTA):", "o": ["a) La red de lectura pública.", "b) Las bibliotecas dependientes de la Administración de la Comunidad Autónoma de Euskadi no integradas en la red de lectura pública.", "c) Las bibliotecas especializadas y el resto de las bibliotecas no integradas en la red de lectura pública.", "d) La Biblioteca de Euskadi."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Las bibliotecas especializadas y el resto de las bibliotecas que, no formando parte de la red de lectura pública, se integren en el Sistema Bibliotecario de Euskadi mediante convenio. (La opción c omite la integración mediante convenio.)"}, {"ap": "7", "t": "7. Sistemas y redes bibliotecarias", "bat": "2022", "num": "502", "q": "Entre las razones fundamentales que explican la creación de consorcios bibliotecarios se encuentra en especial la necesidad de:", "o": ["a) Agilizar el préstamo interbibliotecario.", "b) Facilitar la adquisición conjunta de fondos y la negociación de forma conjunta con proveedores y editoriales.", "c) Digitalizar aquellos fondos que interesa preservar de la manipulación directa.", "d) Aumentar los servicios que se ofrecen en las bibliotecas y centros de documentación."], "ok": [1], "ref": "<b>Respuesta: b)</b> · Se perfila ya el nacimiento de los consorcios, muy centrados en la adquisición conjunta de fondos y en la negociación de las licencias con los proveedores."}];
+DATOS.forEach(function(p){ p.sel=null; p.chk=false; });
+var fichas=document.querySelectorAll('.ficha[data-ap]'), nombre=document.getElementById('nombre');
+var apActual='todo', batActual='2022', lista=[], pos=0;
+var $=function(id){return document.getElementById(id);};
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function filtrar(){
+  lista=DATOS.filter(function(p){ return p.bat===batActual && (apActual==='todo' || p.ap===apActual); });
+  pos=0; $('indices').innerHTML=lista.map(function(p,i){return '<div class="indice" data-i="'+i+'" title="Nº '+p.num+'">'+(i+1)+'</div>';}).join('');
+  pintar();
+}
+function claseIndice(p){ if(!p.chk) return ''; if(!p.ok.length) return 'sinresp'; return p.ok.indexOf(p.sel)>=0?'correcta':'incorrecta'; }
+function pintar(){
+  var hay=lista.length>0;
+  $('test').classList.toggle('hidden',!hay); $('vacio').classList.toggle('hidden',hay); $('etq').classList.toggle('hidden',!hay);
+  document.querySelectorAll('.indice').forEach(function(d,i){ d.className='indice '+claseIndice(lista[i])+(i===pos?' activa':''); });
+  if(!hay){ avisarAltura(); return; }
+  var p=lista[pos];
+  $('etq').textContent=p.t+' · Batería '+(p.bat==='2022'?'Administrativos 2022':'Temario General 2026')+' · Pregunta nº '+p.num;
+  $('pregunta').textContent=(pos+1)+'. '+p.q;
+  $('opciones').innerHTML=p.o.map(function(o,i){
+    var c='opcion';
+    if(p.chk){ if(p.ok.indexOf(i)>=0) c+=' correcta'; else if(i===p.sel) c+=(p.ok.length?' incorrecta':' seleccionada'); }
+    else if(i===p.sel) c+=' seleccionada';
+    return '<button type="button" class="'+c+'" data-i="'+i+'"'+(p.chk?' disabled':'')+'>'+o.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</button>';
+  }).join('');
+  $('ref').innerHTML=p.ref; $('ref').classList.toggle('hidden',!(p.chk && p.ref));
+  $('comprobar').classList.toggle('hidden',p.chk);
+  $('siguiente').disabled=pos===lista.length-1;
+  avisarAltura();
+}
+$('opciones').addEventListener('click',function(e){ var b=e.target.closest('.opcion'); if(!b) return; var p=lista[pos]; if(p.chk) return; p.sel=+b.dataset.i; pintar(); });
+$('comprobar').addEventListener('click',function(){ var p=lista[pos]; if(p.sel===null){ alertar(); return; } p.chk=true; pintar(); });
+function alertar(){ $('aviso').classList.remove('hidden'); setTimeout(function(){ $('aviso').classList.add('hidden'); },1800); }
+$('siguiente').addEventListener('click',function(){ if(pos<lista.length-1){ pos++; pintar(); window.scrollTo(0,0);} });
+$('indices').addEventListener('click',function(e){ var d=e.target.closest('.indice'); if(!d) return; pos=+d.dataset.i; pintar(); });
+function ver(ap){
+  apActual=ap;
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap===ap); if(f.dataset.ap===ap) nombre.textContent= ap==='todo' ? 'Todos los apartados' : f.title; });
+  filtrar(); window.scrollTo(0,0);
+}
+fichas.forEach(function(f){ f.addEventListener('click',function(){ ver(f.dataset.ap); }); });
+document.querySelectorAll('.filtro [data-bat]').forEach(function(b){
+  if(!DATOS.some(function(p){return p.bat===b.dataset.bat;})) b.disabled=true;
+  b.addEventListener('click',function(){ batActual=b.dataset.bat; document.querySelectorAll('.filtro [data-bat]').forEach(function(x){ x.classList.toggle('activo',x===b); }); filtrar(); });
+});
+if(!DATOS.some(function(p){return p.bat==='2022';})){ batActual='2026'; }
+document.querySelectorAll('.filtro [data-bat]').forEach(function(x){ x.classList.toggle('activo',x.dataset.bat===batActual); });
+ver('todo');
+window.addEventListener('load',avisarAltura); window.addEventListener('resize',avisarAltura);
+</script>
+</body>
+</html>

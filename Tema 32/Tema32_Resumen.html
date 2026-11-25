@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 32 · Resumen</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha{text-decoration:none;display:inline-block}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta h4{margin:14px 0 6px;font-size:15px;font-style:italic;color:var(--fondo)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 32. Gestión de la documentación en los archivos de oficina</p>
+  <div class="barra">
+    <nav class="fichas">
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="s0" title="Cómo usar este esquema">Guía</button>
+      <button type="button" class="ficha" data-ap="s1" title="Normativa de referencia">Normativa</button>
+      <button type="button" class="ficha" data-ap="s2" title="1. Introducción">1</button>
+      <button type="button" class="ficha" data-ap="s3" title="2.1. Documento">2.1</button>
+      <button type="button" class="ficha" data-ap="s4" title="2.2. Ciclo de vida de los documentos">2.2</button>
+      <button type="button" class="ficha" data-ap="s5" title="2.3. Expediente">2.3</button>
+      <button type="button" class="ficha" data-ap="s6" title="2.4. Cuadro de clasificación">2.4</button>
+      <button type="button" class="ficha" data-ap="s7" title="2.5. Calendario de conservación y acceso">2.5</button>
+      <button type="button" class="ficha" data-ap="s8" title="3. La documentación electrónica en la Administración de la CAE">3</button>
+      <button type="button" class="ficha" data-ap="s9" title="4. Sistema de archivo de la Administración Pública de la CAE">4</button>
+      <button type="button" class="ficha" data-ap="s10" title="5. El archivo de gestión o de oficina: procesos de gestión documental y tratamiento de la documentación">5</button>
+      <button type="button" class="ficha" data-ap="s11" title="Mapa de preguntas por apartado">Preguntas</button>
+      <a class="ficha" href="Tema32_Bateria.html">Batería</a>
+    </nav>
+  </div>
+  <p class="nombre-tema" id="nombre"></p>
+</div></header>
+<main>
+<p class="leyenda"><span class="etiqueta">P22-nº</span> Batería Administrativos 2022 · <span class="etiqueta">P26-nº</span> Batería Temario General 2026 · <span class="estrella">★</span> preguntado en las dos</p>
+<section class="tarjeta" data-ap="s0">
+<h2>Cómo usar este esquema</h2>
+<p>El texto de cada apartado es literal del Tema 32 (Tema 19 nuevo, opebide.com); solo se ha ordenado en esquema. El apartado 2 se ha dividido en sus subapartados (2.1 a 2.5).</p>
+<ul>
+<li><strong>P22-nº</strong> = Batería <em>Administrativos 2022</em>, Tema 19 (preguntas 342–358).</li>
+<li><strong>P26-nº</strong> = Batería <em>Temario General 2026</em>. No tiene bloque propio para este tema; se incluyen las preguntas de su Tema 15 (expediente y documentos) que este texto responde.</li>
+<li><span class="estrella" title="Preguntado en las dos baterías">★</span> = punto preguntado en las dos baterías.</li>
+<li>Las baterías no traen plantilla de respuestas: la etiqueta indica qué frase del tema responde a cada pregunta.</li>
+<li>La batería 2022 es anterior a la Ley 5/2022. Tres preguntas (P22-349, P22-353 y P22-356) tratan datos que el tema actual no recoge.</li>
+<li>Erratas del original que se mantienen tal cual: «tratamientode», «deberá de tener», «deben de remitirlas».</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s1">
+<h2>Normativa de referencia</h2>
+<p>Las principales normas que regulan la gestión documental y el sistema de archivo de la Administración de la Comunidad Autónoma de Euskadi (CAE) son las siguientes:</p>
+<ul>
+<li><strong>Ley 5/2022, de 23 de junio, de Gestión Documental Integral y Patrimonio Documental de la Comunidad Autónoma del País Vasco</strong> (en adelante, Ley 5/2022). Es la norma central del tema y derogó la Ley 7/1990, de Patrimonio Cultural Vasco, en lo referente a los archivos y al patrimonio documental.</li>
+<li><strong>Decreto 174/2003, de 22 de julio</strong>, de organización y funcionamiento del Sistema de Archivo de la Administración Pública de la CAE, y <strong>Orden de 19 de diciembre de 2005</strong>, del reglamento del sistema de archivo de la Administración General e Institucional de la CAE, en lo que no se opongan a la Ley 5/2022.</li>
+<li><strong>Decreto 54/2024, de 30 de abril</strong>, del Consejo de Archivos y Patrimonio Documental de la Comunidad Autónoma del País Vasco, y <strong>Decreto 59/2024, de 7 de mayo</strong>, de la composición, la organización y el funcionamiento de la Comisión de Valoración, Selección y Acceso a los Documentos de la Comunidad Autónoma del País Vasco (<strong>COVASADE</strong>). Este último derogó la regulación de las antiguas comisiones COVASAD y COVASED.</li>
+<li><strong>Orden de 27 de septiembre de 2016</strong>, por la que se aprueba la política de gestión de documentos electrónicos del sector público de la CAE.</li>
+<li>Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas (en particular, arts. 17, 26, 27 y 70), Ley 40/2015, de 1 de octubre, de Régimen Jurídico del Sector Público, y Real Decreto 203/2021, de 30 de marzo, por el que se aprueba el Reglamento de actuación y funcionamiento del sector público por medios electrónicos.</li>
+<li>Real Decreto 4/2010, de 8 de enero, por el que se regula el Esquema Nacional de Interoperabilidad (ENI), y sus Normas Técnicas de Interoperabilidad (NTI) de Documento electrónico, Expediente electrónico, Digitalización de documentos, Procedimientos de copiado auténtico y conversión, y Política de gestión de documentos electrónicos.</li>
+<li>Reglamento (UE) 910/2014, relativo a la identificación electrónica y los servicios de confianza (Reglamento eIDAS), modificado por el Reglamento (UE) 2024/1183, y Ley 6/2020, de 11 de noviembre, reguladora de determinados aspectos de los servicios electrónicos de confianza.</li>
+<li>Decreto 91/2023, de 20 de junio, de atención integral y multicanal a la ciudadanía y acceso a los servicios públicos por medios electrónicos.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s2">
+<h2>1. Introducción</h2>
+<ul>
+<li>Tanto en los puestos de personal administrativo como en los de auxiliar administrativo se trabaja constantemente con documentación y se enfrentan diariamente al archivo y tratamientode la misma.</li>
+<li>La gestión documental partía de un modelo clásico, en el que el archivo intervenía cuando el proceso de trabajo administrativo había terminado y los documentos se enviaban al archivo.</li>
+<li>Sin embargo, la obligada transformación digital de las administraciones públicas hace necesaria la implantación de un nuevo modelo de gestión documental más complejo que abarque todo el ciclo de vida de los documentos, independientemente de su soporte físico (papel, electrónico, etc.). Este ciclo comienza incluso antes de haber creado los documentos y termina con la disposición final de los documentos, que podría ser su destrucción o su conservación permanente.</li>
+<li>La Ley 5/2022 recoge este cambio de enfoque y define la <strong>gestión documental integral</strong> como el conjunto de operaciones dirigidas al control eficaz y sistemático de la creación, recepción, uso, valoración y conservación de los documentos. Para garantizarlo, obliga a todas las entidades públicas a implantar un sistema de gestión documental y a mantener un programa continuado y activo de gestión documental (arts. 6 y 7).</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s3">
+<h2>2.1. Documento</h2>
+<ul>
+<li><strong>Documento:</strong> según la Ley 5/2022 (art. 3), es la unidad de información, de carácter único y en cualquier soporte o formato, cuyo contenido estructurado y contextualizado se presenta como evidencia de las acciones, decisiones y funciones propias de las personas físicas y jurídicas, incluidas las bases de datos y otros objetos electrónicos de cualquier naturaleza.</li>
+<li><strong>Documento de archivo:</strong> Toda información registrada, independientemente de su forma y características, recibida, creada o conservada por una institución, entidad o individuo en el desempeño de sus funciones. Esta definición es aplicable tanto a la documentación en papel como a la electrónica.</li>
+<li><strong>Documentación de apoyo informativo:</strong> Aquellos documentos (impresos, fotocopias de documentos administrativos, fotocopias de disposiciones normativas, folletos, etc.) cuya utilidad para la Administración radica exclusivamente en su contenido informativo para apoyo de la gestión administrativa, por tanto, <strong>no es documentación susceptible de integración en los expedientes ni de conservación en los archivos</strong>.</li>
+<li><strong>Documentos de titularidad pública:</strong> son los producidos o recibidos en el ejercicio de sus funciones por las entidades públicas, entre ellas el Gobierno Vasco, la Administración General de la CAE y su sector público institucional (art. 4 Ley 5/2022).<ul>
+<li>Tienen esta consideración también los documentos creados o recibidos por los cargos públicos en el ejercicio de sus funciones, incluidos los correos electrónicos; tras su cese, deben entregarlos al sistema de archivo de su entidad o, si lo exige la continuidad de las actividades, a quien les suceda; la entrega se formaliza en un acta que incorpora el inventario de los documentos y que visa la persona responsable del sistema de archivo (art. 8.2).</li>
+<li>Los documentos de titularidad pública son <strong>inalienables e inembargables</strong> y, para su validez, deben cumplir los requisitos de autenticidad, integridad, fiabilidad, disponibilidad, contextualización y trazabilidad (arts. 4.5 y 5).</li>
+</ul>
+</li>
+<li><strong>Documento electrónico:</strong> Información de cualquier naturaleza en forma electrónica, archivada en un soporte electrónico según un formato determinado y susceptible de identificación y tratamiento diferenciado.</li>
+<li><strong>Documento administrativo electrónico:</strong> objeto digital administrativo que contiene la información (datos) y los datos asociados a esa información (firma y metadatos).</li>
+</ul>
+<h3>2.1.1 Características del documento electrónico administrativo</h3>
+<ul>
+<li><strong>Según el art. 26 de la Ley 39/2015, son documentos públicos administrativos los válidamente emitidos por los órganos de las administraciones públicas</strong>, que los emitirán por escrito y a través de medios electrónicos, salvo que su naturaleza exija otra forma más adecuada de expresión y constancia. <span class="etiqueta">P26-383</span></li>
+</ul>
+<p>Para ser válidos, los documentos electrónicos administrativos deben cumplir los siguientes requisitos (art. 26.2 Ley 39/2015):</p>
+<ul>
+<li>a) Contener información de cualquier naturaleza archivada en un soporte electrónico, según un formato determinado, susceptible de identificación y tratamiento diferenciado.</li>
+<li>b) Disponer de los datos de identificación que permitan su individualización, sin perjuicio de su posible incorporación a un expediente electrónico.</li>
+<li>c) Incorporar una referencia temporal del momento en que han sido emitidos.</li>
+<li>d) Incorporar los metadatos mínimos exigidos.</li>
+<li>e) Incorporar las firmas electrónicas que correspondan de acuerdo con lo previsto en la normativa aplicable.</li>
+</ul>
+<h3>2.1.2 Componentes del documento electrónico administrativo</h3>
+<p>Los componentes de un documento electrónico son: <span class="etiqueta">P22-343</span></p>
+<ul>
+<li>a) <strong>Contenido</strong>, entendido como conjunto de datos o información del documento.</li>
+<li>b) <strong>Metadatos</strong> del documento electrónico.</li>
+<li>c) <strong>En su caso, firma electrónica.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>A efectos de tratamiento, gestión y conservación del documento, la suma de estos tres componentes constituye un único objeto electrónico.</li>
+<li><strong>Firma electrónica:</strong> según el Reglamento eIDAS, son los datos en formato electrónico anejos a otros datos electrónicos o asociados de manera lógica con ellos que utiliza el firmante para firmar. El Reglamento distingue tres tipos:<ul>
+<li>Firma electrónica simple: la que responde a la definición general anterior.</li>
+<li>Firma electrónica avanzada: la que, además, cumple los siguientes requisitos: a) Permite identificar al firmante. b) Permite detectar cualquier cambio posterior de los datos firmados. c) Está vinculada al firmante de manera única y a los datos a los que se refiere. d) Ha sido creada por medios que el firmante puede mantener bajo su exclusivo control.</li>
+<li>Firma electrónica cualificada: firma avanzada creada mediante un dispositivo cualificado de creación de firma y basada en un certificado cualificado. Tiene un efecto jurídico equivalente al de la firma manuscrita.</li>
+</ul>
+</li>
+<li>Además de la firma de las personas, las administraciones utilizan el sello electrónico (vinculado a un órgano o entidad, por ejemplo en la actuación administrativa automatizada) y el <strong>código seguro de verificación (CSV), que permite comprobar la integridad de un documento en la sede electrónica</strong>. <span class="etiqueta">P26-370</span></li>
+<li><strong>Metadatos del documento electrónico: Proporcionan contexto al contenido, estructura y firma de un documento, contribuyendo al valor probatorio y fiabilidad de este a lo largo del tiempo como evidencia electrónica de las actividades y procedimientos.</strong> <span class="etiqueta">P22-351</span></li>
+<li>La NTI de Documento electrónico fija los <strong>metadatos mínimos obligatorios</strong>: versión NTI, identificador, órgano, fecha de captura, origen (ciudadanía o administración), estado de elaboración, nombre del formato, tipo documental y tipo de firma. Según la Ley 5/2022, los documentos electrónicos deben incorporar desde la fase de diseño los metadatos de valoración, selección y acceso (art. 11.2).</li>
+</ul>
+<h3>2.1.3 Otros conceptos básicos</h3>
+<p>La Ley 5/2022 (art. 3) define, además, los siguientes conceptos:</p>
+<ul>
+<li><strong>Archivo:</strong> en sentido funcional, el sistema corporativo de gestión que define el proceso de producción y gestión documental a lo largo de todo el ciclo de vida de los documentos; en sentido orgánico, el órgano o la unidad responsable de coordinar ese sistema; y en sentido material, la instalación o el repositorio y su sistema informático donde se custodian los documentos, o bien los propios documentos o fondos.</li>
+<li><strong>Fondo documental:</strong> conjunto orgánico de documentos producidos, recibidos o acumulados por una persona física o jurídica, pública o privada, en la gestión de sus actividades o competencias.</li>
+<li><strong>Serie documental:</strong> conjunto de documentos producidos de manera continuada en el tiempo como resultado de una misma función o actividad.</li>
+<li><strong>Nivel de archivo:</strong> cada uno de los estadios en los que se encuentra la documentación en función de su ciclo de vida.</li>
+<li><strong>Sistema de archivo:</strong> conjunto estructurado de normas, órganos, centros, servicios y sistemas informáticos vinculados a la gestión de los documentos de una o varias organizaciones a lo largo de todo su ciclo de vida.</li>
+<li><strong>Sistema de información administrativa:</strong> aplicación informática que lleva a cabo las funciones necesarias para la tramitación (creación, registro, notificación, almacenamiento, firma y archivado de documentos, entre otras).</li>
+<li><strong>Valoración:</strong> estudio de las series documentales que define sus valores (administrativo, legal, jurídico, fiscal, histórico, científico, cultural, testimonial o informativo) y, de acuerdo con ellos, determina su conservación, permanente (total o parcial) o temporal, o su eliminación.</li>
+<li><strong>Selección:</strong> proceso por el que se determina la conservación o eliminación de los documentos como consecuencia de su valoración.</li>
+<li><strong>Eliminación o expurgo:</strong> proceso de destrucción o borrado de documentos y datos, aplicado de acuerdo con el calendario de conservación y acceso.</li>
+<li><strong>Calendario de conservación y acceso:</strong> instrumento que identifica las series documentales, precisa los criterios de selección y los plazos de conservación o eliminación y establece los criterios de acceso.</li>
+<li><strong>Patrimonio documental:</strong> conjunto de fondos documentales de conservación permanente.</li>
+<li><strong>Política de gestión de documentos electrónicos:</strong> conjunto de directrices que establece una organización para crear y gestionar documentos fiables, auténticos, íntegros y accesibles; se aprueba al más alto nivel y asigna responsabilidades.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s4">
+<h2>2.2. Ciclo de vida de los documentos</h2>
+<ul>
+<li><strong>El ciclo de vida de los documentos es el período comprendido entre el diseño de un documento y su eliminación o conservación permanente (art. 3 Ley 5/2022).</strong> <span class="etiqueta">P22-352</span></li>
+<li>Tradicionalmente se distinguen tres edades, a las que corresponden los niveles de archivo: la fase activa (archivo de gestión u oficina), la semiactiva (archivo intermedio, que en la CAE es el Archivo General) y la inactiva o histórica (archivo histórico).</li>
+</ul>
+<p><strong>Con la administración electrónica, la gestión documental se anticipa al propio documento.</strong> Por eso la Ley 5/2022 establece que los sistemas de archivo públicos actúan en tres fases (art. 12.3):</p>
+<ul>
+<li><strong>Fase de diseño:</strong> se analizan y diseñan los procedimientos y los documentos que los soportan, y se les aplican los recursos archivísticos necesarios.</li>
+<li><strong>Fase de tramitación:</strong> se aplican los recursos archivísticos que aseguran la adecuada gestión de los documentos creados y recibidos.</li>
+<li><strong>Fase de conservación:</strong> los documentos se transfieren al nivel de archivo correspondiente y se les incorporan los recursos necesarios para su permanencia durante el tiempo que corresponda, su difusión y el acceso a ellos.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Desde que se reciben o se crean, los documentos son responsabilidad de los <strong>archivos de gestión u oficina</strong>, es decir, de las unidades administrativas de los departamentos y entidades de la Administración Pública de la CAE.</li>
+<li>Una vez terminada la tramitación, los expedientes deben ingresarse en el sistema de información administrativa que establezca la dirección del Sistema de Archivo del Sector Público en un plazo máximo de <strong>un año</strong> y transferirse al <strong>Archivo General</strong> del sector público, encargado de su custodia y conservación, en un plazo máximo de <strong>cinco años</strong> (art. 31 Ley 5/2022).</li>
+<li>La documentación valorada como de conservación permanente se transfiere después al <strong>Archivo Histórico de Euskadi</strong>, en un plazo máximo de <strong>cincuenta años</strong> desde la finalización de su tramitación (art. 32).</li>
+</ul>
+<p>En la Administración de la CAE, el recorrido operativo de los documentos se concreta en seis fases:</p>
+<ol>
+<li><strong>Entrada de documentación:</strong> El ciudadano puede utilizar dos canales para relacionarse con la administración, el canal telemático o el presencial. Todo documento que entra en la administración deberá de tener un registro de entrada y deberá de almacenarse siempre en el Archivo Digital, ya sea un documento electrónico o una copia digitalizada del documento registrado de manera presencial.</li>
+<li><strong>Distribución de la documentación</strong> a los sistemas de gestión de expedientes de los diferentes organismos y departamentos de las Administraciones Publicas de la CAE: Los asientos registrales, junto con sus documentos asociados, serán distribuidos a los diferentes sistemas de gestión de expedientes que realizan la tramitación de los expedientes.</li>
+<li><strong>Generación de documentos administrativos:</strong> Los documentos administrativos generados durante la etapa de tramitación de los expedientes serán documentos electrónicos (nunca en soporte papel), firmados electrónicamente cuando se precise y deberán de almacenarse obligatoriamente en el Archivo Digital.</li>
+<li><strong>Salida de documentos:</strong> Cuando sea preciso enviar documentos a la ciudadanía se facilitará la identificación del documento electrónico (oid) al registro de salida. Si el ciudadano ha elegido el canal presencial en su interacción con la administración, se le enviará una copia auténtica impresa. <strong>Esta copia contendrá un código seguro de verificación que permitirá contrastar su autenticidad en la sede electrónica de dicha administración.</strong> <span class="etiqueta">P22-355</span></li>
+<li><strong>Ingreso en el sistema de archivo y transferencia al Archivo General:</strong> todo expediente cerrado en los sistemas de gestión de expedientes debe ingresarse, junto con sus documentos electrónicos, en el sistema de información que establezca la dirección del Sistema de Archivo del Sector Público, que en la Administración General de la CAE es la aplicación AKS/SGA, en un plazo máximo de un año desde la finalización de su tramitación; con ello pasa a formar parte del archivo de oficina. Posteriormente, y en un plazo máximo de cinco años, el archivo de oficina lo transfiere al Archivo General. Los expedientes y sus documentos deben estar clasificados, descritos y ordenados antes de su remisión al Archivo General.</li>
+<li><strong>Otros procesos de archivo:</strong> Para cumplir sus funciones principales, conservación y difusión, el sistema de archivo realiza entre otros los siguientes procesos documentales sobre la documentación: identificación y valoración de la misma; selección y expurgo; consulta y préstamo.</li>
+</ol>
+</section>
+<section class="tarjeta" data-ap="s5">
+<h2>2.3. Expediente</h2>
+<ul>
+<li><strong>Se entiende por expediente el conjunto ordenado de documentos y actuaciones que sirven de antecedente y fundamento a la resolución administrativa, así como las diligencias encaminadas a ejecutarla (art. 70.1 Ley 39/2015 y art. 3 Ley 5/2022).</strong> <span class="etiqueta">P26-366</span></li>
+<li>El orden interno de un expediente debe respetar siempre esa secuencia procedimental.</li>
+<li><strong>Los expedientes deben contener únicamente la documentación necesaria para la tramitación, y no debe incorporarse a estos ninguna documentación de apoyo.</strong> <span class="etiqueta">P22-354</span></li>
+<li>Los expedientes se formarán con los documentos originales que se reciban y con las copias de los que se envíen y que se correspondan con los trámites ejecutados. Los oficios de remisión deberán ir unidos a los documentos que remiten.</li>
+<li><strong>La oficina que inicia el expediente es la responsable de su custodia y archivo.</strong> El resto de las oficinas que intervienen en la tramitación, aunque durante un tiempo conserven copias como referencia de su gestión, nunca deben de remitirlas al siguiente nivel de archivo. <span class="etiqueta">P22-342</span></li>
+</ul>
+<p>Tipología de expedientes: <span class="etiqueta">P26-367</span></p>
+<ul>
+<li>a) <strong>Expedientes en papel:</strong> la totalidad de los documentos que conforman el expediente son documentos en papel.</li>
+<li>b) <strong>Expediente electrónico:</strong> la totalidad de documentos que conforma el expediente son documentos electrónicos en diferentes formatos, con sus firmas electrónicas, etc.</li>
+<li>c) <strong>Expediente mixto:</strong> expediente conformado por documentos electrónicos y documentos en papel.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>Expediente administrativo electrónico:</strong> según el art. 70 de la Ley 39/2015, los expedientes tendrán formato electrónico y se formarán mediante la agregación ordenada de cuantos documentos, pruebas, dictámenes, informes, acuerdos, notificaciones y demás diligencias deban integrarlos, así como un índice numerado de todos los documentos que contenga cuando se remita. Deberá constar en el expediente copia electrónica certificada de la resolución adoptada.</li>
+<li><strong>No forma parte del expediente la información de carácter auxiliar o de apoyo, como la contenida en aplicaciones, ficheros y bases de datos informáticas, notas, borradores, opiniones, resúmenes</strong>, comunicaciones e informes internos o entre órganos o entidades administrativas, ni los juicios de valor emitidos por las administraciones, salvo que se trate de informes, preceptivos y facultativos, solicitados antes de la resolución que ponga fin al procedimiento. <span class="etiqueta">P26-382</span></li>
+<li>Cuando, en virtud de una norma, deba remitirse un expediente electrónico, se enviará <strong>completo, foliado, autentificado y acompañado de un índice, también autentificado</strong>, de los documentos que contenga; la autenticación del índice garantiza la integridad e inmutabilidad del expediente desde el momento de su firma (art. 70.3 Ley 39/2015).</li>
+</ul>
+<h3>2.3.1 Componentes del expediente electrónico administrativo</h3>
+<p>Los componentes de un expediente electrónico son: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-345</span> <span class="etiqueta">P26-368</span></p>
+<ul>
+<li>a) <strong>Documentos electrónicos</strong>, que cumplirán las características de estructura y formato establecidas en la Norma Técnica de Interoperabilidad de Documento electrónico.</li>
+<li>b) <strong>Índice electrónico, que garantiza la integridad del expediente electrónico y permite su recuperación siempre que sea preciso.</strong> <span class="etiqueta">P26-378</span></li>
+<li>c) <strong>Firma del índice electrónico por la Administración</strong>, órgano o entidad actuante de acuerdo con la normativa aplicable.</li>
+<li>d) <strong>Metadatos del expediente electrónico.</strong> Los mínimos obligatorios según la NTI de Expediente electrónico son: versión NTI, identificador, órgano, fecha de apertura, clasificación, estado, interesado y tipo de firma.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s6">
+<h2>2.4. Cuadro de clasificación</h2>
+<ul>
+<li>Es el instrumento de gestión de cualquier Sistema de Archivo. Refleja la organización del fondo documental y aporta los datos esenciales de su estructura. Todos los documentos administrativos se organizan en base al cuadro de clasificación, independientemente de su soporte.</li>
+<li>La Ley 5/2022 atribuye a la <strong>dirección del Sistema de Archivo del Sector Público</strong> de la Comunidad Autónoma del País Vasco (la dirección competente en materia de recursos generales) establecer el cuadro de clasificación de la documentación y definir las series documentales que lo componen, así como la tipología documental y los esquemas de metadatos que deben aplicarse (art. 30.1.f). En la práctica, el <strong>Archivo General</strong> lo elabora en colaboración con el personal responsable de organización y archivo de cada departamento, organismo autónomo, ente público de derecho privado o sociedad pública.</li>
+<li>El cuadro de clasificación del Sistema de Archivo de la Administración Pública de Euskadi es <strong>funcional-orgánico</strong>.</li>
+</ul>
+<p><strong>Se estructura jerárquicamente en cinco niveles: Fondo · Subfondo · Sección · Subsección · Serie</strong> <span class="etiqueta">P22-344</span></p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Contenido</th>
+<th>Código</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fondo</td>
+<td>Corresponde con las grandes áreas competenciales en que se organiza la Administración</td>
+<td>Dos letras</td>
+<td>CU – Cultura · IN – Industria</td>
+</tr>
+<tr>
+<td>Subfondo</td>
+<td>Depende jerárquicamente de un fondo y no es obligatoria su existencia. Solo se creará un subfondo si dentro de una gran área competencial (fondo) existe uno de los siguientes organismos: Sociedades Públicas, Entes públicos de Derecho Privado, Organismos Autónomos, Fundaciones o Consorcios</td>
+<td>Dos letras</td>
+<td>IH – IHOBE · OS – OSAKIDETZA</td>
+</tr>
+<tr>
+<td>Sección</td>
+<td>Corresponde aproximadamente con las Direcciones que componen la estructura orgánica de cada Departamento u Organismo</td>
+<td>Dos dígitos</td>
+<td>ED.07 – Centros Docentes · ED.08 – Administración Educativa</td>
+</tr>
+<tr>
+<td>Subsección</td>
+<td>Subdivisiones de una sección. No es obligatoria su existencia</td>
+<td>Una letra</td>
+<td>ED.07.A – Centros Docentes de Araba · ED.07.G – Centros Docentes de Gipuzkoa</td>
+</tr>
+<tr>
+<td>Serie documental</td>
+<td>Es el último elemento del Cuadro de Clasificación y depende jerárquicamente de una Sección o Subsección</td>
+<td>Tres letras que no se pueden repetir dentro de un Fondo o Subfondo</td>
+<td>ED.04.PDT – Ayudas para programas de doctorado</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="tarjeta" data-ap="s7">
+<h2>2.5. Calendario de conservación y acceso</h2>
+<ul>
+<li>Es el instrumento que identifica las series documentales, precisa los criterios de selección y los plazos de conservación o eliminación de los documentos y establece los criterios de acceso a ellos (art. 3 Ley 5/2022).</li>
+<li>Todos los documentos de titularidad pública deben ser valorados para determinar sus plazos de conservación o eliminación y sus condiciones de acceso, y esas decisiones se recogen en los calendarios de conservación y acceso de cada entidad (art. 11 Ley 5/2022). La valoración la realizan comisiones interdisciplinares.</li>
+<li>Las entidades del Sistema de Archivos de la CAPV que no tienen comisión propia, como la Administración de la CAE, someten sus propuestas a la <strong>Comisión de Valoración, Selección y Acceso a los Documentos de la Comunidad Autónoma del País Vasco (COVASADE)</strong>, creada por el <strong>art. 21.4 de la Ley 5/2022</strong>, regulada por sus arts. 26 a 28 y desarrollada por el Decreto 59/2024. La COVASADE sustituyó a la antigua COVASAD, propia de la Administración Pública de la CAE, y a la COVASED.</li>
+</ul>
+<p>El procedimiento se resume así:</p>
+<ul>
+<li>La dirección del Sistema de Archivo del Sector Público elabora un estudio de identificación de cada serie (información descriptiva, normativa que la regula, tipos de documentos, si contiene datos especialmente protegidos, procedimiento al que corresponde y posibles valores), acompañado de uno o varios ejemplos y de una propuesta de calendario (arts. 11.4 y 30.1.h).</li>
+<li>La COVASADE la analiza y valida, y decide qué documentos se conservan o eliminan. Debe resolver en un plazo máximo de <strong>tres meses</strong>; si no lo hace, se entienden desestimadas las propuestas que supongan eliminación de documentos y estimadas las que supongan su conservación total (art. 11.3).</li>
+<li>Además de validar los calendarios, la COVASADE tiene otras funciones (art. 26.2): validar las propuestas de sustitución de documentos en papel por copia electrónica auténtica y la consiguiente destrucción del original; determinar los documentos esenciales resultantes de las funciones y actividades críticas de la entidad, que forman parte de su plan de gestión de riesgos corporativo; informar en los procedimientos de declaración y exclusión del patrimonio documental, y asesorar a las entidades en las materias de su competencia.</li>
+<li>Los acuerdos se adoptan por mayoría de los miembros asistentes, se someten a la aprobación del titular del departamento del Gobierno Vasco competente en materia de archivos y patrimonio documental y se publican en el <strong>Boletín Oficial del País Vasco</strong> (art. 28). Preside la COVASADE la persona titular de la dirección del Gobierno Vasco competente en esa materia (art. 27).</li>
+<li>El conjunto de calendarios aprobados por la COVASADE y por las comisiones que la precedieron (COVASED y COVASAD) forma el <strong>Calendario General de Conservación y Acceso</strong>.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s8">
+<h2>3. La documentación electrónica en la Administración de la CAE</h2>
+<h3>3.1 El archivo electrónico único</h3>
+<ul>
+<li><strong>Cada administración debe mantener un archivo electrónico único de los documentos electrónicos que correspondan a procedimientos finalizados</strong>, en un formato que garantice su autenticidad, integridad y conservación, y que permita su consulta con independencia del tiempo transcurrido desde su emisión (art. 17 Ley 39/2015). <span class="etiqueta">P26-381</span></li>
+<li>La Ley 5/2022 obliga igualmente a que cada sistema de archivo público cuente con un archivo electrónico único (art. 12.2).</li>
+<li>En la Administración General de la CAE y sus organismos autónomos, ese archivo electrónico único es <strong>dokusi (Dokumentu Kudeaketa Sistema Integrala), el sistema integral de gestión documental</strong> integrado en la plataforma de administración electrónica PLATEA. <span class="etiqueta">P22-347</span></li>
+</ul>
+<p>Se compone de dos herramientas: <span class="etiqueta">P22-358</span></p>
+<ul>
+<li><strong>El Archivo Digital</strong>, repositorio de los documentos electrónicos y sus metadatos, en el que cada documento tiene un identificador único (OID).</li>
+<li><strong>El AKS/SGA</strong> (Artxibo Kudeaketa Sistema/Sistema de Gestión de Archivo), la aplicación que gestiona el archivo: archivado, descripción, transferencias, consultas, préstamos y eliminación de expedientes en papel, electrónicos o mixtos.</li>
+</ul>
+<h3>3.2 Política de gestión de documentos electrónicos</h3>
+<ul>
+<li>La <strong>Orden de 27 de septiembre de 2016</strong> aprobó la política de gestión de documentos electrónicos del sector público de la CAE, de acuerdo con la NTI de Política de gestión de documentos electrónicos.</li>
+<li>Establece las directrices para la captura, registro, clasificación, descripción, acceso, calificación, conservación, transferencia y destrucción de los documentos electrónicos. La captura de un documento dotándolo de un identificador supone su incorporación al archivo electrónico único.</li>
+<li>La Ley 5/2022 obliga, además, a cada entidad a mantener un <strong>programa de gestión documental</strong> que, entre otros aspectos, asegure que se crean y reciben los documentos necesarios, integre la gestión documental desde el diseño de los sistemas de tramitación, determine los metadatos de cada documento, fije la forma de organizarlos y sus plazos de conservación, y garantice su conservación en entornos seguros mediante un plan de gestión de riesgos (art. 7).</li>
+</ul>
+<h3>3.3 Copias auténticas, digitalización y sustitución del papel</h3>
+<ul>
+<li><strong>Las copias auténticas, en papel o electrónicas, de documentos públicos administrativos o privados tienen la misma validez y eficacia que los documentos originales (art. 27 Ley 39/2015).</strong> Se expiden por funcionario habilitado o mediante actuación administrativa automatizada. <span class="etiqueta">P26-388</span></li>
+<li>La digitalización es el proceso tecnológico que convierte un documento en papel en una imagen electrónica que codifica fielmente su contenido, acompañada de sus metadatos y, en su caso, de su firma; los documentos que la ciudadanía presenta en papel se digitalizan en las oficinas de asistencia en materia de registros (art. 16.5 Ley 39/2015).</li>
+<li>La destrucción de los originales en papel que se hayan sustituido por copias electrónicas auténticas no es libre: requiere que la COVASADE haya analizado y validado la propuesta de sustitución, y no puede afectar a documentos que formen parte del patrimonio documental (art. 26.2.b Ley 5/2022).</li>
+</ul>
+<h3>3.4 Conservación de los documentos electrónicos</h3>
+<p>La Ley 5/2022 (art. 6) establece las siguientes reglas para la conservación de los documentos electrónicos:</p>
+<ul>
+<li>Se conservan en soporte digital y en su formato original. Si para mantenerlos durante el plazo de conservación es necesario cambiar de formato o de soporte, el cambio debe validarlo el sistema de archivo y quedar documentado.</li>
+<li>Una vez transferidos desde los sistemas de información administrativa al sistema de archivo, se consideran auténticos aunque hayan caducado los certificados y firmas electrónicas con los que se produjeron.</li>
+<li>Todos los sistemas que intervienen en la gestión documental deben contar con medios de seguridad que impidan la alteración y sobreescritura no autorizadas de los documentos, y con instrumentos de trazabilidad que permitan auditar su uso y acceso (art. 6.7).</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s9">
+<h2>4. Sistema de archivo de la Administración Pública de la CAE</h2>
+<p>Se entiende por sistema de archivo el conjunto estructurado de normas, órganos, centros, servicios y sistemas informáticos vinculados a la gestión de los documentos de una o varias organizaciones a lo largo de todo su ciclo de vida (art. 3 Ley 5/2022).</p>
+<h3>4.1 Organización</h3>
+<p>La Ley 5/2022 distingue dos sistemas:</p>
+<ul>
+<li><strong>Sistema de Archivos de la Comunidad Autónoma del País Vasco (art. 21):</strong> espacio común de cooperación y coordinación de los sistemas de archivo de todas las entidades incluidas en la ley (sector público autonómico, entidades locales, Parlamento Vasco, Ararteko, Tribunal Vasco de Cuentas Públicas, UPV/EHU, etc.; el sector público foral y las juntas generales pueden integrarse voluntariamente). Cuenta con dos órganos colegiados: el Consejo de Archivos y Patrimonio Documental, órgano asesor regulado por el Decreto 54/2024, y la COVASADE.</li>
+<li><strong>Sistema de Archivo del Sector Público de la Comunidad Autónoma del País Vasco (art. 29):</strong> sistema único y coordinado de los archivos de todas las entidades del sector público autonómico. Depende del departamento competente en administración pública y está adscrito a la dirección competente en materia de recursos generales, cuyo titular lo dirige. Se exceptúa el Archivo Histórico de Euskadi, adscrito a la dirección competente en archivos y patrimonio documental.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Integran el Sistema de Archivo del Sector Público el Gobierno Vasco y sus departamentos y el sector público institucional, la dirección del sistema, los archivos de gestión, el Archivo General y el Archivo Histórico de Euskadi (art. 29.4).</li>
+<li>La dirección del sistema planifica la política de gestión documental, establece las normas y el cuadro de clasificación, gestiona el archivo electrónico único, elabora las propuestas de valoración y realiza auditorías, entre otras funciones (art. 30).</li>
+<li>El Decreto 174/2003 y su reglamento siguen aplicándose en lo que no se opongan a la Ley 5/2022.</li>
+</ul>
+<h3>4.2 Ámbito de aplicación</h3>
+<p>El sistema abarca la documentación producida por el conjunto de la Administración Pública de la CAE, es decir, el Gobierno Vasco y sus departamentos, la Administración Institucional y el sector público: <span class="etiqueta">P22-346</span></p>
+<ul>
+<li>a) <strong>Administración General:</strong> Departamentos, delegaciones, centros docentes (salvo el nivel universitario), centros sanitarios (salvo en lo referente a la documentación clínica), comisarías (salvo en lo referente a la documentación de carácter policial), juzgados (salvo en lo referente a la documentación de carácter judicial).</li>
+<li>b) <strong>Administración Institucional:</strong><ul>
+<li>Organismos Autónomos: IVAP, Eustat, Emakunde, HABE, Osalan, Kontsumobide, Academia Vasca de Policía y Emergencias, Gogora...</li>
+<li>Entes Públicos de Derecho Privado: Osakidetza, Lanbide, Agencia Vasca del Agua, EVE, Radio Televisión Vasca (EITB)...</li>
+<li>Sociedades Públicas: EJIE, IHOBE, ALOKABIDE…</li>
+<li>Fundaciones: Musikene, ELIKA, HAZI, Museo Vasco del Ferrocarril…</li>
+<li>Consorcios del Sector Público: HAURRESKOLAK.</li>
+</ul>
+</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Integran el Patrimonio Documental de la Comunidad Autónoma del País Vasco todos los documentos de titularidad pública y privada con <strong>más de cincuenta años de antigüedad</strong>, además de los que se declaren como tales (art. 16 Ley 5/2022).</li>
+</ul>
+<h3>4.3 Niveles de archivo</h3>
+<p>La Ley 5/2022 (arts. 31 a 33) organiza la documentación del sector público autonómico en los siguientes niveles de archivo:</p>
+<ul>
+<li><strong>Archivos de gestión u oficina.</strong> Existe uno en cada unidad administrativa u oficina, y su personal se responsabiliza de organizar, custodiar y conservar la documentación. Sus funciones son: cumplir las directrices de la dirección del sistema; organizar los expedientes una vez concluida su tramitación; conservarlos en instalaciones adecuadas; ingresarlos en el sistema de información que establezca la dirección en un plazo máximo de un año desde la finalización de su tramitación; transferirlos al Archivo General en un plazo máximo de cinco años; realizar en su nivel los expurgos previstos en los calendarios, y permitir el acceso a los documentos (art. 31).</li>
+<li><strong>Archivo General del sector público de la Comunidad Autónoma del País Vasco.</strong> Es el archivo intermedio y ejecuta las políticas de gestión y custodia de los documentos del sector público. Transfiere al Archivo Histórico de Euskadi los documentos de conservación permanente en un plazo máximo de cincuenta años desde la finalización de su tramitación (art. 32).</li>
+<li><strong>Archivo Histórico de Euskadi.</strong> Creado por la Ley 5/2022 (art. 33), gestiona, conserva y difunde los documentos integrantes del Patrimonio Documental de la CAPV, o susceptibles de serlo, que estén bajo su custodia. Según la disposición adicional primera de la Ley 5/2022, cuando entre en funcionamiento, el Archivo Histórico de Euskadi asumirá las funciones de Irargi-Centro de Patrimonio Documental de Euskadi que le atribuye la ley.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>El reglamento del sistema de archivo (Orden de 19 de diciembre de 2005) contempla, además, los <strong>archivos centrales de la Administración Institucional</strong> (organismos autónomos, entes públicos de derecho privado, sociedades públicas, fundaciones y consorcios), <strong>encargados de organizar, custodiar y conservar la documentación de sus respectivas entidades antes de su transferencia al Archivo General</strong>. <span class="etiqueta">P22-348</span></li>
+<li>El sistema de archivo de la Administración Pública de la CAE se gestiona mediante una aplicación informática denominada <strong>AKS/SGA</strong>. El AKS/SGA y el Archivo Digital forman, como se ha visto, la infraestructura de gestión documental dokusi, que constituye el archivo electrónico único de la Administración General de la CAE y sus organismos autónomos.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s10">
+<h2>5. El archivo de gestión o de oficina: procesos de gestión documental y tratamiento de la documentación</h2>
+<ul>
+<li>La documentación que genera una unidad administrativa conforma el Archivo de Oficina o de Gestión.</li>
+<li>En cada unidad administrativa u oficina existe un archivo de gestión, cuyo personal se responsabiliza de organizar, custodiar y conservar su documentación (art. 31.1 Ley 5/2022).</li>
+<li>Los procesos técnicos que se llevan a cabo en él son los siguientes:</li>
+</ul>
+<p><em>(Rótulos de la imagen «Procesos técnicos en el archivo de oficina» del tema.)</em> Clasificar → Ordenar → Describir → Archivar → Instalar → Transferir → Consultar → Expurgar.</p>
+<h3>5.1 Clasificación</h3>
+<ul>
+<li>Clasificar es dividir o separar un conjunto de elementos estableciendo clases, grupos o series, de tal manera que dichos grupos queden integrados formando parte de la estructura de un todo.</li>
+<li>La clasificación de la documentación producida por la oficina debe de responder, a las competencias y funciones que tiene encomendadas. Es decir que cada una de esas funciones quedará plasmada en una o varias series documentales.</li>
+<li><strong>Cuando se inicie una nueva actividad (por ejemplo, una nueva línea de ayudas o un nuevo registro administrativo) la oficina productora y el Archivo General deberán analizarla y decidir si se crea una nueva serie</strong> en el cuadro de clasificación o acordar su archivo en alguna de las ya definidas. <span class="etiqueta">P22-350</span></li>
+</ul>
+<h3>5.2 Ordenación</h3>
+<ul>
+<li>a) <strong>El cronológico</strong> que utiliza la fecha de los documentos como elemento de unión, siguiendo los tres elementos de mayor a menor: Año, mes y día. Es el más útil para ordenar series como la correspondencia, las actas, las circulares.</li>
+<li>b) <strong>El alfabético</strong>, que utiliza las letras del abecedario como criterio:<ul>
+<li>Si la palabra elegida es el apellido será una ordenación <strong>onomástica</strong>. Es el criterio más útil para, por ejemplo, expedientes de personal.</li>
+<li>Si el criterio elegido es el de los nombres de lugar, será una ordenación <strong>geográfica</strong>.</li>
+</ul>
+</li>
+<li>c) <strong>El numérico</strong> es el que ordena los documentos siguiendo una serie de guarismos desde el 1 en adelante. Es el criterio más utilizado por documentación de carácter contable.</li>
+<li>d) <strong>El mixto</strong> que consiste en la combinación de cualquiera de los anteriores para conseguir un patrón.</li>
+</ul>
+<h3>5.3 Describir</h3>
+<ul>
+<li>a) Proceso que consiste en identificar el contenido de la documentación archivística y representarlo de manera precisa, con el fin de facilitar el acceso.</li>
+<li>b) Proceso que relaciona el documento/expediente con las personas interesadas.</li>
+<li>c) Permite a los responsables de la gestión de un fondo documental mantener un mejor control de la documentación y, de esta forma, garantizar su conservación.</li>
+<li>d) La descripción ha de seguir la estructura de organización de los fondos documentales y tiene que ir de lo más general a lo más particular.</li>
+</ul>
+<h3>5.4 Archivar expedientes</h3>
+<ul>
+<li>El archivado de expedientes integra una serie de actuaciones encaminadas a seleccionar los expedientes producidos por la unidad administrativa (Dirección/Servicio, etc.) para su ingreso a nivel de Archivo de Oficina, una vez que la tramitación de los expedientes haya finalizado.</li>
+</ul>
+<h3>5.5 Instalar</h3>
+<ul>
+<li>Para la instalación de expedientes que contengan documentación en papel el caso más común es el tipo de unidad de instalación llamada <strong>caja normalizada</strong>. Para los expedientes totalmente electrónicos se utilizará un tipo de unidad de instalación llamada <strong>caja digital</strong>.</li>
+</ul>
+<h3>5.6 Transferir</h3>
+<ul>
+<li>La transferencia es el proceso mediante el cual se transfiere la documentación desde el Archivo de Oficina al Archivo General o al Central Institucional (según de quién dependa la oficina).</li>
+<li>Si los expedientes son electrónicos, el proceso de transferencia al siguiente nivel de archivo parece difícil de entender, pero se trata de una fase obligatoria, debido a que, entre otras cuestiones, conlleva el traspaso de la responsabilidad en la custodia.</li>
+<li>La transferencia al Archivo General debe realizarse en un plazo máximo de <strong>cinco años</strong> desde la finalización de la tramitación de los expedientes, que previamente deben haberse ingresado, en un plazo máximo de <strong>un año</strong>, en el sistema de información administrativa que establezca la dirección del Sistema de Archivo del Sector Público (art. 31.2 Ley 5/2022).</li>
+</ul>
+<p><strong>Tareas previas a la transferencia:</strong></p>
+<ul>
+<li>a) Seleccionar la documentación a transferir, de acuerdo con el Calendario de Conservación y Acceso definido para su oficina.</li>
+<li>b) La documentación que se remita deberá ser original o copia auténtica, depurándose de los expedientes los duplicados, fotocopias y documentación de apoyo (apuntes, normativa, etc.).</li>
+<li>c) No se transferirá documentación suelta, expedientes incompletos o expedientes cuya tramitación administrativa no haya finalizado.</li>
+<li>d) Cuando se transfiera documentación en papel: Se deberá eliminar los elementos materiales que impliquen un problema para la conservación de la documentación: clips, gomas, carpetas de plásticos, carpetas de anillas, etc.</li>
+<li>e) No se deberá aceptar documentación identificada bajo términos ambiguos como «varios», «documentación general», ni siglas o acrónimos sin desarrollar.</li>
+<li>f) Los documentos deberán estar ordenados dentro de cada expediente siguiendo la lógica de su tramitación.</li>
+<li>g) Los expedientes deberán individualizarse en carpetillas.</li>
+<li>h) Los expedientes se ordenarán según el criterio más conveniente a su contenido y codificación: alfabético, cronológico, numérico o mixto.</li>
+<li>i) La documentación se introducirá en Unidades de Instalación normalizadas (cajas, tubos portaplanos, etc.) y se identificará la Unidad de Instalación como se indica en el siguiente ejemplo: <span class="etiqueta">P22-357</span><ul>
+<li><strong>Departamento:</strong> Cultura y Política Lingüística.</li>
+<li><strong>Unidad Productora:</strong> Dirección de Promoción de la Cultura.</li>
+<li><strong>Serie documental:</strong> Ayudas a la promoción de la danza.</li>
+<li><strong>Identificador:</strong> CUDAN00172 [Compuesto por 10 caracteres alfanuméricos: CU-Departamento; DAN-Serie; 00172-Correlativo de la UI].</li>
+</ul>
+</li>
+</ul>
+<h3>5.7 Consultar</h3>
+<ul>
+<li>Se entiende por Consulta el acceso a los datos de un documento o grupo de documentos con el fin de conocer la información que contienen.</li>
+<li>El acceso a los documentos de titularidad pública es un derecho de todas las personas, que no está condicionado a la concurrencia de un interés personal ni requiere motivación (art. 39 Ley 5/2022).</li>
+<li>El acceso es libre, pero se restringe o deniega cuando los documentos contienen información sobre la intimidad de las personas o datos personales especialmente protegidos, secretos comerciales, industriales o científicos o información protegida por la propiedad intelectual, o materias clasificadas.</li>
+<li>En el caso del patrimonio documental, los documentos con datos personales especialmente protegidos no pueden consultarse sin el consentimiento expreso de las personas afectadas o hasta que hayan transcurrido <strong>veinticinco años desde su muerte</strong>, si se conoce la fecha, o <strong>cincuenta años desde la fecha de los documentos</strong> (art. 39.4). El acceso es gratuito, aunque la expedición de reproducciones puede estar sujeta a tasas o precios públicos (art. 42.2).</li>
+</ul>
+<h3>5.8 Expurgar</h3>
+<ul>
+<li>Se entiende por eliminación o expurgo el proceso de destrucción o borrado de documentos y datos, aplicado de acuerdo con lo estipulado en el calendario de conservación y acceso (art. 3 Ley 5/2022).</li>
+<li>La documentación de titularidad pública no puede expurgarse sin la aprobación previa de la comisión de valoración competente, en el caso de la Administración de la CAE la COVASADE, y el calendario debe estar publicado en el boletín oficial (art. 11.5 y 11.7).</li>
+<li>Con el calendario publicado, la decisión de eliminar o no la documentación corresponde a cada entidad titular (art. 11.8).</li>
+<li>Los sistemas de archivo deben hacer público el instrumento en el que se registran las eliminaciones de documentos (art. 40.1.b).</li>
+<li>Los documentos que forman parte del patrimonio documental (por ejemplo, los de más de cincuenta años) no pueden eliminarse salvo que antes se excluyan de ese patrimonio mediante el procedimiento de exclusión del art. 19 de la Ley 5/2022.</li>
+</ul>
+<h3>5.9 Régimen sancionador</h3>
+<p>La Ley 5/2022 clasifica las infracciones en materia de archivos y patrimonio documental en leves, graves y muy graves.</p>
+<table>
+<thead>
+<tr>
+<th>Infracción</th>
+<th>Ejemplo</th>
+<th>Prescripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muy grave</td>
+<td>La eliminación de documentos de titularidad pública al margen de los procedimientos establecidos en la ley y sus normas de desarrollo (art. 52). Multas de 100.001 a 300.000 euros</td>
+<td>Diez años</td>
+</tr>
+<tr>
+<td>Grave</td>
+<td>Que los cargos públicos no entreguen, tras su cese, los documentos de titularidad pública que obren en su poder</td>
+<td>Cinco años</td>
+</tr>
+<tr>
+<td>Leve</td>
+<td>Obstruir el ejercicio del derecho de acceso a los documentos</td>
+<td>Tres años</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cuando las infracciones las cometen cargos públicos o personal al servicio de la Administración sobre documentos públicos, se sancionan conforme a su régimen disciplinario o al de conducta de los cargos públicos (art. 47.3).</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s11">
+<h2>Mapa de preguntas por apartado</h2>
+<table>
+<thead>
+<tr>
+<th>Apartado del tema</th>
+<th>Batería 2022 (Tema 19)</th>
+<th>Batería 2026 (Tema 15)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1. Documento</td>
+<td>343, 351</td>
+<td>370, 383</td>
+</tr>
+<tr>
+<td>2.2. Ciclo de vida de los documentos</td>
+<td>349, 352, 355</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2.3. Expediente</td>
+<td>342, 345, 354</td>
+<td>366, 367, 368, 378, 382</td>
+</tr>
+<tr>
+<td>2.4. Cuadro de clasificación</td>
+<td>344</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2.5. Calendario de conservación y acceso</td>
+<td>353</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3. La documentación electrónica en la CAE</td>
+<td>347, 356, 358</td>
+<td>381, 388</td>
+</tr>
+<tr>
+<td>4. Sistema de archivo</td>
+<td>346, 348</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5. El archivo de gestión o de oficina</td>
+<td>350, 357</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Los apartados más preguntados son <strong>el expediente</strong> (8 preguntas) y <strong>el documento</strong> (4).</p>
+</section>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+<script>
+var fichas = document.querySelectorAll('.ficha'), tarjetas = document.querySelectorAll('.tarjeta'), nombre = document.getElementById('nombre');
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function ver(ap){
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap === ap); if(f.dataset.ap && f.dataset.ap === ap) nombre.textContent = ap === 'todo' ? 'Todos los apartados' : f.title; });
+  tarjetas.forEach(function(t){ t.classList.toggle('hidden', ap !== 'todo' && t.dataset.ap !== ap); });
+  window.scrollTo(0,0); avisarAltura();
+}
+fichas.forEach(function(f){ if(f.dataset.ap) f.addEventListener('click', function(){ ver(f.dataset.ap); }); });
+ver('todo');
+window.addEventListener('load', avisarAltura); window.addEventListener('resize', avisarAltura);
+</script>
+</body>
+</html>

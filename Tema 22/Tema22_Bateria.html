@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 22 · Batería de preguntas</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+.ficha{text-decoration:none;display:inline-block}
+.filtro{display:flex;gap:6px;justify-content:flex-end;margin:0 0 8px;flex-wrap:wrap}
+.filtro button{background:#5F7791;border:1px solid #7A90A8;color:#F9FAFC;border-radius:3px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+.filtro button.activo{background:var(--caja);color:var(--texto);border-color:#F9FAFC}
+.cab2{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bateria h3{background:#EEF2F6;border-left:3px solid var(--acento);padding:5px 10px;margin:16px 0 8px;color:var(--fondo)}
+.preg{border-bottom:1px dashed var(--borde);padding:8px 0 10px}
+.preg:last-child{border-bottom:none}
+.enunciado{font-weight:bold;margin:4px 0 6px}
+.num{display:inline-block;background:var(--acento);color:#fff;border-radius:3px;padding:0 6px;font-size:12px;margin-right:4px;vertical-align:1px}
+.ops{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:2px}
+.ops li{padding:5px 10px;border-radius:3px;font-size:14px;line-height:1.35}
+.ops li.ok{background:var(--ok)}
+.ocultar .ops li.ok{background:transparent}
+.ocultar .referencia{display:none}
+.referencia{text-align:left;font-size:13px;line-height:1.4;background:#EEF2F6;border-left:3px solid var(--acento);padding:6px 10px;margin:4px 0 0;color:var(--texto)}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+
+/* Modo test */
+.etq{width:800px;max-width:100%;font-size:12px;color:#c9d4df;margin:0 0 -12px;text-align:left}
+section.contenedor-test{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 18px;box-sizing:border-box}
+.pregunta{font-size:16px;font-weight:bold;color:var(--texto);margin-bottom:16px;text-align:left;line-height:1.4}
+.opciones-contenedor{display:grid;gap:2px;margin-bottom:20px}
+.opcion{background:var(--caja);border:none;color:var(--texto);padding:11px 12px;line-height:1.3;border-radius:3px;cursor:pointer;font-size:16px;text-align:left;transition:background .2s;font-family:inherit}
+.opcion:hover{background:#D3DCE7}
+.opcion:disabled{cursor:default}
+.opcion:disabled:not(.correcta):not(.incorrecta):not(.seleccionada):hover{background:var(--caja)}
+.opcion.seleccionada{background:#B9C9DA}
+.opcion.correcta,.opcion.correcta:hover{background:var(--ok)}
+.opcion.incorrecta,.opcion.incorrecta:hover{background:var(--ko)}
+.referencia{margin:-8px 0 12px}
+.navegacion{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.navegacion button{background:var(--acento);color:#fff;padding:5px 10px;border:none;border-radius:3px;font-size:12px;width:100px;cursor:pointer;font-family:inherit}
+.navegacion button:hover{background:#51687f}
+#siguiente{margin-left:auto}
+.navegacion button:disabled{opacity:.45;cursor:not-allowed}
+.vacio{text-align:center;color:var(--texto);margin:20px 0}
+.indices{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:800px;max-width:100%}
+.indice{width:30px;height:30px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:#5F7791;border:1px solid #7A90A8;color:#F9FAFC;cursor:pointer;font-weight:bold;font-size:12px}
+.indice:hover{background:#6D86A1}
+.indice.activa{background:var(--caja);border-color:var(--caja);color:var(--texto)}
+.indice.correcta{background:var(--ok);border-color:var(--ok);color:var(--texto)}
+.indice.incorrecta{background:var(--ko);border-color:var(--ko);color:var(--texto)}
+.indice.sinresp{background:#ffe08a;border-color:#ffe08a;color:var(--texto)}
+.filtro button:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 22. Legalización de firmas. La validación en la administración electrónica: la identificación y firma electrónica, el certificado electrónico</p>
+  <div class="barra">
+    <nav class="fichas">
+      <a class="ficha" href="Tema22_Resumen.html">Resumen</a>
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="1" title="1. Legalizaciones de firmas">1</button>
+      <button type="button" class="ficha" data-ap="2" title="2. La validación en la administración electrónica">2</button>
+      <button type="button" class="ficha" data-ap="2.1" title="2.1. Sistemas de firma para la actuación administrativa">2.1</button>
+      <button type="button" class="ficha" data-ap="2.3" title="2.3. Marco legal en la CAE (firma electrónica)">2.3</button>
+      <button type="button" class="ficha" data-ap="2.4" title="2.4. La firma electrónica en la Administración de la CAE">2.4</button>
+      <button type="button" class="ficha" data-ap="2.5" title="2.5. El certificado electrónico">2.5</button>
+      <button type="button" class="ficha" data-ap="2.6" title="2.6. Izenpe">2.6</button>
+    </nav>
+  </div>
+  <div class="cab2"><p class="nombre-tema" id="nombre"></p>
+  <div class="filtro">
+    <button type="button" data-bat="2022">2022</button><button type="button" data-bat="2026">2026</button>
+  </div></div>
+</div></header>
+<main>
+<p class="leyenda">34 preguntas: 8 de la batería Administrativos 2022 y 26 de la batería Temario General 2026. Elige la batería (2022 o 2026) y el apartado; pulsa una opción y «Comprobar». En amarillo, las preguntas que el tema actual no responde.</p>
+<p class="etq" id="etq"></p>
+<section class="contenedor-test" id="test">
+  <div class="pregunta" id="pregunta"></div>
+  <div class="opciones-contenedor" id="opciones"></div>
+  <div class="referencia hidden" id="ref"></div>
+  <p class="referencia hidden" id="aviso">Selecciona una respuesta antes de comprobar.</p>
+  <div class="navegacion"><button type="button" id="comprobar">Comprobar</button><button type="button" id="siguiente">Siguiente</button></div>
+</section>
+<section class="contenedor-test hidden" id="vacio"><p class="vacio">No hay preguntas de esta batería en este apartado.</p></section>
+<div class="indices" id="indices"></div>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo(0,0)">↑ Arriba</button>
+<script>
+var DATOS = [{"ap": "1", "t": "1. Legalizaciones de firmas", "bat": "2026", "num": "391", "q": "En el proceso de legalización de firma además del nombre, apellidos y cargo, la legalización no deberá llevar:", "o": ["a) El sello del departamento u organismo que legaliza la firma.", "b) La fecha de nacimiento de la persona identificada.", "c) La fecha de la legalización.", "d) El cargo, nombre y apellidos de la persona que la realiza."], "ok": [1], "ref": "<b>Respuesta: b)</b> · Además, la legalización deberá llevar: el sello del Departamento u Organismo Autónomo que legaliza la firma, la fecha de la legalización, y el cargo, nombre y apellidos de la persona que la realiza."}, {"ap": "2", "t": "2. La validación en la administración electrónica", "bat": "2026", "num": "392", "q": "¿Cuáles de las siguientes normas contienen regulación vigente sobre administración electrónica?:", "o": ["a) La Ley 39/2015, de 1 de octubre.", "b) La Ley 40/2015, de 1 de octubre.", "c) La Ley 11/2007, de 22 de junio.", "d) Las tres respuestas anteriores son correctas."], "ok": [0, 1], "ref": "<b>Respuesta: a) y b)</b> · La Ley 39/2015, de 1 de octubre… junto con la Ley 40/2015, de 1 de octubre… derogando de forma explícita la Ley 11/2007, de 22 de junio. (Pregunta defectuosa: a) y b) son correctas y no hay opción que las reúna.)"}, {"ap": "2", "t": "2. La validación en la administración electrónica", "bat": "2026", "num": "393", "q": "La Ley que se refiere, entre otras, a cuestiones tales como los derechos de las personas en sus relaciones con las Administraciones Públicas, los registros electrónicos, la práctica de las notificaciones a través de medios electrónicos, la emisión de documentos por las Administraciones Públicas o el archivo de documentos es la:", "o": ["a) La Ley 39/2015, de 1 de octubre.", "b) La Ley 40/2015, de 1 de octubre.", "c) La Ley 11/2007, de 22 de junio.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [0], "ref": "<b>Respuesta: a)</b> · La Ley 39/2015, de 1 de octubre, se refiere, entre otras, a cuestiones tales como los derechos de las personas en sus relaciones con las AA.PP.… los registros electrónicos… y el archivo de documentos."}, {"ap": "2.1", "t": "2.1. Sistemas de firma para la actuación administrativa", "bat": "2026", "num": "394", "q": "Los sistemas para la actuación administrativa automatizada son:", "o": ["a) El Sello electrónico de Administración Pública.", "b) El Código seguro de verificación.", "c) Las respuestas a) y b) son correctas.", "d) La firma electrónica."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Tales sistemas son: a) Sello electrónico de Administración Pública… b) Código Seguro de Verificación (CSV)."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2022", "num": "395", "q": "Cuando recibes un documento firmado digitalmente puedes:", "o": ["a) Probar el origen y la veracidad del documento.", "b) Identificar el CSV.", "c) Identificar la aplicación que ha generado el documento.", "d) Probar la fecha en la que se generó el documento."], "ok": [0], "ref": "<b>Respuesta: a)</b> · Consiste en asociar al documento electrónico unos datos específicos para cada persona, permitiendo a quien recibe dicho documento probar el origen y la veracidad de aquellos."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2022", "num": "396", "q": "¿A qué se refiere el concepto de integridad cuando hablamos de firma electrónica?:", "o": ["a) A que la información que recibimos viene de un interesado que es quien dice ser.", "b) A que la información viene en formato electrónico y no ha sido alterada.", "c) A que la información que recibimos es toda la que ha sido remitida y no ha sido manipulada durante la transmisión.", "d) A que la información no tiene repudio."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Integridad, en un doble sentido: la información que recibimos es toda la que ha sido remitida, y no ha sido modificada o manipulada durante la transmisión."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "395", "q": "La ley reconoce a quienes utilicen la firma electrónica su plena validez, mediante dos principios como son:", "o": ["a) El reconocimiento particular: principio de no discriminación.", "b) El reconocimiento general: principio de no discriminación.", "c) El reconocimiento directo: principio de equivalencia funcional con la firma manuscrita.", "d) Las respuestas b) y c) son correctas."], "ok": [3], "ref": "<b>Respuesta: d)</b> · a) Reconocimiento general: principio de no discriminación… b) Reconocimiento directo: principio de equivalencia funcional con la firma manuscrita."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "396", "q": "Elija la respuesta incorrecta. Todas las firmas deben cumplir los siguientes requisitos:", "o": ["a) Exactitud.", "b) Identidad.", "c) Integridad.", "d) Confidencialidad."], "ok": [0], "ref": "<b>Respuesta: a)</b> · 1. Identidad… 2. Integridad… 3. Autenticidad… 4. Irrevocabilidad… 5. Confidencialidad."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "397", "q": "A comienzos de 2010 fueron aprobados dos Reales Decretos destinados a aumentar, mediante las TIC, el siguiente aspecto de la gestión administrativa:", "o": ["a) La eficacia.", "b) La efectividad.", "c) La eficiencia.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [1], "ref": "<b>Respuesta: b)</b> · A comienzos de 2010 fueron aprobados dos Reales Decretos destinados a aumentar la efectividad de la gestión administrativa mediante las TIC."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "398", "q": "¿Cuáles de los siguientes son tipos de firma electrónica?:", "o": ["a) Ordinaria.", "b) Avanzada.", "c) Reconocida.", "d) Las tres respuestas anteriores son correctas."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Podemos distinguir tres tipos de firma electrónica: a) Simple u ordinaria, b) Avanzada, c) Cualificada. (La batería usa «reconocida», nombre anterior de la cualificada; el tema habla de «firma electrónica reconocida o cualificada».)"}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "399", "q": "¿Cuál de estas características es propia de la firma electrónica ordinaria?:", "o": ["a) Es la más sencilla.", "b) Es la más segura.", "c) Su utilidad es amplia.", "d) Las respuestas a) y c) son correctas."], "ok": [0], "ref": "<b>Respuesta: a)</b> · Es la más sencilla de todas."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "400", "q": "¿Cuál de estas características es propia de la firma electrónica avanzada?:", "o": ["a) Establece la identidad de la persona signataria y la integridad de la información que se ha transmitido.", "b) Es creada por medios que la persona signataria puede mantener bajo su control exclusivo.", "c) Permite detectar cualquier cambio en los datos con posterioridad al firmado, lo cual es una ventaja en cuanto a proteger el contenido de la información.", "d) Todas las respuestas anteriores son correctas."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Establece la identidad de la persona signataria y la integridad de la información… Es creada por medios que la persona signataria puede mantener bajo su control exclusivo. Permite detectar cualquier cambio en los datos con posterioridad al firmado."}, {"ap": "2.3", "t": "2.3. Marco legal en la CAE (firma electrónica)", "bat": "2026", "num": "401", "q": "Elija la respuesta incorrecta. La firma reconocida garantiza:", "o": ["a) Que ha firmado una persona física.", "b) Que ha firmado una persona jurídica.", "c) La posibilidad de visualización del documento por la persona signataria.", "d) La prestación de la aprobación y/o el consentimiento de dicha persona."], "ok": [1], "ref": "<b>Respuesta: b)</b> · Dicho de otro modo, garantiza: que ha firmado una persona física."}, {"ap": "2.4", "t": "2.4. La firma electrónica en la Administración de la CAE", "bat": "2026", "num": "402", "q": "Elija la respuesta incorrecta. La utilización de la firma electrónica en Euskadi está regida por:", "o": ["a) La Ley 39/2015, de 1 de octubre.", "b) La Ley 40/2015, de 1 de octubre.", "c) La Ley 6/2020, de 11 de noviembre.", "d) Las respuestas b) y c) son correctas."], "ok": [0], "ref": "<b>Respuesta: a)</b> · La utilización de la firma electrónica en nuestra Administración está regida por la Ley 40/2015… la Ley 6/2020… y el Decreto 91/2023 (la Ley 39/2015 no se cita)."}, {"ap": "2.4", "t": "2.4. La firma electrónica en la Administración de la CAE", "bat": "2026", "num": "403", "q": "Elija la respuesta incorrecta. Se establece como tipo de firma admitido la denominada firma reconocida en las actuaciones:", "o": ["a) Por parte de la ciudadanía.", "b) De Administración general del Estado.", "c) De las personas físicas en general.", "d) De las personas jurídicas en general."], "ok": [], "ref": "<b>Sin respuesta en el tema</b> · El tema actualizado ya no regula la firma reconocida por tipo de actuación (procede del Decreto 21/2012, derogado por el Decreto 91/2023)."}, {"ap": "2.4", "t": "2.4. La firma electrónica en la Administración de la CAE", "bat": "2026", "num": "404", "q": "¿Cuál de las siguientes afirmaciones es incorrecta? La ciudadanía podrá valerse de otros sistemas de firma en los siguientes casos:", "o": ["a) El trámite de solicitud en los procedimientos de selección y provisión de personal.", "b) La identificación de las personas beneficiarias para el acceso a la prestación farmacéutica del Sistema nacional de Salud en la CAE.", "c) La cita previa en los servicios de atención primaria.", "d) Cualquier otro que se determine en su día mediante orden ministerial."], "ok": [], "ref": "<b>Sin respuesta en el tema</b> · El tema actualizado no enumera esos casos de otros sistemas de firma (proceden del Decreto 21/2012, derogado)."}, {"ap": "2.4", "t": "2.4. La firma electrónica en la Administración de la CAE", "bat": "2026", "num": "405", "q": "La normativa exige que las actuaciones administrativas telemáticas incorporen además de la firma:", "o": ["a) La constancia de que se ha verificado la vigencia de dicha firma, o del certificado electrónico con el que se haya firmado.", "b) El denominado sellado de tiempo, que consiste en la acreditación de la fecha y hora de realización de la operación electrónica.", "c) Las respuestas a) y b) son correctas.", "d) La identificación del certificador."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Las actuaciones administrativas telemáticas deben incorporar, además de la firma, estos dos elementos: 1. La constancia de que se ha verificado la vigencia… 2. El denominado sellado de tiempo."}, {"ap": "2.4", "t": "2.4. La firma electrónica en la Administración de la CAE", "bat": "2026", "num": "406", "q": "Elija la respuesta incorrecta. La Administración de la CAE dispondrá de firma electrónica:", "o": ["a) Para todo su personal.", "b) Para el personal a quien competa valerse de ella.", "c) Para el órgano administrativo o el puesto directivo.", "d) Para la actuación automatizada."], "ok": [0], "ref": "<b>Respuesta: a)</b> · La Administración de la CAE dispondrá de firma electrónica en estos tres casos: 1. Para el personal empleado público. 2. Para el órgano administrativo. 3. Para la actuación administrativa automatizada. (Respuesta de la versión anterior del tema; las opciones no coinciden literalmente con el texto actual.)"}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2022", "num": "397", "q": "El certificado digital es un documento electrónico mediante el cual:", "o": ["a) La autoridad de certificación garantiza la vinculación entre una persona física o jurídica y su clave pública.", "b) La autoridad de certificación garantiza la vinculación entre una persona física o jurídica y su clave privada.", "c) La autoridad de certificación garantiza la vinculación entre una persona jurídica y su clave privada.", "d) La autoridad de certificación garantiza la vinculación entre una persona física y su clave pública."], "ok": [0], "ref": "<b>Respuesta: a)</b> · Un tercero de confianza, denominado autoridad de certificación, garantiza la vinculación entre una persona física o jurídica —llamada suscriptor— y la clave pública que le corresponde."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2022", "num": "398", "q": "Indíquese la respuesta que NO es correcta con relación a las autoridades de certificación:", "o": ["a) Las autoridades de certificación pueden ser personas físicas.", "b) Las autoridades de certificación pueden ser personas jurídicas.", "c) Las autoridades de certificación son todas de naturaleza pública.", "d) Las autoridades de certificación deben estar acreditadas oficialmente."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Así, muchas de ellas son privadas y para usos comerciales."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2022", "num": "399", "q": "La clave pública de un certificado:", "o": ["a) Son los datos de creación del certificado.", "b) Es única, y quien la posee debe intentar mantenerla en secreto.", "c) Se usa para firmar y cifrar el certificado.", "d) Está contenida en el propio certificado."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Clave pública… Está contenida en el propio certificado."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2022", "num": "400", "q": "Si un certificado electrónico se encuentra suspendido y transcurren 120 días sin su reactivación, el certificado queda en estado de:", "o": ["a) Habilitación.", "b) Renovación.", "c) Revocación.", "d) Suspensión."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Su duración máxima la fija cada prestador en su declaración de prácticas de certificación; si transcurre el plazo sin que se reactive, la revocación es definitiva."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2022", "num": "401", "q": "La validez de un sello electrónico es de:", "o": ["a) 4 años.", "b) 1 año.", "c) 5 años.", "d) 3 años."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Por ejemplo, los certificados de sello de Izenpe se expiden por un máximo de tres años."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "407", "q": "Los certificados electrónicos también se denominan certificados:", "o": ["a) Informáticos.", "b) Digitales.", "c) Automatizados.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [1], "ref": "<b>Respuesta: b)</b> · Aunque los certificados digitales sean elementos de validación, no deben ser confundidos con las certificaciones de documentos administrativos."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "408", "q": "Los terceros de confianza que garantizan la vinculación entre una persona física o jurídica, llamada suscriptor y la clave pública que le corresponde para que dicha persona quede identificada con plenas garantías se denomina:", "o": ["a) Autoridad pública.", "b) Autoridad de emisión.", "c) Autoridad de certificación.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Un tercero de confianza, denominado autoridad de certificación, garantiza la vinculación entre una persona física o jurídica —llamada suscriptor— y la clave pública que le corresponde."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "409", "q": "Quien posee las claves de un certificado siempre será:", "o": ["a) Una persona física.", "b) Una persona jurídica.", "c) Una persona física o una persona jurídica.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [0], "ref": "<b>Respuesta: a)</b> · En cambio, quien posee las claves es siempre una persona física, que es la responsable de su utilización."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "410", "q": "Los certificados electrónicos permiten:", "o": ["a) Identificar a la persona que ha solicitado el certificado y posee la clave, así como a la organización a la que aquella, en su caso, pertenece.", "b) Firmar mensajes de modo seguro.", "c) Cifrar documentos, para evitar el acceso a su contenido.", "d) Todas las respuestas anteriores son correctas."], "ok": [3], "ref": "<b>Respuesta: d)</b> · Identificar a la persona que ha solicitado el certificado y posee la clave… Firmar mensajes de modo seguro… Cifrar documentos, para evitar el acceso a su contenido."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "411", "q": "La autoridad de certificación puede ser una persona:", "o": ["a) Física.", "b) Jurídica.", "c) Las respuestas a) y b) son correctas.", "d) Pública."], "ok": [2], "ref": "<b>Respuesta: c)</b> · La autoridad de certificación puede ser una persona física o jurídica."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "412", "q": "¿Cuál de las siguientes entidades no es una autoridad de certificación?:", "o": ["a) CERES.", "b) Izenpe.", "c) Agencia Vasca de Protección de Datos.", "d) Consejo general de la Abogacía."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Entre los prestadores cualificados… CERES… Izenpe… Consejo General de la Abogacía Española (la Agencia Vasca de Protección de Datos no figura)."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "413", "q": "El método criptográfico utilizado en los certificados electrónicos es el conocido como:", "o": ["a) Criptografía simétrica.", "b) Criptografía asimétrica.", "c) Criptografía simétrica pública.", "d) Criptografía asimétrica pública."], "ok": [1], "ref": "<b>Respuesta: b)</b> · El utilizado en este caso es conocido como criptografía asimétrica o de clave pública, porque cada titular dispone de un par de claves."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "414", "q": "Todos los certificados deben incluir al menos:", "o": ["a) El número de serie del certificado, único en cada caso.", "b) El nombre y dirección de quien es titular del certificado.", "c) La firma electrónica de la autoridad de certificación.", "d) Todas las respuestas anteriores son correctas."], "ok": [3], "ref": "<b>Respuesta: d)</b> · El número de serie del certificado, único en cada caso… El nombre y dirección de quien es titular del certificado… La firma electrónica de la autoridad de certificación."}, {"ap": "2.5", "t": "2.5. El certificado electrónico", "bat": "2026", "num": "415", "q": "Elija la respuesta incorrecta. Un certificado puede encontrase en uno de los siguientes estados:", "o": ["a) Suspensión.", "b) Prescripción.", "c) Habilitación.", "d) Renovación."], "ok": [1], "ref": "<b>Respuesta: b)</b> · a) Suspensión. b) Habilitación. c) Revocación. d) Renovación."}, {"ap": "2.6", "t": "2.6. Izenpe", "bat": "2022", "num": "394", "q": "La edad para poder solicitar un certificado de ciudadano expedido por Izenpe es de :", "o": ["a) 16 años.", "b) 18 años.", "c) Cualquier edad.", "d) Cualquier edad si se dispone de DNI."], "ok": [], "ref": "<b>Sin respuesta en el tema</b> · El tema no indica la edad para solicitar el certificado de ciudadano de Izenpe."}, {"ap": "2.6", "t": "2.6. Izenpe", "bat": "2026", "num": "416", "q": "La sede de Izenpe se encuentra ubicada en:", "o": ["a) Bilbao.", "b) Donostia.", "c) Vitoria-Gasteiz.", "d) Ninguna de las respuestas anteriores es correcta."], "ok": [2], "ref": "<b>Respuesta: c)</b> · Su sede está en Vitoria-Gasteiz."}];
+DATOS.forEach(function(p){ p.sel=null; p.chk=false; });
+var fichas=document.querySelectorAll('.ficha[data-ap]'), nombre=document.getElementById('nombre');
+var apActual='todo', batActual='2022', lista=[], pos=0;
+var $=function(id){return document.getElementById(id);};
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function filtrar(){
+  lista=DATOS.filter(function(p){ return p.bat===batActual && (apActual==='todo' || p.ap===apActual); });
+  pos=0; $('indices').innerHTML=lista.map(function(p,i){return '<div class="indice" data-i="'+i+'" title="Nº '+p.num+'">'+(i+1)+'</div>';}).join('');
+  pintar();
+}
+function claseIndice(p){ if(!p.chk) return ''; if(!p.ok.length) return 'sinresp'; return p.ok.indexOf(p.sel)>=0?'correcta':'incorrecta'; }
+function pintar(){
+  var hay=lista.length>0;
+  $('test').classList.toggle('hidden',!hay); $('vacio').classList.toggle('hidden',hay); $('etq').classList.toggle('hidden',!hay);
+  document.querySelectorAll('.indice').forEach(function(d,i){ d.className='indice '+claseIndice(lista[i])+(i===pos?' activa':''); });
+  if(!hay){ avisarAltura(); return; }
+  var p=lista[pos];
+  $('etq').textContent=p.t+' · Batería '+(p.bat==='2022'?'Administrativos 2022':'Temario General 2026')+' · Pregunta nº '+p.num;
+  $('pregunta').textContent=(pos+1)+'. '+p.q;
+  $('opciones').innerHTML=p.o.map(function(o,i){
+    var c='opcion';
+    if(p.chk){ if(p.ok.indexOf(i)>=0) c+=' correcta'; else if(i===p.sel) c+=(p.ok.length?' incorrecta':' seleccionada'); }
+    else if(i===p.sel) c+=' seleccionada';
+    return '<button type="button" class="'+c+'" data-i="'+i+'"'+(p.chk?' disabled':'')+'>'+o.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</button>';
+  }).join('');
+  $('ref').innerHTML=p.ref; $('ref').classList.toggle('hidden',!(p.chk && p.ref));
+  $('comprobar').classList.toggle('hidden',p.chk);
+  $('siguiente').disabled=pos===lista.length-1;
+  avisarAltura();
+}
+$('opciones').addEventListener('click',function(e){ var b=e.target.closest('.opcion'); if(!b) return; var p=lista[pos]; if(p.chk) return; p.sel=+b.dataset.i; pintar(); });
+$('comprobar').addEventListener('click',function(){ var p=lista[pos]; if(p.sel===null){ alertar(); return; } p.chk=true; pintar(); });
+function alertar(){ $('aviso').classList.remove('hidden'); setTimeout(function(){ $('aviso').classList.add('hidden'); },1800); }
+$('siguiente').addEventListener('click',function(){ if(pos<lista.length-1){ pos++; pintar(); window.scrollTo(0,0);} });
+$('indices').addEventListener('click',function(e){ var d=e.target.closest('.indice'); if(!d) return; pos=+d.dataset.i; pintar(); });
+function ver(ap){
+  apActual=ap;
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap===ap); if(f.dataset.ap===ap) nombre.textContent= ap==='todo' ? 'Todos los apartados' : f.title; });
+  filtrar(); window.scrollTo(0,0);
+}
+fichas.forEach(function(f){ f.addEventListener('click',function(){ ver(f.dataset.ap); }); });
+document.querySelectorAll('.filtro [data-bat]').forEach(function(b){
+  if(!DATOS.some(function(p){return p.bat===b.dataset.bat;})) b.disabled=true;
+  b.addEventListener('click',function(){ batActual=b.dataset.bat; document.querySelectorAll('.filtro [data-bat]').forEach(function(x){ x.classList.toggle('activo',x===b); }); filtrar(); });
+});
+if(!DATOS.some(function(p){return p.bat==='2022';})){ batActual='2026'; }
+document.querySelectorAll('.filtro [data-bat]').forEach(function(x){ x.classList.toggle('activo',x.dataset.bat===batActual); });
+ver('todo');
+window.addEventListener('load',avisarAltura); window.addEventListener('resize',avisarAltura);
+</script>
+</body>
+</html>
