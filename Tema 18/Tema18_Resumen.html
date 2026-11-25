@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 18 · Resumen</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha{text-decoration:none;display:inline-block}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta h4{margin:14px 0 6px;font-size:15px;font-style:italic;color:var(--fondo)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 18. La comunicación en la Administración. Uso correcto del lenguaje. Comunicación escrita. Lenguaje no sexista. Contenido y presentación de documentos escritos</p>
+  <div class="barra">
+    <nav class="fichas">
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="s0" title="Cómo usar este esquema">Guía</button>
+      <button type="button" class="ficha" data-ap="s1" title="1. La comunicación">1</button>
+      <button type="button" class="ficha" data-ap="s2" title="2. La comunicación escrita">2</button>
+      <button type="button" class="ficha" data-ap="s3" title="3. La comunicación electrónica">3</button>
+      <button type="button" class="ficha" data-ap="s4" title="4. El lenguaje administrativo">4</button>
+      <button type="button" class="ficha" data-ap="s5" title="5. Lenguaje no sexista">5</button>
+      <button type="button" class="ficha" data-ap="s6" title="6. Los documentos administrativos">6</button>
+      <button type="button" class="ficha" data-ap="s7" title="Mapa de preguntas por apartado">Preguntas</button>
+      <a class="ficha" href="Tema18_Bateria.html">Batería</a>
+    </nav>
+  </div>
+  <p class="nombre-tema" id="nombre"></p>
+</div></header>
+<main>
+<p class="leyenda"><span class="etiqueta">P22-nº</span> Batería Administrativos 2022 · <span class="etiqueta">P26-nº</span> Batería Temario General 2026 · <span class="estrella">★</span> preguntado en las dos</p>
+<section class="tarjeta" data-ap="s0">
+<h2>Cómo usar este esquema</h2>
+<p>El texto de cada apartado es literal del Tema 18 (opebide.com); solo se ha ordenado en esquema.</p>
+<ul>
+<li><strong>P22-nº</strong> = Batería <em>Administrativos 2022</em>, Tema 26 (preguntas 451–469).</li>
+<li><strong>P26-nº</strong> = Batería <em>Temario General 2026</em>, Tema 19 (preguntas 469–494).</li>
+<li><span class="estrella" title="Preguntado en las dos baterías">★</span> = punto preguntado en las dos baterías.</li>
+<li>Las dos baterías usan el número 469 para preguntas distintas; en los archivos van siempre separadas por batería.</li>
+<li>Las baterías no traen plantilla de respuestas: la etiqueta indica qué frase del tema responde a cada pregunta.</li>
+<li>Erratas del original que se mantienen tal cual: «en al proceso comunicativo», «tendencia a jugar a las personas», «recibirá un mensaje menos favorable al que le esté enviando el receptor», «autenticidad.6.28.».</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s1">
+<h2>1. La comunicación</h2>
+<ul>
+<li><strong>La comunicación es la acción consciente de intercambiar mensajes entre dos o más participantes con el fin de transmitir o recibir información u opiniones distintas.</strong> <span class="etiqueta">P26-469</span></li>
+<li>La comunicación deriva del latín communicatio que significa compartir, participar en algo o poner en común.</li>
+<li><strong>Este proceso constituye un factor crítico en las relaciones ciudadanía-Administración.</strong> <span class="etiqueta">P22-451</span></li>
+</ul>
+<h3>1.1. Esquema de la información</h3>
+<p>De forma general, podemos decir que el esquema de la comunicación lo forman los siguientes componentes: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-452</span> <span class="etiqueta">P22-453</span> <span class="etiqueta">P26-470</span> <span class="etiqueta">P26-471</span></p>
+<ul>
+<li><strong>Emisor:</strong> es quien transmite el mensaje. Constituye el punto de partida de la comunicación. Esta persona <strong>codifica el mensaje, es decir elige y selecciona los signos y códigos convenientes</strong>.</li>
+<li><strong>Receptor:</strong> es la persona que recibe el mensaje y lo interpreta para comprender su significado. Realiza un proceso inverso al del emisor, es decir, decodifica el mensaje.</li>
+<li><strong>Código:</strong> es el conjunto de signos utilizados para trasmitir el mensaje (palabras, gestos, símbolos, imágenes). Para que sea posible el entendimiento, emisor y receptor deben compartir el mismo código.</li>
+<li><strong>Mensaje:</strong> es la información o conjunto de datos que transmite el emisor. Es la idea que se pretende trasmitir y constituye el elemento principal en el proceso de comunicación.</li>
+<li><strong>Canal de comunicación:</strong> es el medio físico a través del cual se transmite el mensaje desde el emisor hasta el receptor. Por ejemplo, la carta, el teléfono, el periódico, la televisión, Internet, etc.</li>
+<li><strong>Ruido:</strong> son todas las distorsiones que condicionan la recepción del mensaje original, y puede provenir tanto del emisor (utiliza un lenguaje desconocido para el receptor) como del canal (relacionado con la falta de cobertura de la señal), del ambiente (ruido en nuestro entorno que nos impide oír el mensaje con claridad) o del receptor (no ofrece ninguna respuesta al mensaje).</li>
+<li><strong>Retroalimentación o feedback:</strong> en una primera instancia, se trata de la respuesta del receptor hacia el mensaje recibido. Si posteriormente el emisor responde a lo enviado por el receptor, existe un cambio de roles y se considera asimismo retroalimentación. La retroalimentación constituye un mecanismo para controlar la efectividad de la comunicación.</li>
+<li><strong>Contexto:</strong> es la situación o circunstancias en las que se desarrolla el proceso comunicativo. Incluye factores de diverso tipo: <strong>emocionales, sociales</strong> (referencias culturales comunes, el contexto social), <strong>circunstanciales</strong> (el espacio físico), y tiene influencia directa en la interpretación del mensaje.</li>
+</ul>
+<h3>1.2. Tipos de comunicación</h3>
+<p>La comunicación se puede dividir en dos grandes tipos: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-454</span> <span class="etiqueta">P26-472</span></p>
+<ul>
+<li><strong>Comunicación verbal:</strong> es aquella que se vale de la palabra para dar a conocer el mensaje. Constituye una forma de comunicación exclusiva de los seres humanos y se subdivide en dos subcategorías:<ul>
+<li>Comunicación oral: se trata del intercambio de mensajes a través del habla.</li>
+<li>Comunicación escrita: el proceso de comunicación tiene lugar mediante el lenguaje escrito.</li>
+</ul>
+</li>
+<li><strong>Comunicación no verbal:</strong> es aquella que utiliza signos no lingüísticos. Incluye el lenguaje corporal, el lenguaje gestual, el contacto visual, la distancia, etc.</li>
+</ul>
+<h3>1.3. Barreras de la comunicación</h3>
+<ul>
+<li>Las denominadas barreras de la comunicación; es decir, aquellos obstáculos que pueden surgir en al proceso comunicativo, pueden distorsionarlo o restarle calidad y, en consecuencia, hacerlo menos efectivo.</li>
+<li>Como resultado de todas estas barreras, se produce una degradación de la comunicación entre lo que se dice, lo que se quiere decir, lo que se escucha y lo que se entiende.</li>
+</ul>
+<p>Las barreras de comunicación afectan a todos los elementos del proceso de comunicación y pueden ser de diversos tipos: <strong>Barreras personales · Barreras culturales · Barreras semánticas · Barreras físicas.</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-455</span> <span class="etiqueta">P26-473</span></p>
+<p><strong>1.3.1. Barreras personales.</strong> Son las barreras que ponen tanto el emisor como el receptor, relacionadas con las características del individuo: sus aspectos psicológicos, actitudes, percepciones, estado de ánimo, malos hábitos de escucha... Destacamos las siguientes:</p>
+<ul>
+<li><strong>Actitud.</strong> Las actitudes representan las formas de comportarse de una persona ante determinadas circunstancias. Una actitud poco favorable de alguna de las personas que intervienen en la comunicación afectará negativamente a dicha comunicación.</li>
+<li><strong>Estado de ánimo.</strong> Se trata de un elemento de gran importancia que afecta tanto al emisor como al receptor, y puede resultar una barrera infranqueable.</li>
+<li><strong>Percepciones.</strong> Hacen referencia a la forma de captar la realidad. Se encuentran en el receptor y consisten en captar solo aquello que se quiere o conviene. Es el caso del <strong>«efecto halo»</strong>, o tendencia a jugar a las personas por la primera impresión que nos causan.</li>
+<li><strong>Personalidad.</strong> Conocer los rasgos de la personalidad del receptor facilitará en gran medida la comunicación. Algunos rasgos de personalidad: la timidez, la locuacidad, la extroversión, etc.</li>
+<li><strong>Oído selectivo.</strong> Oímos lo que queremos y tendemos a pasar por alto, inconscientemente, las ideas contrarias.</li>
+<li><strong>Falta de empatía.</strong> Llamamos empatía a la capacidad para ponerse en el lugar de la otra persona, con el fin de comprender mejor sus reacciones.</li>
+<li><strong>Generalizaciones.</strong> Consisten en presuponer el resultado de una comunicación sean cuales sean las circunstancias.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>1.3.2. Barreras culturales.</strong> Se manifiestan cuando existe una diferencia de conocimientos entre emisor y receptor. Esta desigualdad puede tener su origen en diferencias educativas, por ejemplo.</li>
+<li><strong>1.3.3. Barreras semánticas.</strong> Son las relacionadas con el código mismo de la comunicación, que puede variar entre emisores y receptores, y hace difícil, o incluso imposible, el entendimiento.</li>
+<li><strong>1.3.4. Barreras físicas.</strong> Son las propias del lugar donde se lleva a cabo el proceso de comunicación. Ejemplos de barreras físicas son el ruido, la distancia entre interlocutores, el espacio, la temperatura ambiental, etc.</li>
+</ul>
+<h3>1.4. Consejos para evitar las barreras de la comunicación</h3>
+<p>Para evitar las barreras comunicativas, dentro de lo posible, se aconseja: <span class="etiqueta">P26-474</span></p>
+<ul>
+<li>Asegurarse de que los códigos sean comunes.</li>
+<li>Saber expresarse de manera que el receptor nos entienda con facilidad: evitar expresiones inadecuadas y potenciar las convenientes. En resumen: ser claros y directos.</li>
+<li>Emplear la retroalimentación para verificar la comprensión adecuada: intercambiar los lugares de emisor y receptor a menudo. Lo contrario a monologar.</li>
+<li>Controlar las emociones y ser conscientes de nuestro estado anímico o emocional. Se trata de evaluar el mensaje y no al emisor.</li>
+<li><strong>Cuidar el ambiente (la iluminación, el ruido, el canal…) para facilitar la comunicación.</strong></li>
+<li><strong>Practicar la escucha activa (escuchar con atención, mirando a los ojos, preguntando…), así como comprobar que nos siguen cuando hablamos.</strong></li>
+<li><strong>Mantener la correspondencia entre el lenguaje verbal y el no verbal</strong> y ser congruentes con lo que decimos y con cómo lo decimos.</li>
+<li>Asumir una actitud de empatía con el interlocutor. «Ponerse» en el lugar de la otra persona.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s2">
+<h2>2. La comunicación escrita</h2>
+<ul>
+<li>Es una forma de comunicación que permite la expresión de ideas, pensamientos, informaciones u opiniones a través del lenguaje escrito.</li>
+<li><strong>Si el emisor o el receptor desconocen las reglas de la escritura, la comunicación habrá fallado.</strong> <span class="etiqueta">P22-456</span></li>
+</ul>
+<h3>2.1. Elementos de la comunicación escrita</h3>
+<ul>
+<li>En esta clase de comunicación, el emisor escribe mientras que el receptor lee. Como canal de comunicación siempre habrá un dispositivo físico, que puede ser un papel, la pantalla de un ordenador o un teléfono móvil.</li>
+</ul>
+<p>Si bien emisor, receptor, mensaje, código y canal son elementos esenciales de todo proceso de comunicación, la comunicación escrita tiene otros factores adicionales que son necesarios para que el proceso de intercambio de información tenga éxito: <span class="etiqueta">P22-457</span></p>
+<ul>
+<li><strong>Estructura (forma).</strong> Se refiere a la planificación del contenido; es la manera en que el emisor ordena o estructura aquello que quiere comunicar.</li>
+<li><strong>Estilo (redacción).</strong> Define la manera en la que el emisor redacta el contenido del mensaje.</li>
+<li><strong>Contenido (tema).</strong> Es aquello que se desea comunicar.</li>
+</ul>
+<h3>2.2. Características de la comunicación escrita</h3>
+<p><span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-458</span> <span class="etiqueta">P26-475</span></p>
+<ul>
+<li><strong>Requiere de habilidades de lectoescritura.</strong> Quienes participan en el proceso de comunicación tienen que saber leer y escribir en el idioma en el que se transmite el mensaje.</li>
+<li><strong>No es simultánea.</strong> En una comunicación escrita siempre existe una demora.</li>
+<li><strong>La retroalimentación o respuesta no es inmediata. Tiene lugar a conveniencia del receptor del mensaje, no del emisor, por lo que la respuesta del receptor puede retardarse, y, en ocasiones, ni siquiera existe respuesta.</strong></li>
+<li><strong>Permanece en el tiempo.</strong> La comunicación escrita constituye un medio permanente de información y dura tanto como el soporte físico que la contiene.</li>
+<li><strong>Requiere planificación y un mayor nivel reflexivo.</strong> Generalmente, la comunicación escrita no es un acto improvisado.</li>
+<li><strong>Debe respetar una serie de reglas.</strong> El mensaje debe adaptarse a reglas gramaticales y ortográficas para que el contenido cobre sentido y sea efectivo.</li>
+<li><strong>Las distancias no son un impedimento.</strong></li>
+<li><strong>Deja poco espacio para la redundancia.</strong> El registro escrito limita la posibilidad de la redundancia.</li>
+<li><strong>Presenta dificultad para expresar emocionalidad.</strong> Este tipo de comunicación es conocida como fría, impersonal.</li>
+<li><strong>Constituye un mecanismo de organización y de control.</strong></li>
+<li><strong>Disminuye la posibilidad de distorsión e interpretación.</strong></li>
+<li><strong>Falta de flexibilidad.</strong> La falta de flexibilidad es una de las desventajas de la comunicación escrita.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s3">
+<h2>3. La comunicación electrónica</h2>
+<ul>
+<li>La web constituye hoy en día una herramienta imprescindible para la comunicación entre la Administración y la ciudadanía.</li>
+</ul>
+<h3>3.1. Características y consejos de redacción</h3>
+<p><span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-459</span> <span class="etiqueta">P22-460</span> <span class="etiqueta">P26-476</span> <span class="etiqueta">P26-477</span> <span class="etiqueta">P26-478</span></p>
+<p><strong>Un nuevo tipo de comunicación</strong></p>
+<ul>
+<li>Internet ha roto con el paradigma comunicativo clásico y ha creado un nuevo modelo mediante la trasformación de las variantes tradicionales.</li>
+<li>En el paradigma de comunicación tradicional, el receptor es pasivo; en los actuales parámetros, se transforma en agente activo del proceso comunicativo. Igualmente, el emisor pasa de ser único a ser plural.</li>
+<li>El mensaje actual se compone de diversos formatos, por lo que decimos que es de carácter <strong>multimedia</strong>.</li>
+</ul>
+<p><strong>Una nueva forma de leer</strong></p>
+<ul>
+<li><strong>La comunicación digital ha cambiado los hábitos de lectura.</strong> La web es un medio diferente en lo que a conductas de lectura se refiere; se puede afirmar que <strong>los textos en pantalla no se leen de la misma manera que los textos en papel.</strong></li>
+<li>En consecuencia, si nuestros contenidos van a ser leídos en la red, no los podemos redactar según los patrones de los textos en papel.</li>
+</ul>
+<p>Estos son los hábitos específicos de lectura en la web:</p>
+<ul>
+<li><strong>La lectura es dinámica.</strong> Los usuarios de la red están habituados a moverse de una página web a otra en cuestión de segundos. Tampoco leemos linealmente.</li>
+<li><strong>Leer en la pantalla resulta pesado.</strong> <strong>Se ha comprobado que un texto se lee más despacio en el monitor de un ordenador que en papel impreso.</strong></li>
+<li><strong>No leemos, escaneamos.</strong> Ubicación: nos desplazamos hacia determinadas zonas de la página web siguiendo el orden centro-izquierda-derecha. Diseño: la vista se dirige hacia los elementos destacados tipográficamente.</li>
+</ul>
+<p><strong>Una nueva forma de redactar</strong></p>
+<ul>
+<li>La regla principal es que hay que escribir para los lectores.</li>
+<li><strong>La longitud del texto.</strong> La tendencia a la que debemos hacer frente es aquella que nos lleva a incluir toda la información que deseamos comunicar en una sola página. <strong>Como criterio general, podríamos plantear reducir a la mitad el contenido escrito sobre papel.</strong></li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s4">
+<h2>4. El lenguaje administrativo</h2>
+<ul>
+<li><strong>Llamamos lenguaje administrativo a aquel que utiliza la Administración tanto en sus relaciones externas (para comunicarse con la ciudadanía y con otras administraciones) como en sus relaciones internas.</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-461</span> <span class="etiqueta">P26-479</span></li>
+<li>Si atendemos a su definición, <strong>el lenguaje administrativo es un tecnolecto; esto es, un lenguaje de especialidad</strong> usado en el ámbito de la Administración y con unas características propias (sintaxis compleja, vocabulario técnico, fraseología arcaica…).</li>
+<li>La Administración pública es una realidad insoslayable, cuya acción abarca prácticamente todos los campos de la vida social: sanidad, medio ambiente, educación, agricultura, turismo, comunicación, economía, orden público…</li>
+</ul>
+<h3>4.1. Características del lenguaje administrativo</h3>
+<p>Enumeramos a continuación algunos de los rasgos que conforman el estilo del lenguaje administrativo: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-462</span> <span class="etiqueta">P26-480</span></p>
+<ul>
+<li>El léxico administrativo tiene tendencia culta y abusa a veces de tecnicismos poco conocidos por la ciudadanía en general.</li>
+<li><strong>Suelen darse palabras y construcciones muy repetitivas</strong>: por ejemplo, voces con las mismas terminaciones (-ble, -mente, -ando, -ión...).</li>
+<li>Abundan los arcaísmos, los formulismos y las frases hechas.</li>
+<li>Utiliza el futuro de subjuntivo, una reliquia de la lengua de tiempos pasados.</li>
+<li><strong>Utiliza palabras, locuciones y expresiones tomadas del latín.</strong></li>
+<li>Abusa de frases de estilo impersonal.</li>
+<li>Existe una propensión a la nominalización o sustantivación del discurso (dar aviso, hacer uso, efectuar el análisis…).</li>
+<li>Muestra una gran predilección por las oraciones largas, formadas por interminables incisos y perífrasis explicativas.</li>
+<li>Tiene tendencia al alargamiento: abundan las locuciones preposicionales (a tenor de, al objeto de, en vista de que…).</li>
+<li>Los tratamientos personales (gerente, director, etc.) suelen responder a formas de tiempos pasados.</li>
+</ul>
+<p>En euskera, el lenguaje administrativo se caracteriza, además, por estos rasgos: <span class="etiqueta">P22-463</span></p>
+<ul>
+<li><strong>Recurre a calcos lingüísticos del castellano.</strong></li>
+<li>En castellano, existe una tendencia a explicar las acciones a través de perífrasis verbales y cuando traducimos estas formas al euskera con frecuencia cometemos errores. <em>Ejemplos de la tabla del tema:</em> Erabilera gauzatu → Erabili · Baldintzen azterketa burutu → Baldintzak aztertu.</li>
+<li><strong>Respecto a los usos verbales, en euskera también se tiende a utilizar formas arcaicas del verbo (Igor bekio) y tiempos hipotéticos para expresar condiciones. Asimismo, se abusa de las estructuras pasivas y del subjuntivo.</strong></li>
+</ul>
+<h3>4.2. La modernización del lenguaje administrativo</h3>
+<ul>
+<li>El lenguaje administrativo, en general, adolece de sencillez, claridad y concreción.</li>
+<li><strong>Muchas administraciones se han propuesto la tarea de implantar en sus comunicaciones un lenguaje inteligible y claro, cercano al ciudadano.</strong> <span class="etiqueta">P26-481</span></li>
+<li>En los años 60 del pasado siglo, movimientos ciudadanos norteamericanos reivindicaron el <strong>Plain English</strong> o inglés sencillo. Entre nosotros, el <strong>IVAP</strong> tomó el reto de abrir las puertas del lenguaje administrativo al lenguaje claro o lenguaje sencillo.</li>
+<li>Según la <strong>International Plain Language Federation</strong>, «Una comunicación está en lenguaje claro si la lengua, la estructura y el diseño son tan claros que el público al que está destinada puede encontrar fácilmente lo que necesita, comprende lo que encuentra y usa esa información».</li>
+<li>El catedrático de Lengua Española <strong>Ramón Sarmiento</strong> afirma que las personas destinatarias de los textos administrativos «tienen derecho de entender lo que les envía cualquiera de las administraciones públicas con las que han de relacionarse».</li>
+</ul>
+<h3>4.3. Propuestas para la mejora del lenguaje administrativo</h3>
+<ul>
+<li>El lenguaje administrativo debería reunir las siguientes características: <strong>claridad, precisión y corrección lingüística</strong>.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>Ten en cuenta a la persona receptora.</strong> Los textos administrativos se enfrentan a lo que se conoce como «dilema de la doble audiencia». En la mayoría de textos de la administración, trataremos de «usted» al usuario.</li>
+<li><strong>Construye párrafos breves.</strong> Redacta párrafos con una extensión máxima de 3-5 líneas (40-70 palabras). Estructura los párrafos en 2-3 oraciones. Organiza cada párrafo en torno a una única idea. <span class="etiqueta">P26-482</span></li>
+<li><strong>Construye frases cortas.</strong> Sé prudente con la cantidad de palabras que utilizas: escribe oraciones que no superen las 15-20 palabras.</li>
+<li><strong>Ten cuidado con los incisos.</strong> Se trata de acotaciones que proporcionan información complementaria relacionada con el tema de las oraciones en las que se intercalan. Si no cuidamos la longitud y el emplazamiento de estos incisos, corremos el riesgo de que se pierda el hilo del discurso. <span class="etiqueta">P26-483</span></li>
+<li><strong>No abuses del estilo nominal.</strong> Dar aviso por avisar; hacer uso por usar…</li>
+<li><strong>Presta atención a la voz pasiva.</strong> La voz pasiva resulta aceptable, bien cuando deseamos destacar en posición inicial el objeto de la acción, bien cuando no queremos indicar quién es el sujeto de la acción.</li>
+<li><strong>Sigue el orden natural de las frases.</strong> Tenderemos, en la medida de lo posible, al orden lineal, simple y claro.</li>
+<li><strong>Evita el estilo negativo.</strong> Debemos evitar las construcciones negativas, sobre todo la llamada «doble negativa».</li>
+<li><strong>Utiliza un léxico cercano al lenguaje estándar.</strong> En aras de se puede sustituir por para; a tenor de se pude reemplazar por según.</li>
+<li><strong>Cuida el diseño.</strong> <strong>El diseño es uno de los factores que determina la legibilidad de un texto, por lo que tiene que ser claro, cuidado y agradable.</strong> Resaltar elementos concretos ayuda a inferir la estructura lógica de los contenidos, por ejemplo, mediante el uso de la negrita. <span class="etiqueta">P26-484</span></li>
+<li><strong>Presta atención a la normas ortográficas y gramaticales.</strong> Mayúsculas: «la mayúscula es la forma marcada y excepcional». Debemos escribir de acuerdo con y no *de acuerdo a. La sigla correcta es IVAP, no I.V.A.P.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s5">
+<h2>5. Lenguaje no sexista</h2>
+<h3>5.1. Marco jurídico</h3>
+<ul>
+<li>La Convención sobre la Eliminación de todas las Formas de Discriminación contra la Mujer, aprobada por la Asamblea General de la ONU en <strong>diciembre de 1979</strong>, proclama el principio de igualdad de mujeres y hombres.</li>
+<li>Desde la entrada en vigor el <strong>1 de mayo de 1999 del Tratado de Ámsterdam</strong>, la igualdad de mujeres y hombres es consagrada formalmente como un principio fundamental de la Unión Europea.</li>
+<li>El <strong>artículo 9.1 del Estatuto de Autonomía de Euskadi</strong>, a través de una remisión a lo dispuesto en la Constitución española, proclama el derecho a la igualdad y a la no discriminación por razón de sexo. Asimismo, el <strong>artículo 9.2 d)</strong> establece la obligación de los poderes públicos de promover las condiciones y remover los obstáculos para que la igualdad de las personas y los grupos en que se integran sea real y efectiva.</li>
+</ul>
+<p>En la Comunidad Autónoma de Euskadi, dos son las leyes sobre las que se asientan las políticas de igualdad:</p>
+<ul>
+<li><strong>Ley 2/1988, de 5 de febrero</strong>, de creación del Instituto Vasco de la Mujer / Emakumearen Euskal Erakundea.</li>
+<li><strong>Ley 4/2005 para la Igualdad de Mujeres y Hombres.</strong> Modificada mediante la «Ley 3/2012, de 16 de febrero». <strong>El artículo 18, señala que los poderes públicos vascos han de tener en cuenta la igualdad de mujeres y hombres en la elaboración y aplicación de las normas, y deben hacer un uso no sexista de todo tipo de lenguaje en los documentos y soportes que produzcan directamente o a través de terceras personas o entidades.</strong> <span class="etiqueta">P26-485</span><ul>
+<li>El punto 2 del artículo 42, que versa sobre la negociación colectiva: la Administración de la Comunidad Autónoma, a través del Registro de convenios colectivos, ha de velar para que estos no contengan cláusulas contrarias al principio de igualdad de mujeres y hombres, así como para que hagan un uso no sexista del lenguaje.</li>
+</ul>
+</li>
+</ul>
+<h3>5.2. Causas del uso no correcto del lenguaje: sexismo y androcentrismo</h3>
+<p><span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-464</span> <span class="etiqueta">P26-486</span></p>
+<ul>
+<li><strong>Hacemos un uso sexista del lenguaje y de la lengua porque vivimos en una cultura y en una sociedad sexista y androcéntrica.</strong></li>
+<li><strong>Sexismo:</strong> <strong>consiste en asignar valores, capacidades y roles diferentes a mujeres y hombres exclusivamente en función de su sexo.</strong> <span class="etiqueta">P22-465</span></li>
+<li><strong>Androcentrismo:</strong> es un enfoque sesgado de la realidad en función del sexo y consiste en considerar a los hombres el centro y la medida de todas las cosas.</li>
+</ul>
+<h3>5.3. Algunas recomendaciones para una comunicación igualitaria</h3>
+<p><strong>5.3.1. Respecto al lenguaje:</strong></p>
+<ul>
+<li>Eludir las referencias directas al sexo del sujeto. <em>Ejemplo:</em> Cuando el usuario solicite la ayuda deberá... → Cuando se solicite la ayuda se deberá…</li>
+<li>Omitir o sustituir pronombres y artículos con marca de género. <em>Ejemplo:</em> Los solicitantes deben → Cada solicitante debe / Quienes soliciten deben.</li>
+<li>Utilizar perífrasis, sustantivos abstractos y sustantivos genéricos. <em>Ejemplos:</em> Interesado → Persona interesada · El director → La dirección · Los ciudadanos → La ciudadanía.</li>
+<li>Utilizar aposiciones explicativas incluyentes.</li>
+<li>Utilizar de forma simétrica los dos géneros gramaticales: dobles formas. Es recomendable alternar el orden de aparición.</li>
+<li>Utilizar la barra en documentos tales como impresos y formularios, donde haya problemas de espacio, así como en los encabezados y firmas, siempre alternando el orden de los sexos. <em>Ejemplos:</em> D./Dña. · Sra./Sr.</li>
+<li>Se recomienda no usar la @ ya que no es un signo lingüístico y no puede pronunciarse.</li>
+<li>Respecto al euskera debemos indicar que no tiene género gramatical. <em>Recomendaciones del tema:</em> Gizon/gizaki/giza · Composición de palabras · «Hitano» (tuteo) · El sufijo -sa · Atención al uso innecesario de genéricos en euskara · El predominio de jauna/jaunak. Recuerda que disponemos del vocativo jaun-andrea en euskera.</li>
+</ul>
+<p><strong>5.3.2. Respecto a los usos sexistas:</strong></p>
+<ul>
+<li>Evitar los saltos semánticos y presentar a las mujeres como sujetos de acción.</li>
+<li>Evitar las asimetrías.</li>
+<li>No calificar a las mujeres por su aspecto físico o ámbito familiar, sino por su cualificación laboral y sus cualidades profesionales.</li>
+<li>Ha de evitarse el uso de hombre como genérico singular.</li>
+<li>Cuidar las imágenes que se exponen.</li>
+</ul>
+<h3>5.4. Adaptación de la terminología administrativa al lenguaje no sexista</h3>
+<ul>
+<li><strong>Documentos cerrados:</strong> son aquellos de los que se conoce la persona o personas destinatarias. Se utilizará el género gramatical de la persona a la que se dirige.</li>
+<li><strong>Documentos abiertos:</strong> son aquellos de los que no se conoce la persona destinataria. Son los más numerosos dentro de la Administración. Se recomienda nombrar a los dos sexos separados con barras.</li>
+<li><strong>Ofertas de empleo, relación de puestos de trabajo, concursos, oposiciones, becas, ayudas, etc.:</strong> se reflejará a mujeres y hombres sin ambigüedad, explicitando siempre ambos sexos.</li>
+<li><strong>Campañas institucionales:</strong> se reflejarán a hombres y mujeres sin ambigüedad, explicitando ambos sexos.</li>
+<li><strong>Oficios, profesiones, cargos y títulos:</strong> si un cargo está ocupado por una mujer, la mención de su título debe hacerse en femenino (consejera, directora, etc.). Cuando se desconoce si la persona que ocupa un cargo es hombre o mujer: Alcalde → Alcaldía; Concejal → Concejalía; Presidente → Presidencia.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s6">
+<h2>6. Los documentos administrativos</h2>
+<ul>
+<li><strong>La actividad administrativa tiene un carácter documental. Los documentos son el soporte en el que se materializan los actos de la Administración pública</strong>; es decir, la forma externa de dichos actos. <span class="etiqueta">P22-466</span></li>
+<li>El <strong>artículo 26</strong> de la «Ley 39/2015, de 1 de octubre, del Procedimiento Administrativo Común de las Administraciones Públicas» ofrece la siguiente definición: «Se entiende por documentos públicos administrativos los válidamente emitidos por los órganos de las Administraciones Públicas».</li>
+</ul>
+<h3>6.1. Tipos de documentos de las Administraciones públicas</h3>
+<p>En función del origen y destino de la comunicación:</p>
+<ul>
+<li>Documentos generados por las Administraciones públicas para comunicarse con la ciudadanía: certificados, notificaciones, resoluciones, acuerdos, anuncios, cartas, citaciones…</li>
+<li>Documentos generados por las Administraciones públicas para comunicarse dentro de la Administración o con otras Administraciones y organismos públicos: oficios, notas interiores, informes, actas, propuestas de resolución, diligencias, etc.</li>
+<li>Documentos generados por la ciudadanía para dirigirse a la Administración pública: cartas, solicitudes, alegaciones, recursos, denuncias…</li>
+</ul>
+<p>Otra clasificación tiene en cuenta <strong>la finalidad del documento</strong>. Así, de acuerdo con su función, se establecen cuatro categorías de documentos: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-467</span> <span class="etiqueta">P26-487</span></p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Contenido</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documentos de decisión o resolutivos</td>
+<td>Contienen una declaración de voluntad de un órgano administrativo sobre materias de su competencia</td>
+<td>Resoluciones, acuerdos</td>
+</tr>
+<tr>
+<td>Documentos de transmisión</td>
+<td>Comunican la existencia de hechos o actos a otras personas, órganos o entidades</td>
+<td>Notificaciones, publicaciones, oficios, notas interiores, cartas, citaciones, convocatorias</td>
+</tr>
+<tr>
+<td>Documentos de constancia o constatación</td>
+<td>Contienen una declaración de conocimiento de un órgano administrativo, persona o entidad pública o privada, cuya finalidad es acreditar actos, hechos o efectos</td>
+<td>Actas, diligencias, certificados</td>
+</tr>
+<tr>
+<td>Documentos de juicio</td>
+<td>Contienen una declaración de juicio de un órgano administrativo, persona o entidad, sobre las cuestiones de hecho o jurídicas que sean objeto de un procedimiento administrativo</td>
+<td>Informes, propuestas, dictámenes</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2. Estructura de los documentos administrativos</h3>
+<p>Recogidas en el <strong>Real Decreto 1465/1999, de 17 de septiembre</strong>:</p>
+<ul>
+<li><strong>a) Encabezamiento.</strong> Es la parte superior del documento. En él deben constar al menos estos 4 elementos: <strong>cabecera impresa, título, datos generales del documento y destinatario</strong>.</li>
+<li><strong>b) Cuerpo del escrito.</strong> Es costumbre arraigada en la redacción de los documentos jurídicos y administrativos destacar en mayúsculas los verbos que expresan la finalidad o la acción principal del documento: CERTIFICA:, INFORMA:, RESUELVE:, etc.</li>
+<li><strong>c) Pie.</strong> Se entiende por formalización la acreditación de la autenticidad de la voluntad del órgano emisor, manifestada mediante firma manuscrita.</li>
+</ul>
+<p>En las resoluciones administrativas y comunicaciones oficiales, internas o externas, será obligatorio incluir: <span class="etiqueta">P26-488</span></p>
+<ul>
+<li><strong>Lugar y fecha:</strong> Por lugar se entiende el municipio donde está ubicado el órgano que emite el documento; la fecha es la del día en que se elabora. El año no lleva punto (2020 es la forma correcta; 2.020 es incorrecta).</li>
+<li><strong>Firma.</strong> Está compuesta de los siguientes elementos: a) La antefirma; b) Rúbrica; c) Nombre y apellidos; d) <strong>Delegación. Cuando se actúa por delegación de competencias, de firma u otras circunstancias, deberán constar las circunstancias concretas de la delegación</strong> <span class="etiqueta">P26-489</span>; e) Sello.</li>
+</ul>
+<h3>6.3. Presentación de documentos escritos</h3>
+<ul>
+<li><strong>La carta.</strong> La carta, junto con el oficio y el correo electrónico, es uno de los modelos de texto más utilizados en la comunicación administrativa. Es un tipo de documento empleado para las comunicaciones de carácter personal, protocolario o de contenido general. Estructura: el inicio, el cuerpo y el cierre.</li>
+<li><strong>El oficio.</strong> <strong>El oficio es un documento administrativo que normalmente se utiliza para las comunicaciones entre unidades y órganos administrativos. En contraposición a la carta, se caracteriza por un contenido estrictamente administrativo y oficial, así como por un tono formal, neutro y objetivo, centrado fundamentalmente en la actuación administrativa.</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-468</span> <span class="etiqueta">P26-490</span></li>
+<li><strong>La notificación.</strong> <strong>La notificación es el documento mediante el que se comunica a la persona interesada una resolución o un acuerdo que afecta a sus intereses y derechos.</strong> La notificación es una condición para la eficacia jurídica del acto que se comunica y, al mismo tiempo, garantiza la recepción de dicho acto y el éxito de la comunicación. <span class="etiqueta">P26-491</span></li>
+<li><strong>La hoja de solicitud.</strong> <strong>Es un documento mediante el cual un ciudadano o una entidad jurídica solicita a la Administración algo que, por regla general, está contemplado en la normativa vigente.</strong> La receptora de la solicitud siempre es la misma: la Administración. Estructura: título, identificación del solicitante, exposición, solicitud, documentos aportados. <span class="etiqueta">P26-492</span></li>
+<li><strong>El certificado.</strong> Es un documento que acredita actos o situaciones de carácter administrativo. <strong>El solicitante suele ser una persona, órgano o entidad que necesita justificar, por ejemplo, la asistencia a un curso, las retribuciones percibidas o los estudios realizados.</strong> En el documento siempre debe constar la firma, el nombre y apellidos, y el cargo de la persona que acredita el certificado. <span class="etiqueta">P26-493</span></li>
+<li><strong>El correo electrónico.</strong> <strong>El correo electrónico es un medio de comunicación extendido en las comunicaciones formales como sustituto de las notas interiores y otros documentos de transmisión. Es una herramienta electrónica que permite enviar y recibir cualquier tipo de información por Internet. Una de sus ventajas es que, junto al texto escrito como mensaje, se pueden acompañar documentos, imágenes, archivos sonoros...</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-469</span> <span class="etiqueta">P26-494</span><ul>
+<li>El asunto. Avanza de forma sintetizada el contenido del texto y adquiere la función de título en los mensajes electrónicos. Debe ser claro, corto y concreto. No conviene escribir más de tres párrafos, a ser posible.</li>
+<li>Ortotipografía: <strong>No escribas en mayúscula, muestra enfado y entorpece la lectura.</strong> Tamaño: se recomienda la de 12 puntos.</li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s7">
+<h2>Mapa de preguntas por apartado</h2>
+<table>
+<thead>
+<tr>
+<th>Apartado del tema</th>
+<th>Batería 2022 (Tema 26)</th>
+<th>Batería 2026 (Tema 19)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. La comunicación</td>
+<td>451, 452, 453, 454, 455</td>
+<td>469, 470, 471, 472, 473, 474</td>
+</tr>
+<tr>
+<td>2. La comunicación escrita</td>
+<td>456, 457, 458</td>
+<td>475</td>
+</tr>
+<tr>
+<td>3. La comunicación electrónica</td>
+<td>459, 460</td>
+<td>476, 477, 478</td>
+</tr>
+<tr>
+<td>4. El lenguaje administrativo</td>
+<td>461, 462, 463</td>
+<td>479, 480, 481, 482, 483, 484</td>
+</tr>
+<tr>
+<td>5. Lenguaje no sexista</td>
+<td>464, 465</td>
+<td>485, 486</td>
+</tr>
+<tr>
+<td>6. Los documentos administrativos</td>
+<td>466, 467, 468, 469</td>
+<td>487, 488, 489, 490, 491, 492, 493, 494</td>
+</tr>
+</tbody>
+</table>
+<p>Los apartados más preguntados son <strong>los documentos administrativos</strong> (12 preguntas), <strong>la comunicación</strong> (11) y <strong>el lenguaje administrativo</strong> (9).</p>
+</section>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+<script>
+var fichas = document.querySelectorAll('.ficha'), tarjetas = document.querySelectorAll('.tarjeta'), nombre = document.getElementById('nombre');
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function ver(ap){
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap === ap); if(f.dataset.ap && f.dataset.ap === ap) nombre.textContent = ap === 'todo' ? 'Todos los apartados' : f.title; });
+  tarjetas.forEach(function(t){ t.classList.toggle('hidden', ap !== 'todo' && t.dataset.ap !== ap); });
+  window.scrollTo(0,0); avisarAltura();
+}
+fichas.forEach(function(f){ if(f.dataset.ap) f.addEventListener('click', function(){ ver(f.dataset.ap); }); });
+ver('todo');
+window.addEventListener('load', avisarAltura); window.addEventListener('resize', avisarAltura);
+</script>
+</body>
+</html>

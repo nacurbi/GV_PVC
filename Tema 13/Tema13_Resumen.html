@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 13 · Resumen</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha{text-decoration:none;display:inline-block}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta h4{margin:14px 0 6px;font-size:15px;font-style:italic;color:var(--fondo)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 13. Primeros auxilios</p>
+  <div class="barra">
+    <nav class="fichas">
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="s0" title="Cómo usar este esquema">Guía</button>
+      <button type="button" class="ficha" data-ap="s1" title="1. Introducción">1</button>
+      <button type="button" class="ficha" data-ap="s2" title="2. Valoración de las lesiones">2</button>
+      <button type="button" class="ficha" data-ap="s3" title="3. Reanimación cardio-pulmonar (R.C.P.)">3</button>
+      <button type="button" class="ficha" data-ap="s4" title="4. Hemorragias">4</button>
+      <button type="button" class="ficha" data-ap="s5" title="5. Quemaduras">5</button>
+      <button type="button" class="ficha" data-ap="s6" title="6. Fracturas">6</button>
+      <button type="button" class="ficha" data-ap="s7" title="7. Pérdida de conocimiento">7</button>
+      <button type="button" class="ficha" data-ap="s8" title="8. Obstrucción de las vías aéreas">8</button>
+      <button type="button" class="ficha" data-ap="s9" title="9. Lesiones por electricidad">9</button>
+      <button type="button" class="ficha" data-ap="s10" title="10. Intoxicaciones agudas">10</button>
+      <button type="button" class="ficha" data-ap="s11" title="11. Heridas">11</button>
+      <button type="button" class="ficha" data-ap="s12" title="Mapa de preguntas por apartado">Preguntas</button>
+      <a class="ficha" href="Tema13_Bateria.html">Batería</a>
+    </nav>
+  </div>
+  <p class="nombre-tema" id="nombre"></p>
+</div></header>
+<main>
+<p class="leyenda"><span class="etiqueta">P22-nº</span> Batería Administrativos 2022 · <span class="etiqueta">P26-nº</span> Batería Temario General 2026 · <span class="estrella">★</span> preguntado en las dos</p>
+<section class="tarjeta" data-ap="s0">
+<h2>Cómo usar este esquema</h2>
+<p>El texto de cada apartado es literal del Tema 13 (opebide.com); solo se ha ordenado en esquema. El PDF indica que es también el <strong>Tema 13 del nuevo temario</strong>.</p>
+<ul>
+<li><strong>P22-nº</strong> = Batería <em>Administrativos 2022</em>, Tema 13 (preguntas 238–252).</li>
+<li><strong>P26-nº</strong> = Batería <em>Temario General 2026</em>, Tema 13 (preguntas 313–338).</li>
+<li><span class="estrella" title="Preguntado en las dos baterías">★</span> = punto preguntado en las dos baterías.</li>
+<li>Las baterías no traen plantilla de respuestas: la etiqueta indica qué frase del tema responde a cada pregunta.</li>
+<li><strong>Muy importante:</strong> el tema está actualizado a las <strong>Guías ERC 2025</strong>, pero varias preguntas siguen los criterios antiguos. Cambios que afectan a preguntas:<ul>
+<li>Ya <strong>no se busca el pulso</strong> (personas sin formación): solo consciencia y respiración (P22-239, P22-240, P26-313).</li>
+<li>Compresiones: <strong>5-6 cm</strong> y <strong>100-120 por minuto</strong> (P22-243 da 4-5 cm y 80-100).</li>
+<li>Herida en tórax: <strong>no se tapona</strong> la herida abierta (P22-249, P26-337).</li>
+<li>Hemorragias: ya no se recomienda la compresión a distancia ni la elevación del miembro.</li>
+<li>Las preguntas que el tema actual ya no responde se marcan «Sin respuesta en el tema», con la respuesta que daba el criterio antiguo.</li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s1">
+<h2>1. Introducción</h2>
+<ul>
+<li><strong>Los primeros auxilios son el conjunto de medidas asistenciales que adoptaremos inicialmente con una persona accidentada o enferma en el lugar de los hechos, hasta la llegada de los servicios sanitarios.</strong></li>
+<li>El objetivo principal debe ser mantener a la persona accidentada con vida, y evitar agravar las lesiones que presenta. Para ello la persona que preste los primeros auxilios hará solo aquello de lo que esté totalmente segura que puede hacer para ayudar a la persona accidentada.</li>
+<li>Es frecuente que en un accidente se genere un ambiente de nerviosismo y en consecuencia hay riesgo de actuaciones incorrectas, por ello entre las acciones a desarrollar está la de dominar la situación y evitar el pánico.</li>
+</ul>
+<p>En estas situaciones junto a una valoración general del accidente: n.º de personas accidentadas, lesiones de las mismas, persistencia de peligro… <strong>hay que actuar siguiendo unas pautas básicas que responden a la regla: P.A.S.</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-238</span> <span class="etiqueta">P26-315</span></p>
+<ul>
+<li><strong>P de PROTEGER el lugar de los hechos.</strong> Después de un accidente puede continuar existiendo la causa que lo originó (un fuego, un escape de gas…) se ha de tener la seguridad de que tanto quien ha sufrido el accidente como la persona que preste la primera asistencia estén fuera de peligro.</li>
+<li><strong>A de AVISAR en cuanto sea posible a los servicios de emergencia llamando al 112 (en Euskadi, gestionado por SOS Deiak).</strong> Salvo que estemos solos o solas, deberemos permanecer junto a quien ha sufrido el accidente y enviar a otra persona a pedir ayuda mientras empezamos a socorrerla. Si estamos solos, es recomendable llamar con el altavoz del teléfono activado para poder seguir las indicaciones del operador sin dejar de atender a la víctima.</li>
+<li><strong>S de SOCORRER siguiendo un orden de prioridades</strong> (la experiencia demuestra que generalmente quien más se queja no es el que está más grave) <strong>y comprobando, por este orden, si la persona responde (consciencia) y si respira con normalidad. Las recomendaciones actuales no aconsejan que las personas sin formación sanitaria busquen el pulso</strong>: si la víctima no responde y no respira con normalidad, se considerará que está en parada cardiorrespiratoria. <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-239</span> <span class="etiqueta">P26-313</span></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Sabemos que en la mayoría de los accidentes la persona lesionada se encuentra nerviosa, excitada, así como quienes le acompañan. Tenemos que procurar al mismo tiempo que efectuamos los primeros auxilios físicos, tranquilizarles y disminuir su angustia. Por eso evitaremos la censura aunque tenga parte de la responsabilidad en lo sucedido. Le diremos que el momento crítico ya ha pasado. Confirmaremos que los servicios sanitarios están avisados.</li>
+<li>Por otra parte suele suceder que ante un accidente acudan «mirones/as» que entorpecerán las labores de auxilio, ¿Qué podemos hacer?: Dar a conocer nuestra identidad · Apartarlos/as del lugar pero pidiendo su implicación: Que avisen a la ambulancia, que regulen el tráfico, que formen un cordón de seguridad…</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s2">
+<h2>2. Valoración de las lesiones</h2>
+<p><span class="etiqueta">P22-240</span></p>
+<h3>2.1. Valoración primaria</h3>
+<ul>
+<li><strong>Tendremos que identificar aquellas situaciones que puedan suponer una amenaza inmediata para la vida de la persona accidentada.</strong> Como se ha dicho antes, hay que observar el estado de consciencia y la respiración y, a continuación, la existencia de hemorragias graves.</li>
+<li>Las guías actuales proponen estructurar esta valoración siguiendo la secuencia <strong>ABCDE: vía aérea (A), respiración (B), circulación (C), estado neurológico (D) y exposición (E).</strong></li>
+</ul>
+<h3>2.2. Valoración secundaria</h3>
+<p><strong>Una vez que hayamos comprobado que la vida de la víctima no está en peligro (responde y respira con normalidad) pasaremos a buscar otras lesiones que pueda tener.</strong> Para ello le exploraremos ordenadamente de la cabeza a los pies.</p>
+<ul>
+<li><strong>Cabeza:</strong> miraremos si tiene heridas en cuero cabelludo y cara. Comprobaremos la ausencia de hemorragias en la nariz/oídos ya que podría ser signo de fractura de cráneo.</li>
+<li><strong>Cuello:</strong> descartaremos heridas en esta zona. Tendremos especial cuidado en la movilidad del cuello por riesgo de lesión cervical, especialmente si el traumatismo ha sido violento.</li>
+<li><strong>Tórax:</strong> buscaremos deformidades, heridas y si la víctima está consciente preguntaremos si tiene dolor.</li>
+<li><strong>Abdomen:</strong> ver si hay heridas. Preguntaremos por si tiene dolor. Tener siempre presente la posibilidad de lesiones internas.</li>
+<li><strong>Extremidades:</strong> examinaremos brazos y piernas comparando ambos brazos y ambas piernas entre sí para observar diferencias entre ellas y deformidades que nos hagan sospechar de la existencia de fracturas. Descartaremos la existencia de heridas y hemorragias. Asimismo exploraremos la sensibilidad y movilidad para descartar una lesión medular.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s3">
+<h2>3. Reanimación cardio-pulmonar (R.C.P.)</h2>
+<ul>
+<li>El oxígeno es un elemento indispensable para vivir. El organismo lo capta del medio ambiente mediante la respiración y posteriormente lo transporta por todo el cuerpo por la sangre impulsada por el corazón. Cuando existe una insuficiencia en el aporte de oxígeno a los tejidos (asfixia) se pone en peligro la vida de la persona que sufre esta situación. Por este motivo llamamos a la respiración y a la circulación sanguínea funciones vitales.</li>
+<li><strong>Un intervalo de 3 a 5 minutos sin recibir oxígeno daña de forma irreversible las células.</strong> <span class="etiqueta">P26-314</span></li>
+<li><strong>Esta situación de asfixia exige de forma inmediata la puesta en práctica de las maniobras de recuperación del aporte de oxígeno que no admiten la mínima demora en su aplicación</strong> si queremos evitar la muerte o la aparición de lesiones irreversibles en la víctima. <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-241</span> <span class="etiqueta">P26-316</span></li>
+<li>Las recomendaciones de referencia en Europa son las del <strong>Consejo Europeo de Resucitación (ERC), cuya última actualización son las Guías 2025.</strong> La actuación ante una parada cardiaca se resume en la llamada <strong>cadena de supervivencia: reconocimiento precoz de la parada y petición de ayuda, reanimación cardiopulmonar (RCP) precoz, desfibrilación precoz y soporte vital avanzado y cuidados posteriores.</strong> Los primeros eslabones dependen de las personas que presencian la parada, por lo que su actuación inmediata es decisiva.</li>
+</ul>
+<h3>3.1. Secuencia de actuación</h3>
+<ol>
+<li>Comprobar que la zona es segura para la víctima y para quien auxilia.</li>
+<li>Comprobar si responde: sacudirle suavemente los hombros y preguntarle en voz alta «¿Se encuentra bien?».</li>
+<li>Si no responde, abrir la vía aérea con la <strong>maniobra frente-mentón</strong> (una mano en la frente inclinando la cabeza hacia atrás y dos dedos de la otra elevando el mentón) y comprobar, <strong>durante no más de 10 segundos</strong>, si respira con normalidad mirando, escuchando y sintiendo.</li>
+<li>Si no respira con normalidad, llamar al 112 —a ser posible con el altavoz activado— y enviar a alguien a buscar un desfibrilador externo automatizado (DEA).</li>
+<li>Iniciar inmediatamente las compresiones torácicas.</li>
+</ol>
+<!-- fin -->
+
+<ul>
+<li>Las respiraciones agónicas (boqueadas lentas, ruidosas o irregulares) no son una respiración normal y deben considerarse un signo de parada cardiaca. Recuérdese que las personas sin formación sanitaria no deben buscar el pulso: la ausencia de respuesta y de respiración normal basta para iniciar la RCP.</li>
+</ul>
+<h3>3.2. Compresiones torácicas</h3>
+<p>Con la víctima boca arriba sobre una superficie firme, nos arrodillaremos a su lado y colocaremos el talón de una mano en el centro del pecho (mitad inferior del esternón) y la otra mano encima, entrelazando los dedos. Con los brazos rectos y los hombros en vertical sobre el pecho de la víctima, comprimiremos: <span class="etiqueta">P22-243</span></p>
+<ul>
+<li><strong>Con una profundidad de al menos 5 cm y no más de 6 cm.</strong></li>
+<li><strong>A un ritmo de 100 a 120 compresiones por minuto.</strong></li>
+<li>Permitiendo que el tórax se reexpanda completamente tras cada compresión y reduciendo al mínimo las interrupciones.</li>
+</ul>
+<h3>3.3. Ventilaciones</h3>
+<p><span class="etiqueta">P22-242</span> <span class="etiqueta">P26-317</span> <span class="etiqueta">P26-318</span> <span class="etiqueta">P26-319</span></p>
+<ul>
+<li><strong>Si se tiene formación y se está dispuesto a hacerlo, tras cada 30 compresiones se darán 2 insuflaciones boca a boca</strong>: con la cabeza en hiperextensión y el mentón elevado, se pinzará la nariz, se sellarán los labios alrededor de la boca de la víctima y se insuflará durante aproximadamente 1 segundo, <strong>comprobando que el pecho se eleva</strong>. Excepcionalmente, si no es posible ventilar por la boca (por ejemplo, por lesiones en ella), se hará boca-nariz.</li>
+<li><strong>La secuencia es de 30 compresiones y 2 insuflaciones (30:2), tanto si hay una como si hay dos personas reanimadoras.</strong> Si no se sabe o no se quiere realizar ventilaciones, se harán solo compresiones torácicas de forma continua.</li>
+</ul>
+<h3>3.4. Desfibrilador externo automatizado (DEA)</h3>
+<ul>
+<li>El DEA es un aparato que analiza el ritmo cardiaco y, si es necesario, administra una descarga eléctrica. Está diseñado para que lo pueda utilizar cualquier persona siguiendo sus instrucciones de voz.</li>
+<li>En cuanto llegue, se encenderá y se colocarán los parches sobre el pecho desnudo tal como indique el propio aparato, sin interrumpir las compresiones mientras se colocan. Durante el análisis y la descarga nadie debe tocar a la víctima; después se reanudará inmediatamente la RCP siguiendo las indicaciones del DEA.</li>
+</ul>
+<h3>3.5. Cuándo detener la RCP</h3>
+<p><strong>Las maniobras no deben interrumpirse</strong>; si hay varias personas, se relevarán aproximadamente <strong>cada 2 minutos</strong> para evitar la fatiga. Solo se detendrán: <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-241</span> <span class="etiqueta">P26-316</span></p>
+<ul>
+<li><strong>Cuando la víctima muestre signos de vida</strong>: se despierte, se mueva, abra los ojos o respire con normalidad.</li>
+<li><strong>Cuando llegue la ayuda profesional y se haga cargo.</strong></li>
+<li>Cuando la persona reanimadora quede agotada o la situación se vuelva peligrosa.</li>
+</ul>
+<h3>3.6. Posición lateral de seguridad (P.L.S.)</h3>
+<ul>
+<li>Si la persona no responde pero respira con normalidad, se la colocará en posición lateral de seguridad —de lado, con la cabeza ligeramente extendida para mantener la vía aérea abierta— y se vigilará su respiración de forma continua hasta la llegada de los servicios sanitarios. <strong>En caso de traumatismo no se moverá a la víctima a esta posición.</strong></li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s4">
+<h2>4. Hemorragias</h2>
+<ul>
+<li>Cuando alguno de estos vasos sanguíneos sufre alguna lesión y se rompe, la sangre se extravasa y se produce lo que se llama una Hemorragia.</li>
+<li>La intensidad de la hemorragia dependerá del grado de la lesión y del calibre del vaso sanguíneo lesionado.</li>
+<li>Las hemorragias pueden ser externas cuando la sangre sale al exterior y la vemos, o internas cuando la sangre no sale al exterior del organismo y por tanto no la vemos, siendo su diagnóstico más difícil.</li>
+<li>Sospecharemos de la existencia de una hemorragia interna cuando junto al antecedente del traumatismo, la víctima presenta entre otros síntomas: Palidez · Sudoración fría · Extrema debilidad · Pulso rápido y débil · Sed.</li>
+</ul>
+<p><strong>Los principios generales del tratamiento de las heridas son:</strong> <span class="etiqueta">P26-320</span></p>
+<ul>
+<li><strong>Detener la hemorragia.</strong></li>
+<li><strong>Evitar las complicaciones y en especial las infecciones.</strong></li>
+<li><strong>Favorecer la curación.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Cuando se trata de una hemorragia arterial, es decir el vaso lesionado es una arteria, la sangre sale a gran velocidad, de forma intermitente, a borbotones que coinciden con los latidos del corazón.</li>
+</ul>
+<h3>4.1. Compresión de una arteria sangrante</h3>
+<p><span class="etiqueta">P26-321</span></p>
+<ul>
+<li><strong>La compresión puede realizarse directamente sobre la parte que sangra.</strong> Utilizaremos preferentemente gasas estériles y, de no tenerlas a mano, cualquier tela o paño procurando que esté lo más limpio posible, así evitaremos el riesgo de infecciones. <strong>Mantendremos la presión sobre la herida durante unos minutos (10 aproximadamente) hasta que nos percatemos de que la hemorragia ha cedido. Una vez que nos hayamos percatado de que la hemorragia ha cedido vendaremos la herida</strong> y trasladaremos a la persona accidentada al centro sanitario más cercano o la mantendremos acostada, tranquilizándola hasta la llegada de los servicios sanitarios.</li>
+<li>Si por el contrario con esta primera compresión la hemorragia no cediera, se pondrán nuevos apósitos sin retirar los anteriores y sujetándolos con una venda que aumente la presión, ya que si mientras estamos aplicando la presión, retiramos los apósitos empapados antes de tiempo destruiríamos el coágulo formado y volvería a aumentar la hemorragia.</li>
+<li>Si estas medidas no se mostraran suficientes, se puede aplicar sobre la herida un apósito hemostático (o, en su defecto, cualquier material limpio), empaquetándolo en el interior de la herida cuando sea necesario, y mantener una presión firme. Una vez controlada la hemorragia, se aplicará un vendaje compresivo. <strong>Las guías actuales ya no recomiendan la compresión a distancia en puntos arteriales ni la elevación del miembro como medidas para controlar una hemorragia.</strong></li>
+</ul>
+<p>En resumen:</p>
+<ul>
+<li>Llamar al 112, colocar a la persona herida tumbada y tranquilizarla.</li>
+<li>Compresión directa sobre la herida.</li>
+<li>Torniquete si la hemorragia de una extremidad pone en peligro la vida y no se controla con presión directa.</li>
+<li>Vendaje compresivo.</li>
+<li>Traslado a un centro sanitario.</li>
+</ul>
+<h3>4.2. Torniquete</h3>
+<ul>
+<li>Se utilizará lo antes posible ante una hemorragia de una extremidad que ponga en peligro la vida y no se controle con la presión directa.</li>
+<li>Un torniquete es un vendaje compresivo muy fuerte, en general circular, que actúa comprimiendo las arterias por encima de las heridas para evitar la hemorragia. Su colocación es dolorosa y no está exenta de riesgos, por lo que debe reservarse para estos casos.</li>
+</ul>
+<p>Medidas a tener en cuenta en la utilización de un torniquete: <span class="etiqueta">P26-322</span></p>
+<ul>
+<li>Se colocará alrededor de la extremidad, <strong>a unos 5-7 cm por encima de la herida y nunca sobre una articulación</strong>, y se apretará hasta que la hemorragia disminuya y se detenga. <strong>Se anotará en lugar visible la hora en que fue colocado.</strong></li>
+<li><strong>Una vez colocado, no se debe aflojar ni retirar.</strong> Si no consigue detener la hemorragia, puede colocarse un segundo torniquete por encima del primero.</li>
+<li><strong>Solo el personal sanitario puede retirar el torniquete, nunca la persona socorrista.</strong></li>
+</ul>
+<h3>4.3. Shock</h3>
+<ul>
+<li>Cuando la circulación es insuficiente debido a la intensidad de la hemorragia, la sangre no llega con la necesaria presión a todas las partes del organismo. Esta circunstancia tiene especial relevancia en el caso del cerebro produciéndose un estado que viene a llamarse de shock.</li>
+<li>La persona en este estado estará pálida, con sudoración fría, pulso débil y rápido, su respiración será agitada y superficial, tendrá sed y puede a llegar a perder el conocimiento.</li>
+</ul>
+<p>¿Qué hacer ante un riesgo de shock?: <span class="etiqueta">P26-323</span></p>
+<ul>
+<li><strong>Colocaremos a la persona tumbada boca arriba para favorecer el riego sanguíneo al cerebro.</strong></li>
+<li><strong>Elevaremos las piernas si no hay traumatismo, siempre que no se queje de dolor, en cuyo caso dejaremos las extremidades en horizontal.</strong></li>
+<li>Evitaremos que pierda calor.</li>
+<li>No le daremos nada de comer ni de beber.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Además de las hemorragias, otras causas que pueden desencadenar un estado de shock son: Quemaduras graves · Enfermedades cardiacas · Fracturas muy dolorosas · Intoxicaciones · Reacciones anafilácticas-alergias · Deshidrataciones…</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s5">
+<h2>5. Quemaduras</h2>
+<h3>5.1. Concepto</h3>
+<ul>
+<li>La quemadura es el resultado del contacto de los tejidos del organismo con el calor. Las causas principales son el fuego, líquido hirviendo, los sólidos incandescentes, la electricidad, los productos químicos y las radiaciones.</li>
+<li><strong>El cuerpo humano tolera temperaturas de hasta unos 40 ºC</strong>; por encima se produce la quemadura que por un lado depende de la acción directa del agente causal y por otro de la isquemia (falta de aporte sanguíneo) cutánea secundaria a la acción del calor. <span class="etiqueta">P26-324</span></li>
+<li>La piel, que es el órgano más extenso de nuestro cuerpo, está compuesta esencialmente por dos capas: <strong>Epidermis.</strong> La más externa y cuya función es fundamentalmente protectora · <strong>Dermis.</strong> Cuya destrucción conlleva la pérdida de la capacidad de regeneración de la piel.</li>
+</ul>
+<h3>5.2. Clasificación</h3>
+<p><strong>Profundidad</strong></p>
+<ul>
+<li><strong>1.º Grado:</strong> de grosor parcial. Destruye solamente la capa superficial de la piel, la epidermis, produciendo un enrojecimiento de la zona lesionada. A esta lesión se le denomina <strong>ERITEMA</strong>.</li>
+<li><strong>2.º Grado:</strong> destruye la epidermis y un espesor variable de la dermis. Se produce una inflamación del tejido con formación de ampollas llamadas <strong>FLICTENAS</strong>. La lesión es dolorosa y se dice que «llora» por la pérdida de líquidos del tejido y las ampollas.</li>
+<li><strong>3.º Grado:</strong> de grosor total. Afecta a todas las capas de la piel incluyendo la dermis profunda. Es una lesión de aspecto seco, chamuscado y blanquecino. No hay dolor debido a la destrucción de las terminaciones nerviosas. Se le denomina <strong>ESCARA</strong>.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Extensión.</strong> Se utiliza la denominada <strong>«Regla del 9»</strong>. Para ello <strong>Wallace divide la superficie corporal del adulto en 11 áreas, siendo cada parte el 9% o un múltiplo de 9</strong>. <span class="etiqueta">P26-325</span></p>
+<table>
+<thead>
+<tr>
+<th>Zona</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cabeza y cuello</td>
+<td>9%</td>
+</tr>
+<tr>
+<td><strong>Cada extremidad superior</strong></td>
+<td><strong>9%</strong></td>
+</tr>
+<tr>
+<td>Cada extremidad inferior</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Cara anterior de tórax y abdomen</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Espalda y nalgas</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Genitales</td>
+<td>1%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>La valoración de la gravedad de una quemadura se basará en la extensión de la superficie corporal quemada y el grado de profundidad de la misma. Sin embargo no se debe olvidar en ningún momento otros factores como la edad, el agente causal, y ciertas localizaciones, como la cara, los pliegues cutáneos y los genitales que influyen en la determinación del pronóstico de la quemadura.</li>
+<li>La posibilidad de supervivencia en una persona quemada está directamente relacionada con la extensión y profundidad mientras que el pronóstico de las secuelas lo está con la localización.</li>
+</ul>
+<p>Pronóstico: <span class="etiqueta">P22-244</span></p>
+<ul>
+<li><strong>Leve: cuando la superficie quemada es inferior al 10% y su profundidad no rebasa el 2.º grado.</strong></li>
+<li>Grave: entre el 10 y 30% de extensión y la profundidad es de 2.º o 3.er grado.</li>
+<li>Muy grave: entre el 30 y el 50%.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Se considera prácticamente mortal de necesidad cuando la quemadura supera una extensión del 50%.</li>
+<li>Se consideran graves independientemente de su extensión o profundidad, las quemaduras que afectan manos, pies, cara, ojos y genitales así como todas las de 2.º y 3.er grado en infancia, tercera edad y personas accidentadas con enfermedades previas.</li>
+</ul>
+<h3>5.3. Norma general</h3>
+<p>La asistencia inmediata de la persona quemada es muy similar a la de cualquier otro accidente. Es decir lo primero que tenemos que hacer, sin olvidar nuestra propia seguridad, es Proteger, parando el proceso de la quemadura o sea eliminar la causa.</p>
+<p><strong>Qué hacer ante una quemadura</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-245</span> <span class="etiqueta">P26-326</span></p>
+<ol>
+<li>Evacuar a la persona del foco térmico.</li>
+<li>Realizar una evaluación inicial y mantener las funciones vitales: respiración y pulso.</li>
+<li>Descartar otras posibles lesiones como hemorragias, shock, fracturas.</li>
+<li><strong>Refrescar la zona quemada con agua fresca (no helada) durante al menos 20 minutos, evitando enfriar al/a la paciente.</strong></li>
+<li>Envolver la zona quemada con gasas o paños limpios.</li>
+<li>Evacuar a la persona quemada a un centro hospitalario lo antes posible.</li>
+<li>Vigilar de forma periódica los signos vitales.</li>
+</ol>
+<!-- fin -->
+
+<p><strong>Qué NO se debe hacer ante una quemadura</strong></p>
+<ol>
+<li><strong>Aplicar pomadas, ungüentos, pasta dentífrica… sobre la quemadura. Solo agua.</strong></li>
+<li><strong>Enfriar demasiado a la persona herida. Para ello se procurará aplicar el agua solo sobre la zona quemada.</strong></li>
+<li><strong>Dar comida o líquidos por vía oral.</strong></li>
+<li>Romper las ampollas que se hayan podido formar. Facilitaríamos la entrada de gérmenes.</li>
+<li><strong>Despegar la ropa que esté pegada a la piel.</strong></li>
+<li><strong>Dejar sola a la víctima.</strong></li>
+<li>Demorar innecesariamente el traslado a un centro especializado.</li>
+</ol>
+<h3>5.4. Quemadura por fuego</h3>
+<ul>
+<li>Si cuando iniciamos la atención a la persona accidentada las llamas queman todavía a la víctima, no se deben apagar con agua. Revolcaremos a la persona quemada por el suelo o sofocaremos el fuego con una manta o similar. Una vez apagadas las llamas, sí aplicaremos agua con el fin de refrigerar las zonas quemadas.</li>
+<li>La mayoría de las víctimas por fuego lo han sido en un espacio cerrado por lo que a las quemaduras cutáneas se les asociará quemaduras respiratorias. También son frecuentes las intoxicaciones por monóxido de carbono.</li>
+</ul>
+<h3>5.5. Quemadura química</h3>
+<ul>
+<li>Se produce cuando la piel entra en contacto con sustancias químicas como ácidos o álcalis fuertes. Ante una quemadura química se actuará lavando generosamente la piel con agua en abundancia. <strong>Se duchará durante 20-30 minutos.</strong></li>
+<li>En el caso de las quemaduras oculares los ojos se irrigarán durante al menos 20 minutos.</li>
+</ul>
+<h3>5.6. Quemaduras eléctricas</h3>
+<ul>
+<li>La corriente eléctrica puede dar lugar a lesiones de diversa naturaleza en su paso por el interior de nuestro cuerpo. Junto a las lesiones locales, un accidente eléctrico puede desencadenar una parada cardiorrespiratoria.</li>
+<li>La prioridad como en todos los accidentes será Proteger-Avisar-Socorrer. En este caso lo primero será cortar la corriente eléctrica en condiciones seguras, no sin antes prever la caída de la persona.</li>
+</ul>
+<h3>5.7. Conclusión</h3>
+<p>La actuación correcta incluye: 1. Eliminar la causa · 2. Refrigerar la zona quemada con agua · 3. Cubrir la zona lesionada · 4. Evacuar a la persona accidentada.</p>
+</section>
+<section class="tarjeta" data-ap="s6">
+<h2>6. Fracturas</h2>
+<h3>6.1. Definición y clasificación</h3>
+<ul>
+<li>Fractura es la rotura de un hueso producida por un traumatismo o acción violenta. Frecuentemente no hay relación directa entre la intensidad del accidente y la magnitud de la fractura.</li>
+<li>Las fracturas pueden ser: <strong>Cerradas:</strong> La piel y músculos que recubren el hueso fracturado están intactos · <strong>Abiertas:</strong> En las que además de romperse el hueso, la piel, músculos y demás estructuras anatómicas que lo protegen están abiertas. Son lesiones más graves y con gran facilidad de infectarse.</li>
+</ul>
+<h3>6.2. Sintomatología</h3>
+<p>Las fracturas cursan con: <span class="etiqueta">P26-327</span></p>
+<ul>
+<li><strong>Dolor intenso.</strong></li>
+<li><strong>Impotencia funcional</strong>, es decir, incapacidad de moverse o de realizar las funciones habituales.</li>
+<li><strong>Hinchazón y deformidad</strong> de la zona fracturada. Se aprecia comparando con otro miembro sano.</li>
+<li><strong>Crepitación</strong> o sensación de roce («como de pisar nieve») en los fragmentos fracturados.</li>
+<li><strong>Hematoma.</strong></li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Una fractura puede desencadenar un estado shock, originado por el dolor y/o la hemorragia.</li>
+</ul>
+<h3>6.3. Actuación ante una fractura</h3>
+<ul>
+<li>Como siempre mantendremos la regla P.A.S. de tal forma que lo primero sería proteger a la persona accidentada y procuraremos infundirle tranquilidad y confianza comentándole que ya se ha avisado a los servicios sanitarios.</li>
+<li>Evitaremos movimientos innecesarios ya que podemos aumentar el dolor, agravar las lesiones e incluso involuntariamente desencadenar un cuadro de shock.</li>
+<li><strong>La regla esencial es inmovilizar la fractura en la misma posición en que se encuentra. Nunca intentaremos por nuestra cuenta reducir la fractura, esto es llevar al hueso a su posición normal.</strong> <span class="etiqueta">P22-246</span></li>
+<li>Si la fractura se encontrara en una extremidad, junto a la inmovilización de la zona fracturada fijaremos también las articulaciones que están por encima y por debajo de la fractura (articulación anterior y posterior).</li>
+<li>La inmovilización se hará por medio de un «tutor» —pueden emplearse unas tablillas, férulas, palos— que previamente almohadillaremos con trozos de tela, algodón o similar.</li>
+<li>La inmovilización pretende: Calmar el dolor · Disminuir la probabilidad de nuevas lesiones · Reducir el riesgo de shock.</li>
+</ul>
+<p><strong>Fracturas de cráneo.</strong> Las fracturas de cráneo son muy graves porque pueden generar daños cerebrales irreversibles. Las señales que nos pueden hacer sospechar de una fractura cráneo-encefálica son entre otras: El/La paciente está desorientado/a, con náuseas y vómitos que a veces son muy violentos («en escopetazo»), alteración en la visión, pérdida de conocimiento y especialmente hemorragias nasales o por los oídos e incluso la emisión de líquido cefalorraquídeo (de color amarillento) por estos mismos orificios. ¿Qué hacer en esta situación?</p>
+<ul>
+<li>Protegeremos la vía aérea de la persona accidentada. Si está inconsciente o vomita y hay que girarla de lado, lo haremos en bloque, manteniendo alineados cabeza, cuello y tronco.</li>
+<li>Comprobaremos si responde y respira con normalidad. Si no respira con normalidad, comenzaremos las maniobras de reanimación cardiopulmonar (R.C.P.).</li>
+<li>Avisaremos para un traslado urgente a un centro hospitalario.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>Fracturas de columna vertebral</strong> <span class="etiqueta">P26-328</span></p>
+<ul>
+<li>Fracturas de columna vertebral son igualmente muy delicadas y requieren un cuidado extremo en su atención. La columna vertebral es el «estuche» que protege la medula espinal cuya lesión puede ser motivo de secuelas muy graves e irreversibles: parálisis (paraplejías o tetraplejías) e incluso la muerte.</li>
+<li><strong>Aunque en ocasiones resulta difícil saber si realmente existe fractura de columna vertebral</strong>, hay una serie de datos en los antecedentes del traumatismo así como signos y síntomas que nos pueden ayudar a sospechar de esta fractura.</li>
+<li>Los traumatismos que pueden cursar con fractura de columna vertebral son: <strong>Caídas desde altura sobre los pies o de espaldas</strong> · Caídas sobre los glúteos (sentados) · Golpes directos sobre la columna · Movimientos violentos sobre el cuello (signo del latigazo).</li>
+<li>Los síntomas y signos que acompañan a una fractura de columna pueden ser: <strong>Dolor en la nuca, hombros o espalda</strong> · Contractura muscular · y sobre todo signos de sospecha de pérdida de sensibilidad, sensación de hormigueo o acorchamiento, incapacidad de movimiento de las extremidades o curvas pronunciadas en la espalda.</li>
+<li><strong>En cualquier caso, ante la mínima sospecha de fractura de columna vertebral actuaremos considerando a la persona lesionada como si realmente estuviera fracturada.</strong></li>
+</ul>
+<p>Las actuaciones se basarán en tres principios fundamentales:</p>
+<ul>
+<li>Nunca llevar a cabo actuaciones que supongan flexión de la espalda (¡no sentar a la víctima!).</li>
+<li>Mantenerla acostada sobre un plano duro, boca arriba, con la cabeza, tronco y extremidades en línea recta.</li>
+<li>En el momento del traslado se mantendrá este eje en línea recta de cabeza-tronco-extremidades (serán necesarias 3 personas).</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Ante la posibilidad de lesión cervical (recordad cómo ha sido el traumatismo) limitaremos al máximo el movimiento del cuello: si la persona está consciente, le pediremos que no mueva la cabeza; si está inconsciente, sujetaremos la cabeza con las manos en posición neutra y alineada con el tronco. <strong>Las guías actuales no recomiendan que los socorristas no especializados coloquen collarines cervicales.</strong> Si fuera necesario abrir la vía aérea, esta tiene siempre prioridad sobre la inmovilización.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s7">
+<h2>7. Pérdida de conocimiento</h2>
+<h3>7.1. Síncope</h3>
+<ul>
+<li>Es la pérdida brusca y transitoria de la consciencia que se sigue de una recuperación espontánea en un breve espacio de tiempo. Se acompaña de completa relajación postural con el riesgo de caída al suelo y de una cohorte de síntomas vegetativos: náuseas, vómitos, sudoración fría, palidez, sensación vertiginosa…</li>
+<li><strong>Es un trastorno frecuente que afecta hasta un 3% de la población</strong> y en cuanto a su pronóstico dependerá de la causa que lo provoque que va desde causas banales (las más frecuentes) hasta provocar muerte súbita. <span class="etiqueta">P26-329</span></li>
+</ul>
+<p><strong>Las causas las podemos agrupar en dos grandes grupos:</strong></p>
+<ul>
+<li><strong>Síncopes de causa cardiaca:</strong> Arritmias, valvulopatías, cardiopatía isquémica.</li>
+<li><strong>Síncopes de causa no cardíaca:</strong> Hipotensión ortostática, <strong>hipoglucemias</strong>, migrañas, vértigos... y especialmente el síncope vaso-vagal o parasimpático (el que se produce al ver sangre...).</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>Cuando la causa es banal</strong>, algo que deberá confirmar el personal médico cuando la víctima se recupere, <strong>el cuadro a pesar de su aparatosidad no reviste gravedad.</strong></li>
+<li>Ante una persona que haya perdido el conocimiento lo que siempre tenemos que hacer es comprobar si responde y respira con normalidad para, en caso contrario, iniciar las maniobras de reanimación cardiopulmonar.</li>
+<li>Una vez comprobado esto, solo es necesario colocar a la persona en la posición adecuada: siempre tumbada y con las piernas algo elevadas para favorecer el retorno sanguíneo desde las extremidades al corazón. Al mismo tiempo le aflojaremos todo aquello que dificulte esta circulación de retorno: cinturón, corbata, medias, abotonaduras etc.</li>
+<li>Si la recuperación del conocimiento es rápida, esperaremos unos minutos hasta que su estado general sea normal, pasando a la persona de tumbada a sentada y posteriormente a posición de pie. Por el contrario si no se recupera, colocaremos a la víctima en posición lateral de seguridad y solicitaremos ayuda médica.</li>
+<li>¿Cómo prevenir el desmayo o lipotimia?: Airear bien los lugares cerrados · No permanecer de pie mucho tiempo, en especial si hace calor · Después de permanecer mucho tiempo en una posición mantenida (en la cama, en la oficina sentado/a etc.) hay que levantarse poco a poco · Evitar las hipoglucemias (caídas de azúcar en sangre) no permaneciendo tiempo prolongado en ayunas.</li>
+</ul>
+<h3>7.2. Epilepsia</h3>
+<ul>
+<li>Es una enfermedad crónica de carácter neurológico que se manifiesta generando convulsiones. Una convulsión es un evento súbito y de corta duración, caracterizado por una excesiva y anormal actividad de las neuronas cerebrales.</li>
+<li>Las crisis epilépticas suelen ser transitorias y pueden cursar o no con pérdida del nivel de consciencia.</li>
+</ul>
+<p><strong>Primeros auxilios.</strong> Nuestra principal función como socorristas ante una convulsión de probable origen epiléptico será el de procurar que la persona no se dañe durante el ataque. <span class="etiqueta">P26-330</span></p>
+<ul>
+<li><strong>Despejaremos el entorno de cualquier objeto que pueda herir a la víctima.</strong></li>
+<li><strong>Colocaremos una prenda a modo de almohadilla debajo de la cabeza.</strong></li>
+<li><strong>Aflojaremos la ropa ajustada.</strong></li>
+<li><strong>No hay que tratar de sujetar a la víctima durante los espasmos musculares.</strong></li>
+<li>No introducir objetos en la boca.</li>
+<li><strong>Llamaremos al 112 si la crisis dura más de 5 minutos</strong>, se repite, la persona se ha lesionado o no recupera la consciencia.</li>
+<li>Cuando cese la crisis, si la persona no responde pero respira con normalidad, la colocaremos en posición lateral de seguridad.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Cuando termine el ataque la persona enferma se encontrará confusa y desorientada, debemos explicarle lo que ha pasado y tranquilizarla. Y si es la primera vez que sufre una «crisis» trasladarle a un centro médico.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s8">
+<h2>8. Obstrucción de las vías aéreas</h2>
+<h3>8.1. Introducción</h3>
+<ul>
+<li><strong>Con excesiva frecuencia conocemos el fallecimiento de una persona a consecuencia de un «atragantamiento».</strong> Son accidentes dramáticos tanto más porque en numerosas ocasiones son evitables. <span class="etiqueta">P26-331</span></li>
+<li><strong>En las personas adultas, la causa más frecuente es la comida. Los niños y niñas se atragantan con piezas pequeñas de sus juguetes, con botones etc.</strong></li>
+<li>En la mayoría de los casos, nuestro organismo actúa como socorrista expulsando el cuerpo extraño mediante la tos. Pero en otras ocasiones y debido al tamaño, el obstáculo nos impide toser y lo que es más grave nos impide respirar.</li>
+<li>El atragantamiento puede crear dos situaciones: <strong>Obstrucción incompleta</strong> de las vías aéreas · <strong>Obstrucción completa</strong> de las vías aéreas.</li>
+</ul>
+<h3>8.2. Obstrucción incompleta</h3>
+<ul>
+<li>En este caso nos encontraremos a una persona que respira con dificultad, que emitirá ruidos extraños y que podrá toser e incluso hablar.</li>
+<li>Le animaremos a toser con fuerza. <strong>Nuestra tos es el mecanismo más eficaz para desalojar los cuerpos extraños</strong> que se alojan en nuestro árbol respiratorio.</li>
+<li><strong>Mientras la tos sea eficaz no debemos realizar ninguna otra maniobra: ni golpes en la espalda ni compresiones abdominales.</strong> El objeto puede desplazarse más profundamente y la situación se hará más crítica.</li>
+</ul>
+<h3>8.3. Obstrucción completa de las vías aéreas</h3>
+<ul>
+<li>La persona que sufre la obstrucción se pondrá de pie (si estaba sentada comiendo) manifestará con gestos —no podrá hablar— la urgencia de su situación, se llevará las manos al cuello, no podrá toser y es posible que su tez se torne azulada.</li>
+<li>Es una situación de máxima urgencia ya que en unos minutos puede perder el conocimiento y hacer una parada respiratoria que le conducirá a la muerte.</li>
+</ul>
+<p>Si la persona no puede toser o la tos deja de ser eficaz, actuaremos de forma escalonada, según las recomendaciones del ERC: <span class="etiqueta">P26-332</span></p>
+<ol>
+<li><strong>Daremos hasta 5 golpes en la espalda</strong>: nos colocaremos a su lado y ligeramente por detrás, la inclinaremos hacia delante sujetándola por el pecho con una mano y golpearemos con el talón de la otra entre los omóplatos.</li>
+<li><strong>Si los golpes no son eficaces, daremos hasta 5 compresiones abdominales (maniobra de Heimlich)</strong>: Nos colocaremos detrás de la persona atragantada y rodearemos su cintura con ambos brazos. Situaremos una de nuestras manos con el puño cerrado y el pulgar hacia dentro, en el abdomen por encima del ombligo y alejado del esternón y las costillas. Cogeremos el puño con la otra mano. Presionaremos bruscamente hacia adentro y arriba al mismo tiempo. Se repetirá hasta 5 veces.</li>
+<li>Si la obstrucción no se resuelve, llamaremos al 112 y seguiremos alternando 5 golpes en la espalda y 5 compresiones abdominales hasta que se expulse el objeto o la persona pierda el conocimiento.</li>
+</ol>
+<!-- fin -->
+
+<ul>
+<li>Si la persona pierde el conocimiento, la tumbaremos en el suelo con cuidado, nos aseguraremos de que se ha llamado al 112 e iniciaremos la RCP (30 compresiones y 2 insuflaciones). No se deben hacer barridos a ciegas con el dedo en la boca para intentar extraer el objeto. Toda persona a la que se hayan practicado compresiones abdominales debe ser valorada después por personal sanitario.</li>
+</ul>
+<h3>8.4. Prevenir el atragantamiento</h3>
+<ul>
+<li>Trocear la comida en fragmentos pequeños.</li>
+<li><strong>Procurar no hablar mientras comamos.</strong></li>
+<li>No dejar al alcance de los niños y niñas objetos pequeños o que se puedan desmontar.</li>
+<li>Provocar el eructo en los lactantes después de cada toma.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s9">
+<h2>9. Lesiones por electricidad</h2>
+<h3>9.1. Introducción</h3>
+<ul>
+<li><strong>Los accidentes por la corriente eléctrica son poco frecuentes pero siempre graves y frecuentemente mortales.</strong> De esto deriva la importancia de conocerlos para prevenirlos y saber cómo actuar para limitar sus consecuencias. <span class="etiqueta">P22-247</span></li>
+<li>La electricidad puede actuar como: El fuego y produciendo una quemadura · Como paso de corriente. Son siempre graves y pueden provocar además de quemaduras muy severas, riesgo de otras lesiones como fracturas, estado de shock e incluso parada cardiorrespiratoria.</li>
+<li>Las lesiones pueden deberse a accidentes de <strong>alta tensión, por descargas superiores a 1.000 voltios</strong>, en los que se producen lesiones y quemaduras muy severas, o a accidentes de <strong>baja tensión, producidos por descargas de hasta 1.000 voltios</strong> (límite que establece el Reglamento electrotécnico para baja tensión en corriente alterna).</li>
+</ul>
+<h3>9.2. Accidentes por baja tensión</h3>
+<p>Producidos por descargas de tensión de hasta 1.000 voltios. Puede ocurrir: <span class="etiqueta">P22-248</span></p>
+<ul>
+<li>Parada cardio-respiratoria.</li>
+<li>Pérdida de conocimiento.</li>
+<li><strong>Tetanización del cuerpo de la persona accidentada que queda en contacto («enganchada») con la corriente.</strong></li>
+<li>La persona resulte quemada pero separada de la corriente.</li>
+<li>Totalmente ilesa.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li><strong>¿Qué hacer?</strong> Cortaremos la corriente en los interruptores de la sección o los generales. Si no podemos, se intentará separar a la persona (si se mantiene el contacto con la corriente) con algún instrumento aislante. Hay que tener en cuenta que si la persona accidentada está en altura al interrumpir la corriente puede caer al suelo desde la altura lo que nos obligará a tomar medidas preventivas.</li>
+<li>Iniciaremos las maniobras de resucitación cardio-pulmonar si lo necesita. Trataremos las quemaduras. Trataremos las fracturas y lesiones músculo-esqueléticas. Trasladaremos a la persona abrigada, tumbada y la vigilaremos.</li>
+<li>No hay que olvidar que en los accidentes por electricidad pueden producirse quemaduras muy graves y no visibles. La persona accidentada puede tener lesiones internas de gran intensidad. Por eso hay que trasladarle siempre a un centro sanitario.</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s10">
+<h2>10. Intoxicaciones agudas</h2>
+<ul>
+<li>En numerosos procesos laborales se utilizan sustancias químicas que pueden ocasionar intoxicaciones graves e incluso mortales.</li>
+<li>Frente a una intoxicación aguda el personal médico debe valorar, inicialmente las siguientes situaciones clínicas: Parada respiratoria · Estado de shock · Estado de coma · Alteraciones oculares · Alteraciones cutáneas.</li>
+</ul>
+<p><strong>El tratamiento general comprende:</strong> <span class="etiqueta">P26-333</span></p>
+<ul>
+<li>Tratamiento sintomático.</li>
+<li><strong>Evitar que el tóxico continúe absorbiéndose y facilitar su eliminación.</strong></li>
+<li>Administración de antídotos (si se conoce el tóxico).</li>
+<li>Traslado de la persona intoxicada a un centro hospitalario.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Lo más importante del tratamiento sintomático consiste en mantener una adecuada respiración y circulación.</li>
+<li><strong>Parada respiratoria.</strong> <strong>El método más eficaz para tratar una apnea o insuficiencia respiratoria es la ventilación con medios instrumentales (mascarilla y balón) por personal formado.</strong> Si hubiera que ventilar boca a boca, debe tenerse en cuenta el riesgo de contacto con el tóxico, por lo que se utilizará un dispositivo de barrera o, en su defecto, se realizarán solo compresiones torácicas. En caso de paro cardiaco deberán instaurarse las maniobras de resucitación cardio-pulmonar 30/2 lo más rápidamente posible. <span class="etiqueta">P26-334</span></li>
+<li><strong>Estado de shock.</strong> La presencia de una respiración rápida y superficial. Taquicardia, hipotermia y falta de tono muscular hace sospechar que la persona se encuentra en estado de shock. Se colocará a la víctima en un plano rígido con las piernas elevadas y la cabeza baja.</li>
+<li><strong>Alteraciones oculares.</strong> <strong>Se lavará abundantemente con agua tibia o solución fisiológica, con los párpados bien abiertos y durante al menos 30 minutos.</strong> No se utilizarán pomadas ni sustancias neutralizantes. <span class="etiqueta">P26-334</span></li>
+<li><strong>Alteraciones cutáneas.</strong> Se despojará rápidamente a la persona accidentada de su vestimenta y se lavará la piel abundantemente con agua corriente, preferentemente tibia y al menos durante 30 minutos y no se frotará la piel afectada.</li>
+</ul>
+<h3>10.3. Intoxicación por inhalación</h3>
+<ul>
+<li>Un tipo especial de intoxicación es aquella cuya vía de penetración en el organismo es la aérea. Este tipo de intoxicación nos lo vamos a encontrar en lugares cerrados y con mala ventilación donde haya acumulación de humo y gases tóxicos: Escapes de gas · Combustión defectuosa de braseros, calentadores, estufas… · Pozos negros, alcantarillas…</li>
+<li><strong>La víctima se encontrará cianótica (coloración morada o azulada de la piel y mucosas) con dificultad respiratoria.</strong> Esta situación si no se revierte puede conducir a la muerte por parada cardiorrespiratoria. <span class="etiqueta">P22-250</span></li>
+<li>¿Qué hacer? Separaremos a la víctima del ambiente tóxico, sacándole al aire libre o aireando el lugar. Valoraremos el estado general de la persona, iniciando las maniobras de resucitación R.C.P. si lo necesitara. La trasladaremos a un centro sanitario.</li>
+<li>Ante cualquier sospecha de intoxicación puede consultarse, las 24 horas, al Servicio de Información Toxicológica del Instituto Nacional de Toxicología y Ciencias Forenses (91 562 04 20).</li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s11">
+<h2>11. Heridas</h2>
+<h3>11.1. Introducción y clasificación</h3>
+<ul>
+<li><strong>Son lesiones con rotura de piel y salida de sangre al exterior (hemorragia externa).</strong> Toda herida sangra, tiene los bordes de la lesión separados y suele cursar con dolor.</li>
+<li>Las heridas se clasifican según su gravedad y según su mecanismo de producción.</li>
+<li><strong>Gravedad:</strong> Leves: Superficiales y limpias · Graves: Extensas, profundas, sucias y de localización en ojos, tórax o abdomen.</li>
+</ul>
+<p><strong>Mecanismo de producción</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-251</span> <span class="etiqueta">P22-252</span></p>
+<ul>
+<li><strong>Punzantes:</strong> Producidas por objetos puntiagudos como agujas, clavos, punzones… Presentan orificio de entrada y son de mayor profundidad que de extensión. Son propensas a infectarse y sangran poco.</li>
+<li><strong>Incisas: Producidas por objetos cortantes (cristal, cuchillos, tijeras…).</strong> Los bordes suelen ser regulares y limpios.</li>
+<li><strong>Contusas:</strong> Realizadas por objetos romos. Los bordes son irregulares y magullados.</li>
+<li><strong>Transfixiantes: Presentan orificio de entrada y salida. Por ejemplo, las heridas por arma de fuego.</strong></li>
+<li><strong>Inciso-contusas:</strong> En una misma herida existe componente inciso y componente contuso.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>¿Qué hacer?</strong></p>
+<p><strong>a) Si se trata de una herida leve:</strong> <span class="etiqueta">P26-335</span></p>
+<ul>
+<li><strong>Antes de actuar nos lavaremos profusamente las manos.</strong></li>
+<li><strong>Limpiaremos la herida con agua y jabón. Del centro de la herida hacia los bordes.</strong></li>
+<li><strong>Utilizaremos como antiséptico la povidona yodada (betadine).</strong></li>
+</ul>
+<!-- fin -->
+
+<p><strong>b) Por el contrario si se trata de una herida clasificada como grave:</strong> <span class="etiqueta">P26-336</span></p>
+<ul>
+<li>Tranquilizaremos a la víctima.</li>
+<li><strong>Frenaremos la hemorragia si la hubiera.</strong></li>
+<li>No utilizaremos ni pomadas ni otras sustancias.</li>
+<li>Vigilaremos el riesgo de entrar en estado de shock.</li>
+</ul>
+<!-- fin -->
+
+<ul>
+<li>Complicaciones: Infecciones-Tétanos · Hemorragias · Shock · Cuerpos extraños · Separación de bordes.</li>
+<li>Para evitar las infecciones lo más importante es la limpieza que hagamos de la herida. Se valorará la profilaxis antitetánica según el estado de vacunación de la persona, decisión que corresponde al personal sanitario.</li>
+<li>Ante la presencia de cuerpos extraños, pueden estar sirviendo de tapón de una posible hemorragia y por tanto evitaremos la tentación de extraerlos.</li>
+</ul>
+<h3>11.2. Actuación ante heridas especiales</h3>
+<p><strong>En ojos:</strong> No las tocaremos · No manipularemos los ojos · Taparemos ambos ojos para evitar los movimientos conjugados.</p>
+<p><strong>En tórax:</strong> <span class="estrella" title="Preguntado en las dos baterías">★</span> <span class="etiqueta">P22-249</span> <span class="etiqueta">P26-337</span></p>
+<ul>
+<li><strong>Si hubiera un objeto enclavado no trataremos de sacarlo.</strong></li>
+<li><strong>No taponaremos ni cubriremos la herida abierta de tórax: se dejará expuesta para que el aire pueda salir libremente.</strong> Si sangra, controlaremos la hemorragia con presión directa. Solo el personal formado puede colocar un apósito específico no oclusivo (con válvula).</li>
+<li>Llamaremos al 112 y vigilaremos la respiración hasta la llegada de los servicios sanitarios.</li>
+</ul>
+<!-- fin -->
+
+<p><strong>En abdomen:</strong> <span class="etiqueta">P26-338</span></p>
+<ul>
+<li>No hurgaremos.</li>
+<li>No trataremos de sacar cuerpos extraños.</li>
+<li>Si las vísceras están fuera no trataremos de introducirlas en el abdomen.</li>
+<li>No daremos nada de beber.</li>
+<li><strong>Taparemos la herida y trasladaremos a la víctima semisentada o en posición lateral de seguridad y las piernas flexionadas.</strong></li>
+</ul>
+</section>
+<section class="tarjeta" data-ap="s12">
+<h2>Mapa de preguntas por apartado</h2>
+<table>
+<thead>
+<tr>
+<th>Apartado del tema</th>
+<th>Batería 2022 (Tema 13)</th>
+<th>Batería 2026 (Tema 13)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Introducción (regla P.A.S.)</td>
+<td>238, 239</td>
+<td>313, 315</td>
+</tr>
+<tr>
+<td>2. Valoración de las lesiones</td>
+<td>240</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3. Reanimación cardio-pulmonar (R.C.P.)</td>
+<td>241, 242<em>, 243</em></td>
+<td>314, 316, 317*, 318, 319</td>
+</tr>
+<tr>
+<td>4. Hemorragias</td>
+<td>—</td>
+<td>320, 321, 322*, 323</td>
+</tr>
+<tr>
+<td>5. Quemaduras</td>
+<td>244, 245</td>
+<td>324, 325, 326</td>
+</tr>
+<tr>
+<td>6. Fracturas</td>
+<td>246</td>
+<td>327, 328</td>
+</tr>
+<tr>
+<td>7. Pérdida de conocimiento</td>
+<td>—</td>
+<td>329, 330</td>
+</tr>
+<tr>
+<td>8. Obstrucción de las vías aéreas</td>
+<td>—</td>
+<td>331, 332</td>
+</tr>
+<tr>
+<td>9. Lesiones por electricidad</td>
+<td>247, 248</td>
+<td>—</td>
+</tr>
+<tr>
+<td>10. Intoxicaciones agudas</td>
+<td>250</td>
+<td>333, 334</td>
+</tr>
+<tr>
+<td>11. Heridas</td>
+<td>249*, 251, 252</td>
+<td>335, 336, 337*, 338</td>
+</tr>
+</tbody>
+</table>
+<p>* = sin respuesta en el tema actual (criterio antiguo): se coloca en el apartado con el que tiene relación.</p>
+<p>Los apartados más preguntados son <strong>3. RCP</strong> (8 preguntas) y <strong>11. Heridas</strong> (7). Cifras clave: 3-5 minutos sin oxígeno, 10 segundos para comprobar la respiración, 5-6 cm y 100-120 compresiones/min, 30:2, relevo cada 2 minutos, presión 10 minutos, torniquete a 5-7 cm, 40 ºC, regla del 9 (11 áreas), leve &lt; 10 %, agua 20 minutos, síncope 3 %, epilepsia &gt; 5 minutos, 5 golpes + 5 compresiones, 1.000 voltios, lavado ocular 30 minutos.</p>
+</section>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+<script>
+var fichas = document.querySelectorAll('.ficha'), tarjetas = document.querySelectorAll('.tarjeta'), nombre = document.getElementById('nombre');
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function ver(ap){
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap === ap); if(f.dataset.ap && f.dataset.ap === ap) nombre.textContent = ap === 'todo' ? 'Todos los apartados' : f.title; });
+  tarjetas.forEach(function(t){ t.classList.toggle('hidden', ap !== 'todo' && t.dataset.ap !== ap); });
+  window.scrollTo(0,0); avisarAltura();
+}
+fichas.forEach(function(f){ if(f.dataset.ap) f.addEventListener('click', function(){ ver(f.dataset.ap); }); });
+ver('todo');
+window.addEventListener('load', avisarAltura); window.addEventListener('resize', avisarAltura);
+</script>
+</body>
+</html>

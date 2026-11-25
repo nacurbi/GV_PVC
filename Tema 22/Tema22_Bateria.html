@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tema 22 · Batería de preguntas</title>
+<link rel="stylesheet" href="../src/estilo.css">
+<style>
+/* Copia de las variables de estilo.css para que la página funcione también sola */
+:root{--trama:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);--fondo:#2F3B45;--caja:#FDFDFE;--texto:#1E293B;--acento:#627D98;--borde:#b9c7d6;--ok:#85d192;--ko:#f0a1a8}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--fondo);background-image:var(--trama);background-size:8px 8px;color:var(--texto);margin:0;padding:0 0 20px;display:block}
+.hidden{display:none!important}
+header{background:var(--fondo);background-image:var(--trama);background-size:8px 8px;position:sticky;top:0;z-index:5}
+.interior{max-width:840px;margin:0 auto;padding:8px 20px 0}
+h1{margin:0 0 2px;font-size:14px;line-height:1.25;text-align:center;color:#F9FAFC;font-weight:bold}
+.subtitulo{margin:0 0 8px;font-size:13px;text-align:center;color:#c9d4df}
+.barra{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 -20px;padding:0 20px;border-bottom:1px solid var(--borde)}
+.fichas{display:flex;align-items:flex-end;flex-wrap:wrap;gap:3px}
+.ficha{min-width:34px;padding:5px 10px;background:var(--fondo);color:#F9FAFC;font-size:13px;border:1px solid var(--borde);border-bottom:none;border-radius:6px 6px 0 0;cursor:pointer;font-family:inherit}
+.ficha:hover{background:#7390ab}
+.ficha.activo{background:var(--caja);color:var(--texto);font-weight:bold;margin-bottom:-1px;padding-bottom:6px;position:relative}
+.nombre-tema{margin:6px 0 8px;font-size:13px;color:#F9FAFC;min-height:16px}
+main{display:flex;flex-direction:column;gap:20px;align-items:center;padding:16px 20px 20px}
+.tarjeta{background:var(--caja);border:2px solid var(--acento);border-radius:4px;width:800px;max-width:100%;padding:17px 22px;text-align:left;font-size:15px;line-height:1.5}
+.tarjeta h2{margin:0 0 12px;font-size:17px;color:var(--fondo);border-bottom:2px solid var(--acento);padding-bottom:6px}
+.tarjeta h3{margin:18px 0 8px;font-size:15px;color:var(--acento)}
+.tarjeta p{margin:8px 0}
+.tarjeta ul,.tarjeta ol{margin:6px 0;padding-left:22px}
+.tarjeta li{margin:3px 0}
+.tarjeta strong{color:#0f1b2b}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--acento);color:#fff;font-weight:bold;padding:6px 8px;text-align:left}
+td{border:1px solid var(--borde);padding:6px 8px;vertical-align:top}
+tr:nth-child(even) td{background:#EEF2F6}
+.etiqueta{display:inline-block;background:#5F7791;color:#F9FAFC;font-size:11px;font-weight:bold;padding:1px 6px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.estrella{color:#d4a017;font-size:15px}
+.leyenda{width:800px;max-width:100%;font-size:12px;color:#F9FAFC;margin:0 0 -8px}
+.subir{position:fixed;right:16px;bottom:16px;background:var(--acento);color:#fff;border:none;border-radius:3px;padding:6px 10px;font-size:12px;cursor:pointer}
+.subir:hover{background:#51687f}
+.ficha{text-decoration:none;display:inline-block}
+.filtro{display:flex;gap:6px;justify-content:flex-end;margin:0 0 8px;flex-wrap:wrap}
+.filtro button{background:#5F7791;border:1px solid #7A90A8;color:#F9FAFC;border-radius:3px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+.filtro button.activo{background:var(--caja);color:var(--texto);border-color:#F9FAFC}
+.cab2{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bateria h3{background:#EEF2F6;border-left:3px solid var(--acento);padding:5px 10px;margin:16px 0 8px;color:var(--fondo)}
+.preg{border-bottom:1px dashed var(--borde);padding:8px 0 10px}
+.preg:last-child{border-bottom:none}
+.enunciado{font-weight:bold;margin:4px 0 6px}
+.num{display:inline-block;background:var(--acento);color:#fff;border-radius:3px;padding:0 6px;font-size:12px;margin-right:4px;vertical-align:1px}
+.ops{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:2px}
+.ops li{padding:5px 10px;border-radius:3px;font-size:14px;line-height:1.35}
+.ops li.ok{background:var(--ok)}
+.ocultar .ops li.ok{background:transparent}
+.ocultar .referencia{display:none}
+.referencia{text-align:left;font-size:13px;line-height:1.4;background:#EEF2F6;border-left:3px solid var(--acento);padding:6px 10px;margin:4px 0 0;color:var(--texto)}
+@media(max-width:800px){.tarjeta{padding:14px}.ficha{padding:5px 8px}}
+@media print{header,.subir,.leyenda{display:none}body{background:#fff}.tarjeta{border:none;break-inside:auto;width:100%}.tarjeta.hidden{display:block!important}}
+</style>
+</head>
+<body>
+<header><div class="interior">
+  <h1>Gobierno Vasco – OPE 2026 · C1 Escala Administrativa</h1>
+  <p class="subtitulo">Tema 22. Legalización de firmas. La validación en la administración electrónica: la identificación y firma electrónica, el certificado electrónico</p>
+  <div class="barra">
+    <nav class="fichas">
+      <a class="ficha" href="Tema22_Resumen.html">Resumen</a>
+      <button type="button" class="ficha" data-ap="todo">Todo</button>
+      <button type="button" class="ficha" data-ap="1" title="1. Legalizaciones de firmas">1</button>
+      <button type="button" class="ficha" data-ap="2" title="2. La validación en la administración electrónica">2</button>
+      <button type="button" class="ficha" data-ap="2.1" title="2.1. Sistemas de firma para la actuación administrativa">2.1</button>
+      <button type="button" class="ficha" data-ap="2.3" title="2.3. Marco legal en la CAE (firma electrónica)">2.3</button>
+      <button type="button" class="ficha" data-ap="2.4" title="2.4. La firma electrónica en la Administración de la CAE">2.4</button>
+      <button type="button" class="ficha" data-ap="2.5" title="2.5. El certificado electrónico">2.5</button>
+      <button type="button" class="ficha" data-ap="2.6" title="2.6. Izenpe">2.6</button>
+    </nav>
+  </div>
+  <div class="cab2"><p class="nombre-tema" id="nombre"></p>
+  <div class="filtro">
+    <button type="button" data-bat="ambas" class="activo">Ambas</button><button type="button" data-bat="2022">2022</button><button type="button" data-bat="2026">2026</button>
+    <button type="button" id="ver">Ocultar respuestas</button>
+  </div></div>
+</div></header>
+<main>
+<p class="leyenda">34 preguntas: 8 de la batería Administrativos 2022 y 26 de la batería Temario General 2026. En verde, la respuesta correcta según el Tema 22.</p>
+<section class="tarjeta" data-ap="1"><h2>1. Legalizaciones de firmas</h2>
+
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">391</span> En el proceso de legalización de firma además del nombre, apellidos y cargo, la legalización no deberá llevar:</p><ol class="ops"><li class=""><b>a)</b> El sello del departamento u organismo que legaliza la firma.</li><li class="ok"><b>b)</b> La fecha de nacimiento de la persona identificada.</li><li class=""><b>c)</b> La fecha de la legalización.</li><li class=""><b>d)</b> El cargo, nombre y apellidos de la persona que la realiza.</li></ol><p class="referencia"><b>Respuesta: b)</b> · Además, la legalización deberá llevar: el sello del Departamento u Organismo Autónomo que legaliza la firma, la fecha de la legalización, y el cargo, nombre y apellidos de la persona que la realiza.</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2"><h2>2. La validación en la administración electrónica</h2>
+
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">392</span> ¿Cuáles de las siguientes normas contienen regulación vigente sobre administración electrónica?:</p><ol class="ops"><li class="ok"><b>a)</b> La Ley 39/2015, de 1 de octubre.</li><li class="ok"><b>b)</b> La Ley 40/2015, de 1 de octubre.</li><li class=""><b>c)</b> La Ley 11/2007, de 22 de junio.</li><li class=""><b>d)</b> Las tres respuestas anteriores son correctas.</li></ol><p class="referencia"><b>Respuesta: a) y b)</b> · La Ley 39/2015, de 1 de octubre… junto con la Ley 40/2015, de 1 de octubre… derogando de forma explícita la Ley 11/2007, de 22 de junio. (Pregunta defectuosa: a) y b) son correctas y no hay opción que las reúna.)</p></div>
+<div class="preg"><p class="enunciado"><span class="num">393</span> La Ley que se refiere, entre otras, a cuestiones tales como los derechos de las personas en sus relaciones con las Administraciones Públicas, los registros electrónicos, la práctica de las notificaciones a través de medios electrónicos, la emisión de documentos por las Administraciones Públicas o el archivo de documentos es la:</p><ol class="ops"><li class="ok"><b>a)</b> La Ley 39/2015, de 1 de octubre.</li><li class=""><b>b)</b> La Ley 40/2015, de 1 de octubre.</li><li class=""><b>c)</b> La Ley 11/2007, de 22 de junio.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: a)</b> · La Ley 39/2015, de 1 de octubre, se refiere, entre otras, a cuestiones tales como los derechos de las personas en sus relaciones con las AA.PP.… los registros electrónicos… y el archivo de documentos.</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2.1"><h2>2.1. Sistemas de firma para la actuación administrativa</h2>
+
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">394</span> Los sistemas para la actuación administrativa automatizada son:</p><ol class="ops"><li class=""><b>a)</b> El Sello electrónico de Administración Pública.</li><li class=""><b>b)</b> El Código seguro de verificación.</li><li class="ok"><b>c)</b> Las respuestas a) y b) son correctas.</li><li class=""><b>d)</b> La firma electrónica.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Tales sistemas son: a) Sello electrónico de Administración Pública… b) Código Seguro de Verificación (CSV).</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2.3"><h2>2.3. Marco legal en la CAE (firma electrónica)</h2>
+<div class="bateria" data-bat="2022"><h3>Batería Administrativos 2022 · Tema 22</h3>
+<div class="preg"><p class="enunciado"><span class="num">395</span> Cuando recibes un documento firmado digitalmente puedes:</p><ol class="ops"><li class="ok"><b>a)</b> Probar el origen y la veracidad del documento.</li><li class=""><b>b)</b> Identificar el CSV.</li><li class=""><b>c)</b> Identificar la aplicación que ha generado el documento.</li><li class=""><b>d)</b> Probar la fecha en la que se generó el documento.</li></ol><p class="referencia"><b>Respuesta: a)</b> · Consiste en asociar al documento electrónico unos datos específicos para cada persona, permitiendo a quien recibe dicho documento probar el origen y la veracidad de aquellos.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">396</span> ¿A qué se refiere el concepto de integridad cuando hablamos de firma electrónica?:</p><ol class="ops"><li class=""><b>a)</b> A que la información que recibimos viene de un interesado que es quien dice ser.</li><li class=""><b>b)</b> A que la información viene en formato electrónico y no ha sido alterada.</li><li class="ok"><b>c)</b> A que la información que recibimos es toda la que ha sido remitida y no ha sido manipulada durante la transmisión.</li><li class=""><b>d)</b> A que la información no tiene repudio.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Integridad, en un doble sentido: la información que recibimos es toda la que ha sido remitida, y no ha sido modificada o manipulada durante la transmisión.</p></div>
+</div>
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">395</span> La ley reconoce a quienes utilicen la firma electrónica su plena validez, mediante dos principios como son:</p><ol class="ops"><li class=""><b>a)</b> El reconocimiento particular: principio de no discriminación.</li><li class=""><b>b)</b> El reconocimiento general: principio de no discriminación.</li><li class=""><b>c)</b> El reconocimiento directo: principio de equivalencia funcional con la firma manuscrita.</li><li class="ok"><b>d)</b> Las respuestas b) y c) son correctas.</li></ol><p class="referencia"><b>Respuesta: d)</b> · a) Reconocimiento general: principio de no discriminación… b) Reconocimiento directo: principio de equivalencia funcional con la firma manuscrita.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">396</span> Elija la respuesta incorrecta. Todas las firmas deben cumplir los siguientes requisitos:</p><ol class="ops"><li class="ok"><b>a)</b> Exactitud.</li><li class=""><b>b)</b> Identidad.</li><li class=""><b>c)</b> Integridad.</li><li class=""><b>d)</b> Confidencialidad.</li></ol><p class="referencia"><b>Respuesta: a)</b> · 1. Identidad… 2. Integridad… 3. Autenticidad… 4. Irrevocabilidad… 5. Confidencialidad.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">397</span> A comienzos de 2010 fueron aprobados dos Reales Decretos destinados a aumentar, mediante las TIC, el siguiente aspecto de la gestión administrativa:</p><ol class="ops"><li class=""><b>a)</b> La eficacia.</li><li class="ok"><b>b)</b> La efectividad.</li><li class=""><b>c)</b> La eficiencia.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: b)</b> · A comienzos de 2010 fueron aprobados dos Reales Decretos destinados a aumentar la efectividad de la gestión administrativa mediante las TIC.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">398</span> ¿Cuáles de los siguientes son tipos de firma electrónica?:</p><ol class="ops"><li class=""><b>a)</b> Ordinaria.</li><li class=""><b>b)</b> Avanzada.</li><li class=""><b>c)</b> Reconocida.</li><li class="ok"><b>d)</b> Las tres respuestas anteriores son correctas.</li></ol><p class="referencia"><b>Respuesta: d)</b> · Podemos distinguir tres tipos de firma electrónica: a) Simple u ordinaria, b) Avanzada, c) Cualificada. (La batería usa «reconocida», nombre anterior de la cualificada; el tema habla de «firma electrónica reconocida o cualificada».)</p></div>
+<div class="preg"><p class="enunciado"><span class="num">399</span> ¿Cuál de estas características es propia de la firma electrónica ordinaria?:</p><ol class="ops"><li class="ok"><b>a)</b> Es la más sencilla.</li><li class=""><b>b)</b> Es la más segura.</li><li class=""><b>c)</b> Su utilidad es amplia.</li><li class=""><b>d)</b> Las respuestas a) y c) son correctas.</li></ol><p class="referencia"><b>Respuesta: a)</b> · Es la más sencilla de todas.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">400</span> ¿Cuál de estas características es propia de la firma electrónica avanzada?:</p><ol class="ops"><li class=""><b>a)</b> Establece la identidad de la persona signataria y la integridad de la información que se ha transmitido.</li><li class=""><b>b)</b> Es creada por medios que la persona signataria puede mantener bajo su control exclusivo.</li><li class=""><b>c)</b> Permite detectar cualquier cambio en los datos con posterioridad al firmado, lo cual es una ventaja en cuanto a proteger el contenido de la información.</li><li class="ok"><b>d)</b> Todas las respuestas anteriores son correctas.</li></ol><p class="referencia"><b>Respuesta: d)</b> · Establece la identidad de la persona signataria y la integridad de la información… Es creada por medios que la persona signataria puede mantener bajo su control exclusivo. Permite detectar cualquier cambio en los datos con posterioridad al firmado.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">401</span> Elija la respuesta incorrecta. La firma reconocida garantiza:</p><ol class="ops"><li class=""><b>a)</b> Que ha firmado una persona física.</li><li class="ok"><b>b)</b> Que ha firmado una persona jurídica.</li><li class=""><b>c)</b> La posibilidad de visualización del documento por la persona signataria.</li><li class=""><b>d)</b> La prestación de la aprobación y/o el consentimiento de dicha persona.</li></ol><p class="referencia"><b>Respuesta: b)</b> · Dicho de otro modo, garantiza: que ha firmado una persona física.</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2.4"><h2>2.4. La firma electrónica en la Administración de la CAE</h2>
+
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">402</span> Elija la respuesta incorrecta. La utilización de la firma electrónica en Euskadi está regida por:</p><ol class="ops"><li class="ok"><b>a)</b> La Ley 39/2015, de 1 de octubre.</li><li class=""><b>b)</b> La Ley 40/2015, de 1 de octubre.</li><li class=""><b>c)</b> La Ley 6/2020, de 11 de noviembre.</li><li class=""><b>d)</b> Las respuestas b) y c) son correctas.</li></ol><p class="referencia"><b>Respuesta: a)</b> · La utilización de la firma electrónica en nuestra Administración está regida por la Ley 40/2015… la Ley 6/2020… y el Decreto 91/2023 (la Ley 39/2015 no se cita).</p></div>
+<div class="preg"><p class="enunciado"><span class="num">403</span> Elija la respuesta incorrecta. Se establece como tipo de firma admitido la denominada firma reconocida en las actuaciones:</p><ol class="ops"><li class=""><b>a)</b> Por parte de la ciudadanía.</li><li class=""><b>b)</b> De Administración general del Estado.</li><li class=""><b>c)</b> De las personas físicas en general.</li><li class=""><b>d)</b> De las personas jurídicas en general.</li></ol><p class="referencia"><b>Sin respuesta en el tema</b> · El tema actualizado ya no regula la firma reconocida por tipo de actuación (procede del Decreto 21/2012, derogado por el Decreto 91/2023).</p></div>
+<div class="preg"><p class="enunciado"><span class="num">404</span> ¿Cuál de las siguientes afirmaciones es incorrecta? La ciudadanía podrá valerse de otros sistemas de firma en los siguientes casos:</p><ol class="ops"><li class=""><b>a)</b> El trámite de solicitud en los procedimientos de selección y provisión de personal.</li><li class=""><b>b)</b> La identificación de las personas beneficiarias para el acceso a la prestación farmacéutica del Sistema nacional de Salud en la CAE.</li><li class=""><b>c)</b> La cita previa en los servicios de atención primaria.</li><li class=""><b>d)</b> Cualquier otro que se determine en su día mediante orden ministerial.</li></ol><p class="referencia"><b>Sin respuesta en el tema</b> · El tema actualizado no enumera esos casos de otros sistemas de firma (proceden del Decreto 21/2012, derogado).</p></div>
+<div class="preg"><p class="enunciado"><span class="num">405</span> La normativa exige que las actuaciones administrativas telemáticas incorporen además de la firma:</p><ol class="ops"><li class=""><b>a)</b> La constancia de que se ha verificado la vigencia de dicha firma, o del certificado electrónico con el que se haya firmado.</li><li class=""><b>b)</b> El denominado sellado de tiempo, que consiste en la acreditación de la fecha y hora de realización de la operación electrónica.</li><li class="ok"><b>c)</b> Las respuestas a) y b) son correctas.</li><li class=""><b>d)</b> La identificación del certificador.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Las actuaciones administrativas telemáticas deben incorporar, además de la firma, estos dos elementos: 1. La constancia de que se ha verificado la vigencia… 2. El denominado sellado de tiempo.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">406</span> Elija la respuesta incorrecta. La Administración de la CAE dispondrá de firma electrónica:</p><ol class="ops"><li class="ok"><b>a)</b> Para todo su personal.</li><li class=""><b>b)</b> Para el personal a quien competa valerse de ella.</li><li class=""><b>c)</b> Para el órgano administrativo o el puesto directivo.</li><li class=""><b>d)</b> Para la actuación automatizada.</li></ol><p class="referencia"><b>Respuesta: a)</b> · La Administración de la CAE dispondrá de firma electrónica en estos tres casos: 1. Para el personal empleado público. 2. Para el órgano administrativo. 3. Para la actuación administrativa automatizada. (Respuesta de la versión anterior del tema; las opciones no coinciden literalmente con el texto actual.)</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2.5"><h2>2.5. El certificado electrónico</h2>
+<div class="bateria" data-bat="2022"><h3>Batería Administrativos 2022 · Tema 22</h3>
+<div class="preg"><p class="enunciado"><span class="num">397</span> El certificado digital es un documento electrónico mediante el cual:</p><ol class="ops"><li class="ok"><b>a)</b> La autoridad de certificación garantiza la vinculación entre una persona física o jurídica y su clave pública.</li><li class=""><b>b)</b> La autoridad de certificación garantiza la vinculación entre una persona física o jurídica y su clave privada.</li><li class=""><b>c)</b> La autoridad de certificación garantiza la vinculación entre una persona jurídica y su clave privada.</li><li class=""><b>d)</b> La autoridad de certificación garantiza la vinculación entre una persona física y su clave pública.</li></ol><p class="referencia"><b>Respuesta: a)</b> · Un tercero de confianza, denominado autoridad de certificación, garantiza la vinculación entre una persona física o jurídica —llamada suscriptor— y la clave pública que le corresponde.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">398</span> Indíquese la respuesta que NO es correcta con relación a las autoridades de certificación:</p><ol class="ops"><li class=""><b>a)</b> Las autoridades de certificación pueden ser personas físicas.</li><li class=""><b>b)</b> Las autoridades de certificación pueden ser personas jurídicas.</li><li class="ok"><b>c)</b> Las autoridades de certificación son todas de naturaleza pública.</li><li class=""><b>d)</b> Las autoridades de certificación deben estar acreditadas oficialmente.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Así, muchas de ellas son privadas y para usos comerciales.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">399</span> La clave pública de un certificado:</p><ol class="ops"><li class=""><b>a)</b> Son los datos de creación del certificado.</li><li class=""><b>b)</b> Es única, y quien la posee debe intentar mantenerla en secreto.</li><li class=""><b>c)</b> Se usa para firmar y cifrar el certificado.</li><li class="ok"><b>d)</b> Está contenida en el propio certificado.</li></ol><p class="referencia"><b>Respuesta: d)</b> · Clave pública… Está contenida en el propio certificado.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">400</span> Si un certificado electrónico se encuentra suspendido y transcurren 120 días sin su reactivación, el certificado queda en estado de:</p><ol class="ops"><li class=""><b>a)</b> Habilitación.</li><li class=""><b>b)</b> Renovación.</li><li class="ok"><b>c)</b> Revocación.</li><li class=""><b>d)</b> Suspensión.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Su duración máxima la fija cada prestador en su declaración de prácticas de certificación; si transcurre el plazo sin que se reactive, la revocación es definitiva.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">401</span> La validez de un sello electrónico es de:</p><ol class="ops"><li class=""><b>a)</b> 4 años.</li><li class=""><b>b)</b> 1 año.</li><li class=""><b>c)</b> 5 años.</li><li class="ok"><b>d)</b> 3 años.</li></ol><p class="referencia"><b>Respuesta: d)</b> · Por ejemplo, los certificados de sello de Izenpe se expiden por un máximo de tres años.</p></div>
+</div>
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">407</span> Los certificados electrónicos también se denominan certificados:</p><ol class="ops"><li class=""><b>a)</b> Informáticos.</li><li class="ok"><b>b)</b> Digitales.</li><li class=""><b>c)</b> Automatizados.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: b)</b> · Aunque los certificados digitales sean elementos de validación, no deben ser confundidos con las certificaciones de documentos administrativos.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">408</span> Los terceros de confianza que garantizan la vinculación entre una persona física o jurídica, llamada suscriptor y la clave pública que le corresponde para que dicha persona quede identificada con plenas garantías se denomina:</p><ol class="ops"><li class=""><b>a)</b> Autoridad pública.</li><li class=""><b>b)</b> Autoridad de emisión.</li><li class="ok"><b>c)</b> Autoridad de certificación.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Un tercero de confianza, denominado autoridad de certificación, garantiza la vinculación entre una persona física o jurídica —llamada suscriptor— y la clave pública que le corresponde.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">409</span> Quien posee las claves de un certificado siempre será:</p><ol class="ops"><li class="ok"><b>a)</b> Una persona física.</li><li class=""><b>b)</b> Una persona jurídica.</li><li class=""><b>c)</b> Una persona física o una persona jurídica.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: a)</b> · En cambio, quien posee las claves es siempre una persona física, que es la responsable de su utilización.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">410</span> Los certificados electrónicos permiten:</p><ol class="ops"><li class=""><b>a)</b> Identificar a la persona que ha solicitado el certificado y posee la clave, así como a la organización a la que aquella, en su caso, pertenece.</li><li class=""><b>b)</b> Firmar mensajes de modo seguro.</li><li class=""><b>c)</b> Cifrar documentos, para evitar el acceso a su contenido.</li><li class="ok"><b>d)</b> Todas las respuestas anteriores son correctas.</li></ol><p class="referencia"><b>Respuesta: d)</b> · Identificar a la persona que ha solicitado el certificado y posee la clave… Firmar mensajes de modo seguro… Cifrar documentos, para evitar el acceso a su contenido.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">411</span> La autoridad de certificación puede ser una persona:</p><ol class="ops"><li class=""><b>a)</b> Física.</li><li class=""><b>b)</b> Jurídica.</li><li class="ok"><b>c)</b> Las respuestas a) y b) son correctas.</li><li class=""><b>d)</b> Pública.</li></ol><p class="referencia"><b>Respuesta: c)</b> · La autoridad de certificación puede ser una persona física o jurídica.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">412</span> ¿Cuál de las siguientes entidades no es una autoridad de certificación?:</p><ol class="ops"><li class=""><b>a)</b> CERES.</li><li class=""><b>b)</b> Izenpe.</li><li class="ok"><b>c)</b> Agencia Vasca de Protección de Datos.</li><li class=""><b>d)</b> Consejo general de la Abogacía.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Entre los prestadores cualificados… CERES… Izenpe… Consejo General de la Abogacía Española (la Agencia Vasca de Protección de Datos no figura).</p></div>
+<div class="preg"><p class="enunciado"><span class="num">413</span> El método criptográfico utilizado en los certificados electrónicos es el conocido como:</p><ol class="ops"><li class=""><b>a)</b> Criptografía simétrica.</li><li class="ok"><b>b)</b> Criptografía asimétrica.</li><li class=""><b>c)</b> Criptografía simétrica pública.</li><li class=""><b>d)</b> Criptografía asimétrica pública.</li></ol><p class="referencia"><b>Respuesta: b)</b> · El utilizado en este caso es conocido como criptografía asimétrica o de clave pública, porque cada titular dispone de un par de claves.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">414</span> Todos los certificados deben incluir al menos:</p><ol class="ops"><li class=""><b>a)</b> El número de serie del certificado, único en cada caso.</li><li class=""><b>b)</b> El nombre y dirección de quien es titular del certificado.</li><li class=""><b>c)</b> La firma electrónica de la autoridad de certificación.</li><li class="ok"><b>d)</b> Todas las respuestas anteriores son correctas.</li></ol><p class="referencia"><b>Respuesta: d)</b> · El número de serie del certificado, único en cada caso… El nombre y dirección de quien es titular del certificado… La firma electrónica de la autoridad de certificación.</p></div>
+<div class="preg"><p class="enunciado"><span class="num">415</span> Elija la respuesta incorrecta. Un certificado puede encontrase en uno de los siguientes estados:</p><ol class="ops"><li class=""><b>a)</b> Suspensión.</li><li class="ok"><b>b)</b> Prescripción.</li><li class=""><b>c)</b> Habilitación.</li><li class=""><b>d)</b> Renovación.</li></ol><p class="referencia"><b>Respuesta: b)</b> · a) Suspensión. b) Habilitación. c) Revocación. d) Renovación.</p></div>
+</div>
+</section>
+<section class="tarjeta" data-ap="2.6"><h2>2.6. Izenpe</h2>
+<div class="bateria" data-bat="2022"><h3>Batería Administrativos 2022 · Tema 22</h3>
+<div class="preg"><p class="enunciado"><span class="num">394</span> La edad para poder solicitar un certificado de ciudadano expedido por Izenpe es de :</p><ol class="ops"><li class=""><b>a)</b> 16 años.</li><li class=""><b>b)</b> 18 años.</li><li class=""><b>c)</b> Cualquier edad.</li><li class=""><b>d)</b> Cualquier edad si se dispone de DNI.</li></ol><p class="referencia"><b>Sin respuesta en el tema</b> · El tema no indica la edad para solicitar el certificado de ciudadano de Izenpe.</p></div>
+</div>
+<div class="bateria" data-bat="2026"><h3>Batería Temario General 2026 · Tema 16</h3>
+<div class="preg"><p class="enunciado"><span class="num">416</span> La sede de Izenpe se encuentra ubicada en:</p><ol class="ops"><li class=""><b>a)</b> Bilbao.</li><li class=""><b>b)</b> Donostia.</li><li class="ok"><b>c)</b> Vitoria-Gasteiz.</li><li class=""><b>d)</b> Ninguna de las respuestas anteriores es correcta.</li></ol><p class="referencia"><b>Respuesta: c)</b> · Su sede está en Vitoria-Gasteiz.</p></div>
+</div>
+</section>
+</main>
+<button type="button" class="subir" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+<script>
+var fichas = document.querySelectorAll('.ficha'), tarjetas = document.querySelectorAll('.tarjeta'), nombre = document.getElementById('nombre');
+function avisarAltura(){ try{ parent.postMessage({tipo:'alturaContenido', altura:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+function ver(ap){
+  fichas.forEach(function(f){ f.classList.toggle('activo', f.dataset.ap === ap); if(f.dataset.ap && f.dataset.ap === ap) nombre.textContent = ap === 'todo' ? 'Todos los apartados' : f.title; });
+  tarjetas.forEach(function(t){ t.classList.toggle('hidden', ap !== 'todo' && t.dataset.ap !== ap); });
+  window.scrollTo(0,0); avisarAltura();
+}
+fichas.forEach(function(f){ if(f.dataset.ap) f.addEventListener('click', function(){ ver(f.dataset.ap); }); });
+document.querySelectorAll('.filtro [data-bat]').forEach(function(b){ b.addEventListener('click', function(){
+  document.querySelectorAll('.filtro [data-bat]').forEach(function(x){ x.classList.toggle('activo', x===b); });
+  document.querySelectorAll('.bateria').forEach(function(x){ x.classList.toggle('hidden', b.dataset.bat!=='ambas' && x.dataset.bat!==b.dataset.bat); });
+  avisarAltura(); }); });
+document.getElementById('ver').addEventListener('click', function(){ var o=document.body.classList.toggle('ocultar'); this.textContent=o?'Mostrar respuestas':'Ocultar respuestas'; avisarAltura(); });
+ver('todo');
+window.addEventListener('load', avisarAltura); window.addEventListener('resize', avisarAltura);
+</script>
+</body>
+</html>
